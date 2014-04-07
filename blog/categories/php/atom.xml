@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: php | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[./symfony doctrine:build-schema for a Single Table]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table/"/>
+    <updated>2012-07-16T06:52:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table</id>
+    <content type="html"><![CDATA[<p>The built-in command line tasks in symfony 1.4 (yes, I am still stuck on 1.4)
+are very handy for quickly performing all sorts of project related tasks.
+Doctrines own command line tasks are exposed through the symfony CLI in the
+<em>doctrine</em> namespace.
+I use the <code>doctrine:build-schema</code> task, which generates a yml schema for an
+existing database, all the time. This allows one to very rapidly build models
+from and for an existing database.</p>
+
+<!--more-->
+
+
+<p>But therein also lies a problem - at least sometimes. I am often working on
+projects with multiple large databases that consist of dozens or hundreds of
+tables. And most often I only need to have models for a very small subset of
+the total list of tables.
+I used to simply generate the yml schema with <code>./symfony docrine:build-schema</code>
+and then manually remove the tables I did not need. Horrible!! Slow, error
+prone and mind numbing.</p>
+
+<p>It would be great if there was a more granular version of this task.
+For example
+<blockquote><p>Add the schema for table X on database Y to the existing schema file</p></blockquote></p>
+
+<p>Enter <code>doctrine:build-table-schema</code>.
+I wrapped the functionality in a class that is really nothing more than a slight
+variation of part of the <code>Doctrine_Import</code> class. More specifically its
+<code>importSchema</code> method. But instead of building the schema for all tables of
+the database it simply builds the ones that have been explicitly requested.
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>SchemaBuilder.class.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">?</span><span class="nx">php</span>
+</span><span class='line'><span class="o">/&lt;</span><span class="nx">em</span><span class="o">&gt;*</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">Build</span> <span class="nx">the</span> <span class="nx">schema</span> <span class="k">for</span> <span class="nx">multiple</span> <span class="nx">connections</span> <span class="k">and</span> <span class="nx">specific</span> <span class="nx">tables</span> <span class="k">for</span> <span class="nx">those</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">connections</span><span class="o">.</span>
+</span><span class='line'> <span class="o">*</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">Example</span><span class="o">:</span>
+</span><span class='line'> <span class="o">*</span>   <span class="nv">$connections</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'> <span class="o">*</span>       <span class="s1">&#39;connection1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table1&#39;</span><span class="p">,</span> <span class="s1">&#39;table2&#39;</span><span class="p">),</span>
+</span><span class='line'> <span class="o">*</span>       <span class="s1">&#39;connection2&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table1&#39;</span><span class="p">,</span> <span class="s1">&#39;table2&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="o">*</span>   <span class="p">);</span>
+</span><span class='line'> <span class="o">*</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">@</span><span class="nx">param</span> <span class="nx">type</span> <span class="nv">$directory</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">@</span><span class="nx">param</span> <span class="k">array</span> <span class="nv">$connections</span> <span class="k">Array</span> <span class="nx">of</span> <span class="nx">connection</span> <span class="nx">names</span> <span class="nx">with</span> <span class="nx">their</span> <span class="nx">associated</span>
+</span><span class='line'> <span class="o">*</span>                           <span class="nx">tables</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">@</span><span class="nx">param</span> <span class="k">array</span> <span class="nv">$options</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">@</span><span class="k">return</span> <span class="k">array</span>
+</span><span class='line'> <span class="o">&lt;/</span><span class="nx">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="k">protected</span> <span class="k">function</span> <span class="nf">buildPHPModels</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$connections</span> <span class="o">=</span> <span class="k">array</span><span class="p">(),</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$classes</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nv">$manager</span> <span class="o">=</span> <span class="nx">Doctrine_Manager</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="k">foreach</span> <span class="p">(</span><span class="nv">$manager</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$connection</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;//</span> <span class="nx">Limit</span> <span class="nx">the</span> <span class="nx">databases</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">ones</span> <span class="nx">specified</span> <span class="nx">by</span> <span class="nv">$connections</span><span class="o">.</span>
+</span><span class='line'><span class="c1">// Check only happens if array is not empty</span>
+</span><span class='line'><span class="nv">$connectionNames</span> <span class="o">=</span> <span class="nb">array_keys</span><span class="p">(</span><span class="nv">$connections</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$connections</span><span class="p">)</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="o">!</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$connectionNames</span><span class="p">))</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">continue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$builder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Doctrine_Import_Builder</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$builder</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">setTargetPath</span><span class="p">(</span><span class="nv">$directory</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$builder</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">setOptions</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$definitions</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$currentConnName</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">getName</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">import</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">listTables</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$table</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$table</span><span class="p">,</span> <span class="nv">$connections</span><span class="p">[</span><span class="nv">$currentConnName</span><span class="p">]))</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="k">continue</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$definition</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;tableName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$table</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">classify</span><span class="p">(</span><span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">tableize</span><span class="p">(</span><span class="nv">$table</span><span class="p">));</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">import</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">listTableColumns</span><span class="p">(</span><span class="nv">$table</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;connection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">getName</span><span class="p">();</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;connectionClassName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>    <span class="nv">$relations</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">import</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">listTableRelations</span><span class="p">(</span><span class="nv">$table</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$relClasses</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$relations</span> <span class="k">as</span> <span class="nv">$relation</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$table</span> <span class="o">=</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">];</span>
+</span><span class='line'>      <span class="nv">$class</span> <span class="o">=</span> <span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">classify</span><span class="p">(</span><span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">tableize</span><span class="p">(</span><span class="nv">$table</span><span class="p">));</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$relClasses</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$class</span> <span class="o">.</span> <span class="s1">&#39;_&#39;</span> <span class="o">.</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$relClasses</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$class</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nv">$relClasses</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$class</span><span class="p">;</span>
+</span><span class='line'>      <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">][</span><span class="nv">$alias</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s1">&#39;alias&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$alias</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;class&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$class</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;local&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="s1">&#39;foreign&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;foreign&#39;</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$definitions</span><span class="p">[</span><span class="nx">strtolower</span><span class="p">(</span><span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$classes</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Build opposite end of relationships</span>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$definitions</span> <span class="k">as</span> <span class="nv">$definition</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$className</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">];</span>
+</span><span class='line'>  <span class="nv">$relClasses</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">foreach</span> <span class="p">(</span><span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$alias</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">],</span> <span class="nv">$relClasses</span><span class="p">)</span> <span class="o">||</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$definitions</span><span class="p">[</span><span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]][</span><span class="s1">&#39;relations&#39;</span><span class="p">][</span><span class="nv">$className</span><span class="p">]))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$className</span> <span class="o">.</span> <span class="s1">&#39;_&#39;</span> <span class="o">.</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$relClasses</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$className</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nv">$relClasses</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">];</span>
+</span><span class='line'>    <span class="nv">$definitions</span><span class="p">[</span><span class="nx">strtolower</span><span class="p">(</span><span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">])][</span><span class="s1">&#39;relations&#39;</span><span class="p">][</span><span class="nv">$alias</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Doctrine_Relation</span><span class="o">::</span><span class="na">MANY</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;alias&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$alias</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;class&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$className</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;local&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;foreign&#39;</span><span class="p">],</span>
+</span><span class='line'>        <span class="s1">&#39;foreign&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Build records</span>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$definitions</span> <span class="k">as</span> <span class="nv">$definition</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$builder</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">buildRecord</span><span class="p">(</span><span class="nv">$definition</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="k">return</span> <span class="nv">$classes</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The entire code including a symfony task to call it is available as a symfony 1.4
+plugin on github.com. It is part of a utilities plugin that is available at
+<a href="http://github.com/hglattergotz/uUtilitiesPlugin">http://github.com/hglattergotz/uUtilitiesPlugin</a>.</p>
+
+<p>The class can be found here <code>uUtilitiesPlugin/lib/SchemaBuilder</code></p>
+
+<p>To add the schema for table <em>A</em> in database connection <em>Z</em> you would execute this from the
+symfony project folder:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./symfony doctrine:build-schema-table --connection<span class="o">=</span>Z --table<span class="o">=</span>A --application<span class="o">=</span>myapp
+</span><span class='line'>./symfony doctrine:build-model
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP: The Right Way]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/07/10/php-the-right-way/"/>
+    <updated>2012-07-10T11:12:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/07/10/php-the-right-way</id>
+    <content type="html"><![CDATA[<p>Today I discovered an interesting new project called <a href="http://www.phptherightway.com/">"PHP: The Right Way"</a>. It is an open source project maintained by <a href="https://twitter.com/codeguy">Josh Lockhart</a> attempting to provide a well rounded set of best practices for developing in PHP.</p>
+
+<p>While I have not yet attempted to contribute any content I have added the banner to my personal blog to show my support. If you are interested it adding a "PHP: The Right Way" banner to the side bar of your <a href="http://octopress.org">Octopress</a> blog, here is how. Allthough, if you are using octopress you probably don't need help with this ;-).</p>
+
+<!--more-->
+
+
+<p>Following is the html for the aside. The 240x400 image size works well for the sidebar width that I have. This is easy to change.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/source/includes/custom/asides/php_the_right_way.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{% if site.php_the_right_way_show %}
+</span><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.phptherightway.com&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>img class=&quot;center&quot; src=&quot;http://www.phptherightway.com/images/banners/vert-rect-240x400.png&quot; alt=&quot;PHP: The Right Way&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span><span class='line'>{% endif %}
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>In <code>/_config.yml</code> add the aside to the list of <code>default_asides</code> in the location you want it to show up in. Mine is at the end.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/_config.yml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default_asides</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">custom/asides/about.html</span><span class="p-Indicator">,</span> <span class="nv">asides/recent_posts.html</span><span class="p-Indicator">,</span> <span class="nv">asides/twitter.html</span><span class="p-Indicator">,</span> <span class="nv">asides/github.html</span><span class="p-Indicator">,</span> <span class="nv">custom/asides/php_the_right_way.html</span><span class="p-Indicator">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>In the configuration file add the following to the very end.
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/_config.yml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">&lt;h1&gt;PHP The Right Way Banner image&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">&lt;p&gt;php_the_right_way_show</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That's it!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ExactTarget SOAP API: Obtaining an Accurate List of Retrievable Properties]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/"/>
+    <updated>2012-06-18T07:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions</id>
+    <content type="html"><![CDATA[<p>Aahhh! The joys of integrating with third-party API's.
+Trying to get your application to talk to a third-party API is sometimes tricky, especially if the API documentation is not up to date.
+SOAP is supposed to make this simpler by providing a WSDL from which you can generate classes.
+So what are you supposed to do if the documentation and the WSDL seem out of date?</p>
+
+<!-- more -->
+
+
+<p><strong>Clarification</strong>: By out of date I mean that the documentation for a particular object states it has retrievable properties <em>a</em>, <em>b</em> and <em>c</em>, the WSDL has properties <em>a</em>, <em>c</em> and <em>d</em>, and by trial and error you finally figure out that only <em>a</em> and <em>d</em> are retrievable.</p>
+
+<p>Not to fear, ExactTarget provides a SOAP method that describes objects. You pass the object name as a parameter and in return you get a list of all properties and their attributes. One of the attributes is <strong>isRetrievable</strong>, which is what I am after.</p>
+
+<p>Great! Right? Well, mostly...</p>
+
+<p>For most objects the method described below returns accurate results from what I can tell. The only object I have encountered so far that has an incorrect result form this method is <a href="http://docs.code.exacttarget.com/020_Web_Service_Guide/Objects/EmailSendDefinition">EmailSendDefinition</a>.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>EmailSendDefinition retrievable properties </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">Client</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'><span class="nx">CreatedDate</span>
+</span><span class='line'><span class="nx">ModifiedDate</span>
+</span><span class='line'><span class="nx">ObjectID</span>
+</span><span class='line'><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">Name</span>
+</span><span class='line'><span class="nx">CategoryID</span>
+</span><span class='line'><span class="nx">Description</span>
+</span><span class='line'><span class="nx">SendClassification</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">FromName</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">FromAddress</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">CusomterKey</span>            <span class="c1">// &amp;lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">SourceAddressType</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">PrivateIP</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">DomainType</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">PrivateDomain</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">HeaderSalutationSource</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">HeaderContentArea</span><span class="o">.</span><span class="nx">ID</span>   <span class="c1">// &amp;lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">FooterSalutationSource</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">FooterContentArea</span><span class="o">.</span><span class="nx">ID</span>   <span class="c1">// &amp;lt;-- Generates error</span>
+</span><span class='line'><span class="nx">SuppressTracking</span>
+</span><span class='line'><span class="nx">IsSendLogging</span>
+</span><span class='line'><span class="nx">Email</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'><span class="nx">CCEmail</span>
+</span><span class='line'><span class="nx">BccEmail</span>
+</span><span class='line'><span class="nx">AutoBccEmail</span>
+</span><span class='line'><span class="nx">TestEmailAddr</span>
+</span><span class='line'><span class="nx">EmailSubject</span>
+</span><span class='line'><span class="nx">DynamicEmailSubject</span>
+</span><span class='line'><span class="nx">IsMultipart</span>
+</span><span class='line'><span class="nx">IsWrapped</span>
+</span><span class='line'><span class="nx">SendLimit</span>
+</span><span class='line'><span class="nx">SendWindowOpen</span>
+</span><span class='line'><span class="nx">SendWindowCloses</span>                       <span class="c1">// &amp;lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeduplicateByEmail</span>
+</span><span class='line'><span class="nx">ExclusionFilter</span>
+</span><span class='line'><span class="nx">Additional</span>
+</span><span class='line'><span class="nx">SendDefinitionList</span>
+</span><span class='line'><span class="nx">IsPlatformObject</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The Describe method is quite handy and I use it quite a bit when exploring the API, so I added it to my PHP library for accessing ExactTarget's SOAP API.
+You can get the lib <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOAP-API">here</a>, and this is how you would get the definition for the above EmailSendDefinition object:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>describe.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">?</span><span class="nx">php</span>
+</span><span class='line'><span class="nx">ETCore</span><span class="o">::</span><span class="na">initialize</span><span class="p">(</span><span class="nv">$userName</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+</span><span class='line'><span class="nb">print_r</span><span class="p">(</span><span class="nx">ETCore</span><span class="o">::</span><span class="na">getObjectDefinition</span><span class="p">(</span><span class="s1">&#39;EmailSendDefinition&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Result </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">definition</span> <span class="o">=</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'><span class="p">(</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="p">[</span><span class="nx">ObjectType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">EmailSendDefinition</span>
+</span><span class='line'><span class="p">[</span><span class="nx">Properties</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">Array</span>
+</span><span class='line'>    <span class="p">(</span>
+</span><span class='line'>        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>            <span class="p">(</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Client</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Int32</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>            <span class="p">(</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">CreatedDate</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">DateTime</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>            <span class="p">(</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">ModifiedDate</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">DateTime</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>         <span class="o">:</span>
+</span><span class='line'>         <span class="o">:</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+As I learn more about the ExactTarget SOAP API and SOAP itself I will be posting my findings and expanding the library on github.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ExactTarget SOAP Upsert with PHP]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/10/31/exacttarget-soap-upsert-with-php/"/>
+    <updated>2011-10-31T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/10/31/exacttarget-soap-upsert-with-php</id>
+    <content type="html"><![CDATA[<p>There is quite a bit of documentation for the ExactTarget SOAP API that includes lots of code samples. But unfortunately the PHP code samples are not quite as plentiful as the .NET and Java ones.
+After lots of searching and lot of trial and error I finally got my upsert working. An upsert is a SOAP method in the ExactTarget SOAP API that will either update or insert a record depending on whether it is already present or not.</p>
+
+<!--more-->
+
+
+<p>``` php
+&lt;?php
+$uo = new ExactTarget_UpdateOptions();
+$uo->SaveOptions = array();</p>
+
+<p>$so = new ExactTarget_SaveOption();
+$so->PropertyName = 'DataExtensionObject';
+$so->SaveAction = ExactTarget_SaveAction::UpdateAdd;</p>
+
+<p>$uo->SaveOptions[] = $so;
+$uoSo = ETCore::toSoapVar($uo, 'UpdateOptions');</p>
+
+<p>$request = new ExactTarget_UpdateRequest();
+$request->Options = $uoSo;
+$request->Objects = array($deoSo);
+$result = $soapClient->Update($request);
+```</p>
+
+<p>Where <em>$deoSo</em> is a DataExtension Object that has been converted to a SoapVar and <em>$soapClient</em> is an ExactTarget soap client instance. The way you get the upsert behavior is to set the saveaction to <em>ExactTarget_SaveAction::UpdateAdd</em>.</p>
+
+<p>If you are looking for a minimal wrapper library that includes the above method take a look at <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOAP-API">this library on gitub</a>. This library gleans quite a few things from the Doctrine ORM, so if you are familiar with that you should feel right at home.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Connecting to Microsoft SQL Server from PHP on OSX and XAMPP]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/"/>
+    <updated>2011-06-06T00:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp</id>
+    <content type="html"><![CDATA[<blockquote><h4>UPDATE (March 23rd 2012):</h4>
+
+<p>I recently found a <a href="http://php-osx.liip.ch/">PHP binary </a>that has a one-line installer. It is actively maintained by Liip AG. I now use that in combination with <a href="http://mxcl.github.com/homebrew/">HomeBrew</a> for all the rest. The Liip package is compiled with pdo_dblib which makes the problem described in this post a non-issue.</p></blockquote>
+
+<p>I recently found myself in the position of having to connect to a remote Microsoft SQL Server from my OSX system using PHP. The production environment runs Ubuntu LINUX, where connecting via mssql_connect() was no problem, but I develop on OSX and I could not get this to work initially.</p>
+
+<!--more-->
+
+
+<p>mssql_connect() simply returns boolean FALSE on failure and PHP tells you little more than</p>
+
+<p><code>bash
+Warning: mssql_connect(): Unable to connect to server: YOURSERVERNAME
+</code></p>
+
+<p>It took quite a few hours to finally figure out that I could turn on some additional logging on the driver level. I use XAMPP and its PHP distribution uses FreeTDS for mssql access.
+There is a configuration file for this driver located at</p>
+
+<p><code>bash
+/Applications/XAMPP/xamppfiles/etc/freetds.conf
+</code></p>
+
+<p>that lets you turn on debug logging to a file.</p>
+
+<p>Uncomment the following lines</p>
+
+<p><code>bash
+;       dump file = /tmp/freetds.log
+;       debug flags = 0xffff
+</code></p>
+
+<p>And then run your connection attempt again. Take a look at the log for details on the failure.</p>
+
+<p>In the end I added a new entry for an MS SQL server at the end of the freetds.conf file and used its name in the call to mssql_connect().</p>
+
+<p>``` bash
+[MyServerXYZ]</p>
+
+<pre><code>    host = the_host_name
+    instance = the_instance_name
+    port = 1433
+    tds version = 9.0
+</code></pre>
+
+<p>```</p>
+
+<p>In my case I had to deal with an instance name that would normally be appended to the host name in a connection string, but for this driver configuration you have to use a variable called <em>instance</em>.</p>
+
+<p>In PHP I then use this code during development</p>
+
+<p><code>bash
+$conn = mssql_connect('MyServerXYZ', $username, $password);
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

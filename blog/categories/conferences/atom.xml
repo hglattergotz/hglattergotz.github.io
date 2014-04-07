@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: conferences | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/conferences/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CodeWorks Orlando 2010]]></title>
+    <link href="http://glatter-gotz.com/blog/2010/11/18/codeworks-orlando-2010/"/>
+    <updated>2010-11-18T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2010/11/18/codeworks-orlando-2010</id>
+    <content type="html"><![CDATA[<p>CodeWorks is a relatively new PHP conference organized by the folks at <a title="php|architect Magazine" href="http://www.phparch.com/" target="_self">php|architect Magazine</a>. Now in its second year, it has been considerably scaled back in scope compared to the first conference. The Florida event was hosted in Orlando this year, which was a lot more convenient for me since it is smack in the middle of the state and a bit easier to get to than Miami. The idea behind this conference, which takes place in multiple cities throughout the US, is to bring a conference to people who usually do not attend events of this nature because they are either too far away or they are simply too long. According to <a title="Marco Tabini" href="http://blog.tabini.ca/" target="_self">Marco Tabini</a>, the purpose of this event was not so much to educate in a particular area of PHP, but to inspire attendees and encourage them to come away from the conference with more questions than they came with.</p>
+
+<!--more-->
+
+
+<p>CodeWorks 2010 featured a one day, single track line-up of six talks on a wide variety of topics. After <a title="Marco Tabini" href="http://blog.tabini.ca/" target="_self">Marco Tabini's</a> brief opening remarks, <a title="Keith Casey" href="http://caseysoftware.com/" target="_self">Keith Casey</a> presented the first of two talks he gave at the conference.</p>
+
+<h3>Unit testing strategies – <a title="Keith Casey" href="http://caseysoftware.com/" target="_self">Keith Casey</a></h3>
+
+<p>Keith is a core contributor to web2project and used this open source project to illustrate some of the points he made in his talk.</p>
+
+<p>He provided a high level overview of what unit testing is and what to aim for when putting a system under test. He did a great job of explaining how theories like 100% code coverage are really not a useful metric in the real world to determine how well a system is tested and that it is more important to have meaningful tests that actually test the “annoying” areas of a project – the ones that generate the largest number of bugs – rather than trying to achieve a high code coverage number that does not necessarily have a practical value.</p>
+
+<p>I have been using unit testing in my projects for several years now but came away with lots of good information from this talk.</p>
+
+<h3>Learn to love the front end – <a title="Ryan Stewart" href="http://blog.digitalbackcountry.com/" target="_self">Ryan Stewart</a></h3>
+
+<p>I had no idea what to expect from this talk since most of my work has dealt with server side projects that don't have a fancy GUI. Ryan started out by emphasizing that he was going to talk about “how to make it work” and not about “how to make it pretty or how to create a great user experience”, which were more the domain of the designer and the unicorn or rather the user experience guru. He made the case for obtaining front end skills based on economics by presenting data from the past few years that showed the increasing demand for PHP AND JavaScript skills vs. only PHP or only JavaScript skills.</p>
+
+<p>This was illustrated very nicely with a beer analogy, where the malted barley, the commodity and raw material for beer, represented the PHP developer with no front end skills that could easily be replaced or obtained elsewhere and the pub on the corner that provides beer and an atmosphere, a value added experience that people are willing to pay substantially more for. This was representative of a PHP developer that also had front end skills. A very effective and rather amusing way to bring across his point.</p>
+
+<p>Ryan went on to demonstrate some of the features that <a title="jQuery" href="http://jquery.com/" target="_self">jQuery</a> has to offer and how it helps to bring the desktop paradigm to the web browser. He then explained how <a title="jQuery" href="http://jquery.com/" target="_self">jQuery</a> takes care of a lot of cross browser compatibility issues and handles progressive enhancement for the developer and therefore puts the control in the users' hands.</p>
+
+<p>I have dabbled a bit in <a title="jQuery" href="http://jquery.com/" target="_self">jQuery</a> lately and have to say it actually makes front end development fun. I have beaten my head against the wall in the past trying to develop front ends that are compatible across multiple browsers, or just the same browser on different operating systems.</p>
+
+<p>While Ryan has a strong background in Flash and actually works for Adobe he did state that for 90% to 95% of applications Flash is overkill.</p>
+
+<p>A great talk packed full of good information.</p>
+
+<h3>APIs from the ground up – <a title="Cal Evans" href="http://blog.calevans.com/" target="_self">Cal Evans</a></h3>
+
+<p>Cal Evans is the only speaker whom I had heard before and also knew from his podcasts for Zend, and he did not disappoint. In his trademark laid-back and amusing way he provided a high level overview of the various API categories that are in general use today: Payload over HTTP, SOAP and REST.</p>
+
+<p>He went on to outline the most common status codes for these types of APIs and the importance of adhering to these standards.</p>
+
+<p>The remainder of the talk consisted of a demo of three different ways of implementing an API.
+* Hand coded – not recommended
+* <a title="Frapi" href="http://getfrapi.com" target="_self">Frapi</a> – High level API framework
+* <a title="Zend Framework" href="http://framework.zend.com/" target="_self">Zend Framework</a></p>
+
+<p>I was not aware of the Frapi framework and will definitely look into that for upcoming projects. As a rather amusing aside Cal explained what <a title="Yak Shavings" href="http://www.catb.org/~esr/jargon/html/Y/yak-shaving.html" target="_self">Yak Shavings</a> means in our industry.</p>
+
+<h3>A 100K users.. now what – <a title="Keith Casey" href="http://caseysoftware.com/" target="_self">Keith Casey</a></h3>
+
+<p>This is a talk I did not think I would get much out of since I do not deal with sites that have a user base that is remotely this large. But I was pleasantly surprised to see that there were numerous points that I could apply to my current projects even though they have only a handful of users.</p>
+
+<p>This talk nicely outlined at a high level the troubleshooting steps that are necessary to (ideally) prevent a site from going down or how to fix it if it is down.</p>
+
+<p>Surprisingly most of the suggestions had nothing or little to do with the actual PHP code but rather with the environment that the application runs in.</p>
+
+<p>The most common bottleneck for performance is the database because of disk IO and Casey outlined the various strategies for optimizing this, which ranged from having the proper indexes on your database tables and how to find out why queries are performing badly using the mySQL command EXPLAIN, over PHP Caching strategies and Memcached to Firefox Plugins such as Yslow.</p>
+
+<p>Great food for thought in this talk and more questions.</p>
+
+<h3>Object orientation the PHP 5.3 way – <a title="Marco Tabini" href="http://blog.tabini.ca/" target="_self">Marco Tabini</a></h3>
+
+<p>Marco argued that code is simply a means to an end (from his perspective) and that a project is judged by how well it fulfills the expectations of the user. And while we as developers feel like our code is a form of artistic expression (well, of course it is!!!), this is not necessarily relevant or important to everyone.</p>
+
+<p>He went on to provide a high level overview of OOP and how it has changed in PHP from version 4 to version 5 and briefly touched on the newly introduced namespaces in the latest release of PHP as well as SPL – the standard PHP library.</p>
+
+<h3>Five tools you should know &amp; love – <a title="Cal Evans" href="http://blog.calevans.com/" target="_self">Cal Evans</a></h3>
+
+<p>This was the last talk of the day and one of my favorites. I had heard a similar talk by Cal at last year's CodeWorks conference.</p>
+
+<p>The tools on his list for this talk were:
+* <a title="PHP Lint" href="http://de.php.net/manual/en/features.commandline.options.php" target="_self">PHP Lint</a> (php -l)
+* <a title="phploc" href="https://github.com/sebastianbergmann/phploc" target="_self">phploc</a>
+* <a title="phpdepend" href="http://pdepend.org/" target="_self">phpdepend</a>
+* <a title="phpcpd" href="https://github.com/sebastianbergmann/phpcpd" target="_self">phpcpd</a>
+* <a title="phing" href="http://phing.info/trac/wiki/WikiStart" target="_self">phing</a></p>
+
+<p>He concluded the talk with a demo of a phing build script that ran all the above mentioned tools to build a set of reports for a given project.</p>
+
+<p>On one of the breaks I briefly spoke to <a title="Marco Tabini" href="http://blog.tabini.ca/" target="_self">Marco Tabini</a>, the organizer of the event, about his opinion on this year's turnout and overall success of the event. He seemed quite satisfied with how the conference went this year and was positive about doing this again next year.</p>
+
+<p>If you registered early you were able to attend this jam-packed day for under $100, which is an unbelievable value.</p>
+
+<p>Last year's line-up of international speakers was spectacular and as a first time PHP conference attendee I was blown away to see so many big names from the PHP community, but this years speakers were no less spectacular and passionate about their work and I have to say that the shorter format is actually really appealing and leaves absolutely no excuses for not attending. At this price it was a steal!!!</p>
+
+<p>Aside from having the opportunity to sit in on some really great talks you can meet your peers and do a bit of networking.</p>
+
+<p>If you have never attended a conference like this before try to do so next year, you will not be disappointed.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: security | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/security/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Secure File Transfers in WordPress with SFTP/SSH: Installing SSH2 for PHP]]></title>
+    <link href="http://glatter-gotz.com/blog/2010/11/10/secure-file-transfers-in-wordpress-with-sftpssh-installing-ssh2-for-php/"/>
+    <updated>2010-11-10T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2010/11/10/secure-file-transfers-in-wordpress-with-sftpssh-installing-ssh2-for-php</id>
+    <content type="html"><![CDATA[<blockquote><h4>Update, 2011-11-16: Added some troubleshooting info</h4></blockquote>
+
+<p>There are many reasons why you would want to install ssh2 for PHP on your server, mine was to allow me to use SFTP on a WordPress installation because my web host does not allow the use of FTP. Even if your host allows FTP I strongly urge you to use SFTP instead, since it uses SSH to encrypt all your data transfers. FTP sends your username and password as plain text!</p>
+
+<!--more-->
+
+
+<h3>Requirements for this tutorial</h3>
+
+<ul>
+<li>PHP 5.2.x (I have used this on 5.2.9)</li>
+<li>Apache</li>
+<li>LINUX (probably works on Windows too, but no details about that are described here, sorry)</li>
+<li>WordPress 3.0.1 (somewhat older versions should work too)</li>
+</ul>
+
+
+<p>A general overview of ssh2 for PHP can be found at <a title="PHP: Hypertext Processor" href="http://www.php.net/manual/en/book.ssh2.php">php.net</a>. If you look at the requirements section on <a title="PHP: Hypertext Processor" href="http://www.php.net/manual/en/ssh2.requirements.php">php.net</a> you will see that two other libraries are required for this to work. They are <a title="OpenSSL: Cryptography and SSL\TLS Toolkit" href="http://www.openssl.org/" target="_self">OpenSSL</a> and <a title="ibssh2 is a client-side C library implementing the SSH2 protocol" href="http://www.libssh2.org/" target="_self">libssh2</a>. I explain here how to install both of these as well.</p>
+
+<h3>Installing OpenSSL</h3>
+
+<p>First log in as root on your server on the command line and find out if OpenSSL is already installed by running the following command:</p>
+
+<p><code>bash
+[root@host ~]$ rpm -qa | grep openssl
+</code></p>
+
+<p>If you see something similar to the two lines below (might differ in version numbers) then OpenSSL is installed and you can skip to the next section.</p>
+
+<p><code>bash
+openssl-0.9.7a-43.17.2
+openssl-devel-0.9.7a-43.17.2
+</code></p>
+
+<p>If it is not installed, then you can do so by running yum or apt-get (depending on your system) as follows:</p>
+
+<h4>RedHat based systems</h4>
+
+<p><code>bash
+[root@host ~]$ yum install openssl
+</code></p>
+
+<h4>Debian based systems</h4>
+
+<p><code>bash
+[root@host ~]$ apt-get install openssl
+</code></p>
+
+<h3>Installing libssh2</h3>
+
+<p>You can verify if it is already on your system by searching for libssh2.so like this</p>
+
+<p><code>bash
+[root@host ~]$ find / -name libssh2.so -print
+</code></p>
+
+<p>If it is not installed then you will have to install it from source.</p>
+
+<p>Create a temporary directory to download the source files to and then cd to the newly created temporary directory</p>
+
+<p><code>bash
+[root@server ~]$ wget http://sourceforge.net/projects/libssh2/files/old-libssh2-releases/1.1/libssh2-1.1.tar.gz
+[root@server ~]$ tar -zxvf libssh2-1.1.tar.gz
+[root@server ~]$ cd libssh2-1.1
+[root@server ~]$ ./configure
+[root@server ~]$ make
+[root@server ~]$ make install
+</code></p>
+
+<p>Once these steps have been successfully completed delete the previously created directory.</p>
+
+<h3>Installing the ssh2 module for php</h3>
+
+<p>This is available via PECL and can be installed as follows</p>
+
+<p><code>bash
+[root@server ~]$ pecl install channel://pecl.php.net/ssh2-0.11.3
+</code></p>
+
+<p>This should have placed the ssh2.so file in your php extensions directory. Now add</p>
+
+<p><code>bash
+extension=ssh2.so
+</code></p>
+
+<p>to your php.ini or whatever file your extensions are specified in. Depending on your installation this might be in a separate file instead of your php.ini. Consult you php installation documentation for more information. The way this is done varies depending on your distribution.
+Also worth mentioning is that you will need the zlib.so extension enabled as well. Make sure this is the case while you are editing the extension ini file and then restart apache.</p>
+
+<h4>Ubuntu/Debian</h4>
+
+<p><code>bash
+[root@server ~]$ /etc/init.d/apache2 restart
+</code></p>
+
+<h4>Red Hat, CentOS, Fedora</h4>
+
+<p><code>bash
+[root@server ~]$ /etc/init.d/httpd restart
+</code></p>
+
+<p>Now make sure that ssh2.so is really loaded by executing the following command on the command line:</p>
+
+<p><code>bash
+[root@server ~]$ php -i | grep ssh2
+</code></p>
+
+<p>You should see something like</p>
+
+<p><code>bash
+libssh2 version =&gt; 1.1
+</code></p>
+
+<p>If you do not, then the ssh2.so file might have been placed in the wrong directory or you did not correctly configure your ini file to load it.</p>
+
+<h3>Generating the ssh keys</h3>
+
+<p>Wordpress needs to know the location of your ssh public and private keys. This is how you generate them:
+On the command line on your server login as the user that has access to the site. In my case I have the site installed as a virtual host and have a specific user that owns it.</p>
+
+<p><code>bash
+[user@server ~]$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/user/.ssh/id_rsa):
+Created directory '/home/user/.ssh'.
+Enter passphrase (empty for no passphrase): (enter a passphrase and make note of it)
+Enter same passphrase again: (enter the same passphrase)
+Your identification has been saved in /home/bsf/.ssh/id_rsa.
+Your public key has been saved in /home/bsf/.ssh/id_rsa.pub.
+The key fingerprint is:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:X:X:XX:XX user@server.something.com
+The key's randomart image is:
++--[ RSA 2048]----+
+(info will be displayed here)
++-----------------+
+</code></p>
+
+<p>Create an "authorized_keys" file by copying the public key in place</p>
+
+<p><code>bash
+[user@server ~]$ cd .ssh
+[user@server .ssh]$ cp id_rsa.pub authorized_keys
+[user@server .ssh]$ cd ..
+[user@server ~]$ chmod 755 .ssh
+[user@server ~]$ chmod 644 .ssh/*
+</code></p>
+
+<p>Now, when you log into the WordPress admin dashboard and perform an action that requires a file transfer operation, such as installing or updating a plugin, you should be presented with more options for the connection type. Aside from FTP, which was there before, you should also have SSH2.
+Select SSH2 and it will add a few fields to the form and it should look something like the screenshot below.</p>
+
+<h4>Important:</h4>
+
+<p>The FTP/SSH Username here is the user name for SSH for which you created the ssh keys earlier, NOT your ftp user. And the password is the passphrase that you created during the key generation step earlier, not the users password.</p>
+
+<p><img class="left" src="/images/wordpress_connection_settings.png" width="602" height="452" title="WordPress Connection Settings with SSH2 Enabled" alt="WordPress Connection Settings when SSH2 is installed"></p>
+
+<p>To avoid having to enter this information every time a file transfer is executed you can define a few constants in your WordPress configuration file wp-config.php:</p>
+
+<p><code>php
+define('FTP_PUBKEY','/home/user/.ssh/id_rsa.pub');
+define('FTP_PRIKEY','/home/user/.ssh/id_rsa');
+define('FTP_USER','user');
+define('FTP_PASS','yourpassphrase');
+define('FTP_HOST','server.something.com');
+</code></p>
+
+<p><strong>Important:</strong> Be sure to move your wp-config.php file out of the doc root for added security.</p>
+
+<h3>Troubleshooting</h3>
+
+<h5>Pecl installation of ssh2 fails</h5>
+
+<p><strong>Error</strong>
+<code>bash
+Cannot find autoconf. Please check your autoconf installation and the
+$PHP_AUTOCONF environment variable. Then, rerun this script.
+</code></p>
+
+<h5>Solution</h5>
+
+<p>Check if autoconf is on your system but not in the path:</p>
+
+<p><code>bash
+which autoconf
+</code></p>
+
+<p>If it is there then</p>
+
+<p><code>bash
+export path/to/autoconf
+</code></p>
+
+<p><strong>Error</strong></p>
+
+<p>Pecl does not have write permissions to the tmp directories and fails with</p>
+
+<p><code>bash
+/usr/local/bin/phpize: /tmp/pear/temp/...: /bin/sh: bad interpreter: Permission denied
+</code></p>
+
+<h5>Solution</h5>
+
+<p>Temporarily change permissions on the following folders.</p>
+
+<p><code>bash
+mount -o remount,exec,suid /tmp
+mount -o remount,exec,suid /var/tmp
+</code></p>
+
+<p>Run the install again and then change the permissions back</p>
+
+<p><code>bash
+mount -o remount,noexec,suid /tmp
+mount -o remount,noexec,suid /var/tmp
+</code></p>
+
+<h4>For getting this to work the first time for myself I referred to the following two posts:</h4>
+
+<p><a href="http://hostechs.com/2008/07/installing-ssh2-for-php-shell-connections-how-to/">http://hostechs.com/2008/07/installing-ssh2-for-php-shell-connections-how-to/</a>
+<a href="http://www.firesidemedia.net/dev/wordpress-install-upgrade-ssh/">http://www.firesidemedia.net/dev/wordpress-install-upgrade-ssh/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

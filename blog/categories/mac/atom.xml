@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mac | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My List of Useful Desktop and Mobile Applications, Plugins and Services]]></title>
+    <link href="http://glatter-gotz.com/blog/2010/12/13/my-list-of-useful-desktop-and-mobile-applications-plugins-and-services/"/>
+    <updated>2010-12-13T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2010/12/13/my-list-of-useful-desktop-and-mobile-applications-plugins-and-services</id>
+    <content type="html"><![CDATA[<p>I recently made the switch from the dark side and wonder almost daily why I did not get a Mac years ago. Getting this new device meant learning a whole bunch of new things. I have compiled a list of useful applications, browser plugins and some mobile apps I have come across in the last few months. Not all of them are specific to the Mac.</p>
+
+<!--more-->
+
+
+<p>Besides getting a Mac I also own an Android phone (or more accurately, it owns me) and really like the services and software that Google provides. Knowing this, you kind of get an idea of what to expect of this post. There is not really any particular order to this list since not all things fit in a single category.</p>
+
+<h3>File synchronization with Dropbox</h3>
+
+<p>By far the coolest and most useful service I have come across recently is <a title="Dropbox" href="http://www.dropbox.com" target="_blank">Dropbox</a>. In a nutshell, it is a file synchronization service that has clients for many different operating systems and mobile devices. This is something that I have been wanting for years. So, what this lets you do is synchronize 2GB (free) of any kind of data in a specific folder on your desktop to the cloud. So you create an account and connect it to a folder on your computer so to speak. Anything you drop into that folder immediately gets synchronized to your "hard drive in the cloud". What makes this really useful is that any file or folder in your Dropbox has a unique URL that you can share with anyone to allow them to access the file or folder. So instead of emailing large files you just send a link via email or instant message. If the data happens to be a folder of images then Dropbox will generate a really cool online gallery.</p>
+
+<p>So all that by itself is already really great, but what makes this a totally kick ass service is that you can install a Dropbox client on any number of desktops or mobile devices and connect them to your account. Now you can synchronize files between multiple systems. Lets say you drop a file from your Mac at home into your Dropbox folder, it is immediately synchronized to lets say your PC at work and is available for download on your phone. Watch the video on their website for a much better explanation of what they have to offer.</p>
+
+<p>One last thing about this service: They offer a referral bonus. So if you get someone to sign up you get an extra 250MB of storage space on your account. So if you are reading this and want to sign up, do me a favor and use <a title="Signup for Dropbox" href="https://www.dropbox.com/referrals/NTEwNjg2MjQ2OQ?src=global0" target="_blank">this link</a> to do so and give me an extra 250MB.</p>
+
+<h3>Password management with 1Password</h3>
+
+<p>Unless you just got internet access last week, you probably have more online accounts than you can keep track of in your head. If you are like most people (me in the past) you probably have the same username and password on most if not all accounts. This is a significant security risk. <a title="Manage all your passwords in one place - 1Password" href="http://agilewebsolutions.com/onepassword" target="_blank">1Password</a> offers a central secure place to manage all your online account usernames and passwords and basically removes the burden of having to remember all but one password - the master password. This way you can assign random character strings like "kgPfVLWQ4TyDRsRPD8mr" as your password. Not only that, but you can and should have a different one for every account. "I don't want to type that horrible looking string to log into an account!" you might say. Well, you don't have to. 1Password comes with a plugin for every major browser and all you need to do is click a button and 1Password will fill in your credentials for you.</p>
+
+<p>But what if you are not at your Mac at home? There is a solution for that too. It is called Dropbox. 1Password allows you to store your key chain (the master password file) in your Dropbox account. See where this is going? You can install Dropbox on your phone and have it access the same keychain as your home system. That way you always have the very latest version of your passwords in your pocket. This application is not free, but it is worth every penny.</p>
+
+<h3>Web browser - Google Chrome</h3>
+
+<p>Google will probably take over the world some day. I bet they will change their name to <a title="SkyNet form the Terminator movie" href="http://en.wikipedia.org/wiki/Skynet_(Terminator)" target="_blank">SkyNet</a> in a few years and we all know what will happen then. But for now, their services and applications are nothing less than amazing. I use a lot of their API's for my work and have to say: They kick ass!</p>
+
+<p>So it is no surprise that their web browser - <a title="Get Google Chrome" href="http://www.google.com/chrome/intl/en/landing_chrome_mac.html?hl=en" target="_blank">Chrome</a> - is my favorite. It has, in true Google manner, a minimalistic interface that provides raw speed. It starts up fast, runs fast and consumes fewer resources on your system than most or all other browsers (might be just my opinion).</p>
+
+<h3>Send a web page to your phone with Chrome to Phone</h3>
+
+<p>Since I am on the subject of Chrome I might as well mention a plugin that is available for this browser - <a title="Chrome to phone plugin" href="http://code.google.com/p/chrometophone/" target="_blank">Chrome to Phone</a>. Lets say you have the following scenario: You are reading a fascinating blog post like this one at your desktop and have to leave in a hurry. Maybe because you have to visit the throne room. So you have an Android mobile device (might also work on the iPhone, not sure) and could continue reading on that. To do this you would either have to remember the URL or send yourself an email to your phone that contains the link. Well, not anymore, if you have the Chrome plugin <em>Chrome to Phone</em> installed and have the companion app on your Android phone then all you need to do is click a button in your browser bar, grab your phone and run. Within seconds you phone will pop-up a browser with that exact web page and you can continue reading where you left off - pure genius!!!</p>
+
+<h3>Office Suite - OpenOffice</h3>
+
+<p>With my departure from Windows I also left pretty much all Microsoft software behind. Not all, but most. One of them is Microsoft Office. While there is a rather good version of Micro$oft Office for the Mac, I was not prepared to shell out a pile of money for it, after all, I was broke from buying a Mac Pro. Don't get me wrong, it is the most magical device I have ever owned, but it costs a boat load. Anyway, for my needs I get everything from the open source office suite called <a title="OpenOffice" href="http://www.openoffice.org/" target="_blank">OpenOffice</a>. It provides most of what you would be used to from your previous life on Windows and it costs nothing.</p>
+
+<h3>Run Windows in a Window - Parallels</h3>
+
+<p>As I mentioned, I was not able to leave all Windows Applications behind. There are still things that I absolutely have to have that simply don't exists for the Mac. For cases like this there is something called a virtual machine. It is an application that runs on your Mac (or most other operating systems) that will let you install a number of guest operating systems on it. So, you can, for example install Windows XP on your Mac using an application called <a title="Run Windows or a number of other guest operating systems on your Mac with Parallels" href="http://www.parallels.com/products/desktop/" target="_blank">Parallels</a>. This will let you launch Windows XP on your Mac as if it were another Mac application. Essentially you will have Windows XP running in an application window on your OS X box. You can then install any Windows application and run it when needed and then shut down or just minimize Windows when not needed. You can buy Parallels for about $80. Again, a small price to pay for being able to run your legacy applications.</p>
+
+<h3>Google Calendar Sync</h3>
+
+<p>Google provides a very powerful and free calendar service that comes with your gmail account. Since this synchronizes to my Android phone it is always in my pocket. Well, it also synchronizes to my iCal on my Mac with the help of <a title="Synchronize your Google calendar with iCal" href="http://www.google.com/support/calendar/bin/answer.py?hl=en&amp;answer=99358#ical" target="_blank">Google's calendar sync feature</a>. So, if you make a change on your calendar on your Mac it will automatically synchronize to your Google Calendar as well as your phone and of course vice versa.</p>
+
+<h3>Google Contacts Sync</h3>
+
+<p>Just like Google Calendar provides synchronization with iCal, your Google contacts can be synchronized with your Mac Address book using <a title="Sync your Google Contacts to your Mac Address Book" href="http://www.google.com/support/contactsync/bin/answer.py?hl=en&amp;answer=92997&amp;rd=1" target="_blank">Google Sync service for Contacts</a> allowing you to have a single address book across your desktop, Google account and phone.</p>
+
+<h3>Maintain a ToDo list with TeuxDeux</h3>
+
+<p><a title="Maintain your todo list with TeuxDeux" href="http://teuxdeux.com/" target="_blank">TeuxDeux</a> is a minimalistic free service that lets you very easily maintain your todo list. It does not yet have an app for the Android, but they are supposedly working on it. Beats the hell out of doing this on a sheet of paper or in Excel or something similar.</p>
+
+<h3>Listen to your favorite music on your Desktop - Pandora</h3>
+
+<p>This is not really anything new, but maybe some folks have not heard of it yet. <a title="Listen to music for free on Pandora" href="http://www.pandora.com" target="_blank">Pandora</a> lest you setup your own radio stations that play music by a particular artist and other similar songs. The free version has a few commercials sprinkled in every now an then and has a 40 hour per month listening limit. And of course there is an app for pretty much every mobile device so you can also listen to it anywhere.</p>
+
+<h3>Share your desktop with TeamViewer</h3>
+
+<p>Ever wished you could show someone who is across town or on the other side of the planet what is on your screen while talking to them over the phone and do so without having to register for a service or even install any software? Download <a title="Get TeamViewer" href="http://www.teamviewer.com" target="_blank">TeamViewer</a> and put the executable on your desktop. You can simply run the program without installing anything. Have the other party do the same and then tell them what you user id and password is (you will be automatically assigned one). Not only can you give a presentation this way, but you can take control of another desktop (if permission is granted) and help someone out. Ever had a friend or a family member ask you the same thing over and over and you had to explain it step by step over the phone? Use this and make your life easier.</p>
+
+<p>TeamViewer is free for personal use. For commercial use there is a fee.</p>
+]]></content>
+  </entry>
+  
+</feed>

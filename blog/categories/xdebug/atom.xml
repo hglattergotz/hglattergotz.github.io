@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: xdebug | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/xdebug/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Install Xdebug 2.1.0 on OSX 10.6]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6/"/>
+    <updated>2011-05-31T00:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6</id>
+    <content type="html"><![CDATA[<p>I have had to install Xdebug on a few systems now and I always find myself spending time going down the wrong, or should I say the harder, path. Which is to try to install via PECL as recommended. For some reason the PECL install on OSX does not work as designed. The built extension ends up being of the wrong architecture. My guess is that it is built as a 32 bit extension instead of 64 bit.</p>
+
+<!--more-->
+
+
+<p>Anyway, if Xdebug will not load after you installed on OSX using PECL and you find something like this in your apache error log:</p>
+
+<p><code>bash
+Failed loading /Applications/XAMPP/xamppfiles/lib/php/php-
+5.3.1/extensions/no-debug-non-zts-20090626/xdebug.so:  
+dlopen(/Applications/XAMPP/xamppfiles/lib/php/php-5.3.1/extensions/no-
+debug-non-zts-20090626/xdebug.so, 9): no suitable image found.  Did
+find: /Applications/XAMPP/xamppfiles/lib/php/php-5.3.1/extensions/no-
+debug-non-zts-20090626/xdebug.so: mach-o, but wrong architecture
+</code></p>
+
+<p>Go to <a href="http://code.activestate.com/komodo/remotedebugging/">http://code.activestate.com/komodo/remotedebugging/</a> and download the binary for your version of PHP and put it in the extension directory. Restart apache and you should be good to go.</p>
+
+<p>If anyone knows how to coax PECL into building the correct version of the Xdebug extension on OSX please drop me a comment.</p>
+]]></content>
+  </entry>
+  
+</feed>

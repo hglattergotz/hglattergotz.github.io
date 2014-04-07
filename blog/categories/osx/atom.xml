@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: osx | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/osx/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Connecting to Microsoft SQL Server from PHP on OSX and XAMPP]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/"/>
+    <updated>2011-06-06T00:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp</id>
+    <content type="html"><![CDATA[<blockquote><h4>UPDATE (March 23rd 2012):</h4>
+
+<p>I recently found a <a href="http://php-osx.liip.ch/">PHP binary </a>that has a one-line installer. It is actively maintained by Liip AG. I now use that in combination with <a href="http://mxcl.github.com/homebrew/">HomeBrew</a> for all the rest. The Liip package is compiled with pdo_dblib which makes the problem described in this post a non-issue.</p></blockquote>
+
+<p>I recently found myself in the position of having to connect to a remote Microsoft SQL Server from my OSX system using PHP. The production environment runs Ubuntu LINUX, where connecting via mssql_connect() was no problem, but I develop on OSX and I could not get this to work initially.</p>
+
+<!--more-->
+
+
+<p>mssql_connect() simply returns boolean FALSE on failure and PHP tells you little more than</p>
+
+<p><code>bash
+Warning: mssql_connect(): Unable to connect to server: YOURSERVERNAME
+</code></p>
+
+<p>It took quite a few hours to finally figure out that I could turn on some additional logging on the driver level. I use XAMPP and its PHP distribution uses FreeTDS for mssql access.
+There is a configuration file for this driver located at</p>
+
+<p><code>bash
+/Applications/XAMPP/xamppfiles/etc/freetds.conf
+</code></p>
+
+<p>that lets you turn on debug logging to a file.</p>
+
+<p>Uncomment the following lines</p>
+
+<p><code>bash
+;       dump file = /tmp/freetds.log
+;       debug flags = 0xffff
+</code></p>
+
+<p>And then run your connection attempt again. Take a look at the log for details on the failure.</p>
+
+<p>In the end I added a new entry for an MS SQL server at the end of the freetds.conf file and used its name in the call to mssql_connect().</p>
+
+<p>``` bash
+[MyServerXYZ]</p>
+
+<pre><code>    host = the_host_name
+    instance = the_instance_name
+    port = 1433
+    tds version = 9.0
+</code></pre>
+
+<p>```</p>
+
+<p>In my case I had to deal with an instance name that would normally be appended to the host name in a connection string, but for this driver configuration you have to use a variable called <em>instance</em>.</p>
+
+<p>In PHP I then use this code during development</p>
+
+<p><code>bash
+$conn = mssql_connect('MyServerXYZ', $username, $password);
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Install Xdebug 2.1.0 on OSX 10.6]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6/"/>
+    <updated>2011-05-31T00:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6</id>
+    <content type="html"><![CDATA[<p>I have had to install Xdebug on a few systems now and I always find myself spending time going down the wrong, or should I say the harder, path. Which is to try to install via PECL as recommended. For some reason the PECL install on OSX does not work as designed. The built extension ends up being of the wrong architecture. My guess is that it is built as a 32 bit extension instead of 64 bit.</p>
+
+<!--more-->
+
+
+<p>Anyway, if Xdebug will not load after you installed on OSX using PECL and you find something like this in your apache error log:</p>
+
+<p><code>bash
+Failed loading /Applications/XAMPP/xamppfiles/lib/php/php-
+5.3.1/extensions/no-debug-non-zts-20090626/xdebug.so:  
+dlopen(/Applications/XAMPP/xamppfiles/lib/php/php-5.3.1/extensions/no-
+debug-non-zts-20090626/xdebug.so, 9): no suitable image found.  Did
+find: /Applications/XAMPP/xamppfiles/lib/php/php-5.3.1/extensions/no-
+debug-non-zts-20090626/xdebug.so: mach-o, but wrong architecture
+</code></p>
+
+<p>Go to <a href="http://code.activestate.com/komodo/remotedebugging/">http://code.activestate.com/komodo/remotedebugging/</a> and download the binary for your version of PHP and put it in the extension directory. Restart apache and you should be good to go.</p>
+
+<p>If anyone knows how to coax PECL into building the correct version of the Xdebug extension on OSX please drop me a comment.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Looping Through Dates in a Bash Script on OSX]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/02/19/looping-through-dates-in-a-bash-script-on-osx/"/>
+    <updated>2011-02-19T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/02/19/looping-through-dates-in-a-bash-script-on-osx</id>
+    <content type="html"><![CDATA[<p>A little while ago I came across a problem in PHP where I had to process large amounts of data from Google Analytics. If I choose a date range that was too large, PHP would run out of memory. I was not able to resolve the memory leak issue caused by parsing very large XML documents so I settled on writing a shell script that would process the data one day at a time by essentially calling the PHP script over and over instead of having it process all data during a single run. I got as far as confirming that this was not a case of simply not having enough memory to do the job, rather there appeared to be a memory leak in a library that I used to process the GA data.<!--more-->
+Anyway, that memory leak issue is a problem that still needs to be solved, but I did not have the necessary time when I needed this to work and that is not the topic here anyway.</p>
+
+<p>The bash script loops from a start date to an end date, incrementing one day at a time and calls the PHP script on each iteration, passing the date to the script as a parameter.</p>
+
+<p>On Linux it was not a big deal to get it to work:</p>
+
+<p>``` bash</p>
+
+<h1>!/bin/bash</h1>
+
+<p>currentdate=$1
+loopenddate=$(/bin/date --date "$2 1 day" +%Y-%m-%d)</p>
+
+<p>until [ "$currentdate" == "$loopenddate" ]
+do
+  echo $currentdate
+  currentdate=$(/bin/date --date "$currentdate 1 day" +%Y-%m-%d)
+done
+```</p>
+
+<p>Now execute the script, assuming you created a file called dateloop.sh and assigned it execute permissions:</p>
+
+<p><code>bash
+./dateloop.sh 2011-01-01 2011-01-05
+</code></p>
+
+<p>And you should get this</p>
+
+<p><code>bash
+2011-01-01
+2011-01-02
+2011-01-03
+2011-01-04
+2011-01-05
+</code></p>
+
+<p>On OSX it is not quite as straight forward (to me), because the date command does not support the <em>&#45;&#45;date</em> option. Here you have to jump through a few hoops to get it to work. I was able to figure this out with the help of <a href="http://stackoverflow.com/users/207248/siegex">SiegeX</a> on <a href="http://stackoverflow.com/questions/4434782/loop-from-start-date-to-end-date-in-mac-os-x-shell-script">stackoverflow.com</a>.</p>
+
+<p>``` bash</p>
+
+<h1>!/bin/bash</h1>
+
+<p>currentDateTs=$(date -j -f "%Y-%m-%d" $1 "+%s")
+endDateTs=$(date -j -f "%Y-%m-%d" $2 "+%s")
+offset=86400</p>
+
+<p>while [ "$currentDateTs" -le "$endDateTs" ]
+do
+  date=$(date -j -f "%s" $currentDateTs "+%Y-%m-%d")
+  echo $date
+  currentDateTs=$(($currentDateTs+$offset))
+done
+```</p>
+
+<p>The solution here was to convert both the start and end dates to seconds (epoch) using</p>
+
+<p><code>bash
+date -j -f "%Y-%m-%d" $1 "+%s" // Lines 2 and 3 above
+</code></p>
+
+<p>and then add the number of seconds for a day (86400) and convert it back to the format I wanted</p>
+
+<p><code>bash
+date -j -f "%s" $currentDateTs "+%Y-%m-%d" // line 8 above
+</code></p>
+
+<p>Not that hard after all, as with everything else, once you understand it.</p>
+]]></content>
+  </entry>
+  
+</feed>

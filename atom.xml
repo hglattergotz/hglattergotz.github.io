@@ -1,0 +1,1838 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Things I would like to learn in 2013]]></title>
+    <link href="http://glatter-gotz.com/blog/2013/01/28/things-i-would-like-to-learn-in-2013/"/>
+    <updated>2013-01-28T05:38:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2013/01/28/things-i-would-like-to-learn-in-2013</id>
+    <content type="html"><![CDATA[<p>There are a number of new (and not so new) things I would like to learn or have
+been meaning to learn. Maybe putting them down on &#8220;paper&#8221; will serve as a
+reminder and I can revisit this at the end of the year.</p>
+
+<p>So here is my list:</p>
+
+<ul>
+<li><strong><a href="http://emberjs.com/">ember.js</a>:</strong> I have always shied away from front-end
+development because I felt like it is horribly messy compared to server side
+code. But with the rise of so many Javascript frameworks and the huge surge
+in popularity of JS due to things like <a href="http://nodejs.org/">node.js</a> and the
+<a href="http://www.appcelerator.com/">Appcelerator Titanium</a> platform I feel like
+the time might be right. Ember.js looks extremely promising and interesting.</li>
+<li><strong><a href="http://www.vagrantup.com/">Vagrant:</a></strong> I have never gotten past the very
+first example script that is on the Vagrant site due to time issues. But with
+ever more complex development environments it just makes sense to put in the
+time to get this to work.</li>
+<li><strong><a href="http://symfony.com/">Symfony2</a>:</strong> It&#8217;s time, it is sooo time. I have been
+working with sf1 since 2009 and have started using sf2 components and more
+recently been playing with composer a bit and really want to put the sf1
+times behind me as much as that is possible with a fairly large sf1 code base
+to maintain. Since attending Symfony LIVE in Berlin last year I really want
+to start developing in Symfony2 full time.</li>
+<li><strong><a href="http://www.python.org/">Python</a>:</strong> I have a very limited knowledge of
+Python at this point. The only exposure I have gotten is due to my work with
+<a href="http://docs.fabfile.org/en/1.5/">fabric</a>. But I would like to gain a deeper
+understanding of the language to possibly write some of my long running data
+processing scripts in Python instead of PHP.</li>
+<li><strong>TDD:</strong> My first experience with TDD was back in 2006 with C++. This is when
+I came to understand all the benefits and started advocating TDD within my
+organisation. I practiced TDD quite consistently until 2009 when I switched
+to PHP (don&#8217;t ask). Ever since, I have only ever &#8220;started&#8221; to get back into
+it. In fact I have started several times. The tools are there, I have the
+knowledge (for the most part), so there really is not excuse to not
+consistently practice TDD.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bye bye 2012]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/12/31/bye-bye-2012/"/>
+    <updated>2012-12-31T19:48:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/12/31/bye-bye-2012</id>
+    <content type="html"><![CDATA[<p>This year was certainly tumultuous!!</p>
+
+<ul>
+<li>Had another big &#8220;0&#8221; Birthday</li>
+<li>Had a second child - a daughter</li>
+<li>Moved to a different continent</li>
+</ul>
+
+
+<p>Those are some major changes that definitely caused some moments of temporary insanity, some where longer than others and seemed to never end. But I am still standing!</p>
+
+<!--more-->
+
+
+<p>Things I learned:</p>
+
+<ul>
+<li>Becoming a dad for the second time does not make the sleep deprivation less painful in any way! Whatsoever! If anything it is worse, because you know what is about to happen to you in the next 18 to 24 months - NO SLEEP!!!</li>
+<li>Moving internationally with small children takes about 5 years off your life.</li>
+<li>Hiring the company <a href="http://www.inhouserelocation.com">Inhouse Relocation</a> to ease the pain of moving internationally is a waste of money.</li>
+<li><a href="http://www.symfony.com">Symfony2</a> is pretty amazing</li>
+<li><a href="http://getcomposer.org">Composer</a> rocks!</li>
+<li>Parallel processing with PHP is doable</li>
+<li>Beanstalkd is really cool</li>
+<li>A day does not have enough hours in it to be a great husband, and dad, put in a 8 hour workday, work on a side project, maintain your hobbies, and learn new things.</li>
+</ul>
+
+
+<p>So whats in store for 2013?</p>
+
+<ul>
+<li>I shall be <a href="http://webadvent.org/2012/be-lazy-by-kitt-hodsden">lazier</a> than ever! Especially at work.</li>
+<li>I want to get at least one app into the app store.</li>
+<li>I shall blog more frequently (once a week).</li>
+</ul>
+
+
+<p>2013 bring it on!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[./symfony doctrine:build-schema for a Single Table]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table/"/>
+    <updated>2012-07-16T06:52:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table</id>
+    <content type="html"><![CDATA[<p>The built-in command line tasks in symfony 1.4 (yes, I am still stuck on 1.4)
+are very handy for quickly performing all sorts of project related tasks.
+Doctrines own command line tasks are exposed through the symfony CLI in the
+<em>doctrine</em> namespace.
+I use the <code>doctrine:build-schema</code> task, which generates a yml schema for an
+existing database, all the time. This allows one to very rapidly build models
+from and for an existing database.</p>
+
+<!--more-->
+
+
+<p>But therein also lies a problem - at least sometimes. I am often working on
+projects with multiple large databases that consist of dozens or hundreds of
+tables. And most often I only need to have models for a very small subset of
+the total list of tables.
+I used to simply generate the yml schema with <code>./symfony docrine:build-schema</code>
+and then manually remove the tables I did not need. Horrible!! Slow, error
+prone and mind numbing.</p>
+
+<p>It would be great if there was a more granular version of this task.
+For example</p>
+
+<blockquote><p>Add the schema for table X on database Y to the existing schema file</p></blockquote>
+
+
+<p>Enter <code>doctrine:build-table-schema</code>.
+I wrapped the functionality in a class that is really nothing more than a slight
+variation of part of the <code>Doctrine_Import</code> class. More specifically its
+<code>importSchema</code> method. But instead of building the schema for all tables of
+the database it simply builds the ones that have been explicitly requested.</p>
+
+<figure class='code'><figcaption><span>SchemaBuilder.class.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Build the schema for multiple connections and specific tables for those</span>
+</span><span class='line'><span class="sd"> * connections.</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * Example:</span>
+</span><span class='line'><span class="sd"> *   $connections = array(</span>
+</span><span class='line'><span class="sd"> *       &#39;connection1&#39; =&gt; array(&#39;table1&#39;, &#39;table2&#39;),</span>
+</span><span class='line'><span class="sd"> *       &#39;connection2&#39; =&gt; array(&#39;table1&#39;, &#39;table2&#39;)</span>
+</span><span class='line'><span class="sd"> *   );</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * @param type $directory</span>
+</span><span class='line'><span class="sd"> * @param array $connections Array of connection names with their associated</span>
+</span><span class='line'><span class="sd"> *                           tables</span>
+</span><span class='line'><span class="sd"> * @param array $options</span>
+</span><span class='line'><span class="sd"> * @return array</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">protected</span> <span class="k">function</span> <span class="nf">buildPHPModels</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$connections</span> <span class="o">=</span> <span class="k">array</span><span class="p">(),</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$classes</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$manager</span> <span class="o">=</span> <span class="nx">Doctrine_Manager</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">foreach</span> <span class="p">(</span><span class="nv">$manager</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$connection</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Limit the databases to the ones specified by $connections.</span>
+</span><span class='line'>    <span class="c1">// Check only happens if array is not empty</span>
+</span><span class='line'>    <span class="nv">$connectionNames</span> <span class="o">=</span> <span class="nb">array_keys</span><span class="p">(</span><span class="nv">$connections</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$connections</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$connectionNames</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="k">continue</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$builder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Doctrine_Import_Builder</span><span class="p">();</span>
+</span><span class='line'>    <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">setTargetPath</span><span class="p">(</span><span class="nv">$directory</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">setOptions</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$definitions</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>    <span class="nv">$currentConnName</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">import</span><span class="o">-&gt;</span><span class="na">listTables</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$table</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$table</span><span class="p">,</span> <span class="nv">$connections</span><span class="p">[</span><span class="nv">$currentConnName</span><span class="p">]))</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="k">continue</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nv">$definition</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>      <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;tableName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$table</span><span class="p">;</span>
+</span><span class='line'>      <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">classify</span><span class="p">(</span><span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">tableize</span><span class="p">(</span><span class="nv">$table</span><span class="p">));</span>
+</span><span class='line'>      <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">import</span><span class="o">-&gt;</span><span class="na">listTableColumns</span><span class="p">(</span><span class="nv">$table</span><span class="p">);</span>
+</span><span class='line'>      <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;connection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+</span><span class='line'>      <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;connectionClassName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">try</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>        <span class="nv">$relations</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">import</span><span class="o">-&gt;</span><span class="na">listTableRelations</span><span class="p">(</span><span class="nv">$table</span><span class="p">);</span>
+</span><span class='line'>        <span class="nv">$relClasses</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$relations</span> <span class="k">as</span> <span class="nv">$relation</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>          <span class="nv">$table</span> <span class="o">=</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">];</span>
+</span><span class='line'>          <span class="nv">$class</span> <span class="o">=</span> <span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">classify</span><span class="p">(</span><span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">tableize</span><span class="p">(</span><span class="nv">$table</span><span class="p">));</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$relClasses</span><span class="p">))</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$class</span> <span class="o">.</span> <span class="s1">&#39;_&#39;</span> <span class="o">.</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$relClasses</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="k">else</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$class</span><span class="p">;</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="nv">$relClasses</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$class</span><span class="p">;</span>
+</span><span class='line'>          <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">][</span><span class="nv">$alias</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>              <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="nv">$alias</span><span class="p">,</span>
+</span><span class='line'>              <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nv">$class</span><span class="p">,</span>
+</span><span class='line'>              <span class="s1">&#39;local&#39;</span> <span class="o">=&gt;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">],</span>
+</span><span class='line'>              <span class="s1">&#39;foreign&#39;</span> <span class="o">=&gt;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;foreign&#39;</span><span class="p">]</span>
+</span><span class='line'>          <span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nv">$definitions</span><span class="p">[</span><span class="nx">strtolower</span><span class="p">(</span><span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">;</span>
+</span><span class='line'>      <span class="nv">$classes</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Build opposite end of relationships</span>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$definitions</span> <span class="k">as</span> <span class="nv">$definition</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$className</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">];</span>
+</span><span class='line'>      <span class="nv">$relClasses</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">foreach</span> <span class="p">(</span><span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$alias</span> <span class="o">=&gt;</span> <span class="nv">$relation</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">],</span> <span class="nv">$relClasses</span><span class="p">)</span> <span class="o">||</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$definitions</span><span class="p">[</span><span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]][</span><span class="s1">&#39;relations&#39;</span><span class="p">][</span><span class="nv">$className</span><span class="p">]))</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>          <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$className</span> <span class="o">.</span> <span class="s1">&#39;_&#39;</span> <span class="o">.</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$relClasses</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>          <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$className</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="nv">$relClasses</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">];</span>
+</span><span class='line'>        <span class="nv">$definitions</span><span class="p">[</span><span class="nx">strtolower</span><span class="p">(</span><span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">])][</span><span class="s1">&#39;relations&#39;</span><span class="p">][</span><span class="nv">$alias</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="nx">Doctrine_Relation</span><span class="o">::</span><span class="na">MANY</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="nv">$alias</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nv">$className</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;local&#39;</span> <span class="o">=&gt;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;foreign&#39;</span><span class="p">],</span>
+</span><span class='line'>            <span class="s1">&#39;foreign&#39;</span> <span class="o">=&gt;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Build records</span>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$definitions</span> <span class="k">as</span> <span class="nv">$definition</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">buildRecord</span><span class="p">(</span><span class="nv">$definition</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nv">$classes</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The entire code including a symfony task to call it is available as a symfony 1.4
+plugin on github.com. It is part of a utilities plugin that is available at
+<a href="http://github.com/hglattergotz/uUtilitiesPlugin">http://github.com/hglattergotz/uUtilitiesPlugin</a>.</p>
+
+<p>The class can be found here <code>uUtilitiesPlugin/lib/SchemaBuilder</code></p>
+
+<p>To add the schema for table <em>A</em> in database connection <em>Z</em> you would execute this from the
+symfony project folder:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./symfony doctrine:build-schema-table --connection<span class="o">=</span>Z --table<span class="o">=</span>A --application<span class="o">=</span>myapp
+</span><span class='line'>./symfony doctrine:build-model
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP: The Right Way]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/07/10/php-the-right-way/"/>
+    <updated>2012-07-10T11:12:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/07/10/php-the-right-way</id>
+    <content type="html"><![CDATA[<p>Today I discovered an interesting new project called <a href="http://www.phptherightway.com/">&#8220;PHP: The Right Way&#8221;</a>. It is an open source project maintained by <a href="https://twitter.com/codeguy">Josh Lockhart</a> attempting to provide a well rounded set of best practices for developing in PHP.</p>
+
+<p>While I have not yet attempted to contribute any content I have added the banner to my personal blog to show my support. If you are interested it adding a &#8220;PHP: The Right Way&#8221; banner to the side bar of your <a href="http://octopress.org">Octopress</a> blog, here is how. Allthough, if you are using octopress you probably don&#8217;t need help with this ;-).</p>
+
+<!--more-->
+
+
+<p>Following is the html for the aside. The 240x400 image size works well for the sidebar width that I have. This is easy to change.</p>
+
+<figure class='code'><figcaption><span>/source/includes/custom/asides/php_the_right_way.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{% if site.php_the_right_way_show %}
+</span><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.phptherightway.com&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">class=</span><span class="s">&quot;center&quot;</span> <span class="na">src=</span><span class="s">&quot;http://www.phptherightway.com/images/banners/vert-rect-240x400.png&quot;</span> <span class="na">alt=</span><span class="s">&quot;PHP: The Right Way&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span><span class='line'>{% endif %}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In <code>/_config.yml</code> add the aside to the list of <code>default_asides</code> in the location you want it to show up in. Mine is at the end.</p>
+
+<figure class='code'><figcaption><span>/_config.yml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default_asides</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">custom/asides/about.html</span><span class="p-Indicator">,</span> <span class="nv">asides/recent_posts.html</span><span class="p-Indicator">,</span> <span class="nv">asides/twitter.html</span><span class="p-Indicator">,</span> <span class="nv">asides/github.html</span><span class="p-Indicator">,</span> <span class="nv">custom/asides/php_the_right_way.html</span><span class="p-Indicator">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the configuration file add the following to the very end.</p>
+
+<figure class='code'><figcaption><span>/_config.yml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># PHP The Right Way Banner image</span>
+</span><span class='line'><span class="l-Scalar-Plain">php_the_right_way_show</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s it!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ExactTarget SOAP API: Obtaining an Accurate List of Retrievable Properties]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/"/>
+    <updated>2012-06-18T07:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions</id>
+    <content type="html"><![CDATA[<p>Aahhh! The joys of integrating with third-party API&#8217;s.
+Trying to get your application to talk to a third-party API is sometimes tricky, especially if the API documentation is not up to date.
+SOAP is supposed to make this simpler by providing a WSDL from which you can generate classes.
+So what are you supposed to do if the documentation and the WSDL seem out of date?</p>
+
+<!-- more -->
+
+
+<p><strong>Clarification</strong>: By out of date I mean that the documentation for a particular object states it has retrievable properties <em>a</em>, <em>b</em> and <em>c</em>, the WSDL has properties <em>a</em>, <em>c</em> and <em>d</em>, and by trial and error you finally figure out that only <em>a</em> and <em>d</em> are retrievable.</p>
+
+<p>Not to fear, ExactTarget provides a SOAP method that describes objects. You pass the object name as a parameter and in return you get a list of all properties and their attributes. One of the attributes is <strong>isRetrievable</strong>, which is what I am after.</p>
+
+<p>Great! Right? Well, mostly&#8230;</p>
+
+<p>For most objects the method described below returns accurate results from what I can tell. The only object I have encountered so far that has an incorrect result form this method is <a href="http://docs.code.exacttarget.com/020_Web_Service_Guide/Objects/EmailSendDefinition">EmailSendDefinition</a>.</p>
+
+<figure class='code'><figcaption><span>EmailSendDefinition retrievable properties </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">Client</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'><span class="nx">CreatedDate</span>
+</span><span class='line'><span class="nx">ModifiedDate</span>
+</span><span class='line'><span class="nx">ObjectID</span>
+</span><span class='line'><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">Name</span>
+</span><span class='line'><span class="nx">CategoryID</span>
+</span><span class='line'><span class="nx">Description</span>
+</span><span class='line'><span class="nx">SendClassification</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">FromName</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">FromAddress</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">CusomterKey</span>            <span class="c1">// &lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">SourceAddressType</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">PrivateIP</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">DomainType</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">PrivateDomain</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">HeaderSalutationSource</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">HeaderContentArea</span><span class="o">.</span><span class="nx">ID</span>   <span class="c1">// &lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">FooterSalutationSource</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">FooterContentArea</span><span class="o">.</span><span class="nx">ID</span>   <span class="c1">// &lt;-- Generates error</span>
+</span><span class='line'><span class="nx">SuppressTracking</span>
+</span><span class='line'><span class="nx">IsSendLogging</span>
+</span><span class='line'><span class="nx">Email</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'><span class="nx">CCEmail</span>
+</span><span class='line'><span class="nx">BccEmail</span>
+</span><span class='line'><span class="nx">AutoBccEmail</span>
+</span><span class='line'><span class="nx">TestEmailAddr</span>
+</span><span class='line'><span class="nx">EmailSubject</span>
+</span><span class='line'><span class="nx">DynamicEmailSubject</span>
+</span><span class='line'><span class="nx">IsMultipart</span>
+</span><span class='line'><span class="nx">IsWrapped</span>
+</span><span class='line'><span class="nx">SendLimit</span>
+</span><span class='line'><span class="nx">SendWindowOpen</span>
+</span><span class='line'><span class="nx">SendWindowCloses</span>                       <span class="c1">// &lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeduplicateByEmail</span>
+</span><span class='line'><span class="nx">ExclusionFilter</span>
+</span><span class='line'><span class="nx">Additional</span>
+</span><span class='line'><span class="nx">SendDefinitionList</span>
+</span><span class='line'><span class="nx">IsPlatformObject</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The Describe method is quite handy and I use it quite a bit when exploring the API, so I added it to my PHP library for accessing ExactTarget&#8217;s SOAP API.
+You can get the lib <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOAP-API">here</a>, and this is how you would get the definition for the above EmailSendDefinition object:</p>
+
+<figure class='code'><figcaption><span>describe.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="nx">ETCore</span><span class="o">::</span><span class="na">initialize</span><span class="p">(</span><span class="nv">$userName</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+</span><span class='line'><span class="nb">print_r</span><span class="p">(</span><span class="nx">ETCore</span><span class="o">::</span><span class="na">getObjectDefinition</span><span class="p">(</span><span class="s1">&#39;EmailSendDefinition&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Result </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">definition</span> <span class="o">=</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>    <span class="p">[</span><span class="nx">ObjectType</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">EmailSendDefinition</span>
+</span><span class='line'>    <span class="p">[</span><span class="nx">Properties</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>        <span class="p">(</span>
+</span><span class='line'>            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Client</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Int32</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">CreatedDate</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">DateTime</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">ModifiedDate</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">DateTime</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>             <span class="o">:</span>
+</span><span class='line'>             <span class="o">:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As I learn more about the ExactTarget SOAP API and SOAP itself I will be posting my findings and expanding the library on github.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Appcelerator Titanium - Email a Screen Shot with a Single Button Click]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/04/30/appcelerator-titanium-email-a-screen-shot-with-a-single-button-click/"/>
+    <updated>2012-04-30T16:30:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/04/30/appcelerator-titanium-email-a-screen-shot-with-a-single-button-click</id>
+    <content type="html"><![CDATA[<p>During testing it is often helpful if a tester can send you, the developer, a screen shot of a particular window in the app.
+Of course this is generally very simple to do on an iOS device right out of the box. However, you can make it even easer for your testers.</p>
+
+<!-- more -->
+
+
+<p>With a single click of a button in your app you can</p>
+
+<ul>
+<li>grab the screen content</li>
+<li>save it as an image</li>
+<li>attach it to an email</li>
+<li>prepopulate the message with default values</li>
+<li>allow the user to write a comment and send</li>
+</ul>
+
+
+<p>Providing all that cuts down on a whole lot of steps and might make it more likely that you get that much needed feedback.</p>
+
+<figure class='code'><figcaption><span>lib/UiElements.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * For beta testing purposes create a camera button that can be set</span>
+</span><span class='line'><span class="cm"> * as the right nav button. Upon clicking create a screenshot and</span>
+</span><span class='line'><span class="cm"> * display the email dialog with pre-populated fields.</span>
+</span><span class='line'><span class="cm"> * This is a convenience for testers to send a screenshot straight</span>
+</span><span class='line'><span class="cm"> * out of the applicaiton.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">createScreenShotButton</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">buttonObjects</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span><span class="nx">image</span><span class="o">:</span><span class="s1">&#39;images/camera.png&#39;</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span><span class="mi">45</span><span class="p">}</span>
+</span><span class='line'>    <span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">buttonBar</span> <span class="o">=</span> <span class="nx">Titanium</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createButtonBar</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">labels</span><span class="o">:</span><span class="nx">buttonObjects</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">backgroundColor</span><span class="o">:</span><span class="s1">&#39;#000&#39;</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">indicator</span> <span class="o">=</span> <span class="nx">createIndicatorWindow</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">buttonBar</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">index</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">Ti</span><span class="p">.</span><span class="nx">Media</span><span class="p">.</span><span class="nx">takeScreenshot</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">indicator</span><span class="p">.</span><span class="nx">openIndicator</span><span class="p">();</span>
+</span><span class='line'>                <span class="kd">var</span> <span class="nx">emailDialog</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createEmailDialog</span><span class="p">()</span>
+</span><span class='line'>                <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">subject</span> <span class="o">=</span> <span class="s2">&quot;Screenshot from myApp&quot;</span><span class="p">;</span>
+</span><span class='line'>                <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">toRecipients</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;my@email-address.com&#39;</span><span class="p">];</span>
+</span><span class='line'>                <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">messageBody</span> <span class="o">=</span> <span class="s1">&#39;Describe the problem please&#39;</span><span class="p">;</span>
+</span><span class='line'>                <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">addAttachment</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">media</span><span class="p">);</span>
+</span><span class='line'>                <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+</span><span class='line'>                <span class="nx">indicator</span><span class="p">.</span><span class="nx">closeIndicator</span><span class="p">();</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">buttonBar</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">createScreenShotButton</span> <span class="o">=</span> <span class="nx">createScreenShotButton</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The activity indicator used in this example is described <a href="http://glatter-gotz.com/blog/2012/03/19/appcelerator-titanium-a-nice-looking-activity-indicator-window">here</a>.</p>
+
+<p>A great place to get free icons for this button is at <a href="http://glyphish.com/">glyphish.com</a>.</p>
+
+<p>To provide this screen shot button on specific windows of your application simply do the following</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">win</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createWindow</span><span class="p">({});</span>
+</span><span class='line'><span class="nx">uie</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lib/UiElements&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">bb</span> <span class="o">=</span> <span class="nx">uie</span><span class="p">.</span><span class="nx">createScreenShotButton</span><span class="p">();</span>
+</span><span class='line'><span class="nx">win</span><span class="p">.</span><span class="nx">setRightNavButton</span><span class="p">(</span><span class="nx">bb</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// When returning to this window from a child view the nav button gets</span>
+</span><span class='line'><span class="c1">// removed by default. This will show it again.</span>
+</span><span class='line'><span class="nx">win</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;focus&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">win</span><span class="p">.</span><span class="nx">setRightNavButton</span><span class="p">(</span><span class="nx">bb</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Appcelerator Titanium - A Nice Looking Activity Indicator Window]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/03/19/appcelerator-titanium-a-nice-looking-activity-indicator-window/"/>
+    <updated>2012-03-19T13:13:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/03/19/appcelerator-titanium-a-nice-looking-activity-indicator-window</id>
+    <content type="html"><![CDATA[<blockquote><h4>UPDATE (April 11th 2013):</h4>
+
+<p>I updated the demo project on <a href="http://github.com/hglattergotz/indicatordemo">github</a> with a patch from Khawar. The demo now also works on android.</p></blockquote>
+
+<p>The <em>Titanium.UI.ActivityIndicator</em> is a commonly used component in my iOS applications, but on its own it does not look very appealing.
+To make the activity indicator look a little nicer I dressed it up in its own window that has is slightly opaque and stuck it in a commonjs module.</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><figcaption><span>lib/UiElements.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * Indicator window with a spinner and a label</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * @param {Object} args</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">createIndicatorWindow</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="mi">180</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">height</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">args</span> <span class="o">||</span> <span class="p">{};</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">top</span> <span class="o">||</span> <span class="mi">140</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">text</span> <span class="o">||</span> <span class="s1">&#39;Loading ...&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">Titanium</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createWindow</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">height</span><span class="o">:</span>           <span class="nx">height</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">width</span><span class="o">:</span>            <span class="nx">width</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">top</span><span class="o">:</span>              <span class="nx">top</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">borderRadius</span><span class="o">:</span>     <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">touchEnabled</span><span class="o">:</span>     <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">opacity</span><span class="o">:</span>          <span class="mf">0.6</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">view</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createView</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">width</span><span class="o">:</span>   <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">SIZE</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">height</span><span class="o">:</span>  <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FILL</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">center</span><span class="o">:</span>  <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="p">(</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="nx">y</span><span class="o">:</span> <span class="p">(</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="p">},</span>
+</span><span class='line'>        <span class="nx">layout</span><span class="o">:</span>  <span class="s1">&#39;horizontal&#39;</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">function</span> <span class="nx">osIndicatorStyle</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">style</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">iPhone</span><span class="p">.</span><span class="nx">ActivityIndicatorStyle</span><span class="p">.</span><span class="nx">PLAIN</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;iPhone OS&#39;</span> <span class="o">!==</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">style</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ActivityIndicatorStyle</span><span class="p">.</span><span class="nx">DARK</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">style</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">activityIndicator</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createActivityIndicator</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">style</span><span class="o">:</span>   <span class="nx">osIndicatorStyle</span><span class="p">(),</span>
+</span><span class='line'>        <span class="nx">left</span><span class="o">:</span>    <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">height</span><span class="o">:</span>  <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FILL</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">width</span><span class="o">:</span>   <span class="mi">30</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">Titanium</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createLabel</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">left</span><span class="o">:</span>    <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">width</span><span class="o">:</span>   <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FILL</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">height</span><span class="o">:</span>  <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FILL</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">text</span><span class="o">:</span>    <span class="nx">text</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">color</span><span class="o">:</span>   <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">font</span><span class="o">:</span>    <span class="p">{</span> <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Helvetica Neue&#39;</span><span class="p">,</span> <span class="nx">fontSize</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span> <span class="nx">fontWeight</span><span class="o">:</span> <span class="s1">&#39;bold&#39;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">view</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">activityIndicator</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">view</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">label</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">win</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">view</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">function</span> <span class="nx">openIndicator</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">win</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+</span><span class='line'>        <span class="nx">activityIndicator</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">win</span><span class="p">.</span><span class="nx">openIndicator</span> <span class="o">=</span> <span class="nx">openIndicator</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">function</span> <span class="nx">closeIndicator</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">activityIndicator</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>        <span class="nx">win</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">win</span><span class="p">.</span><span class="nx">closeIndicator</span> <span class="o">=</span> <span class="nx">closeIndicator</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">win</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Public interface</span>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">createIndicatorWindow</span> <span class="o">=</span> <span class="nx">createIndicatorWindow</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This would then be called from inside an event listener like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">uie</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lib/UiElements&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">indicator</span> <span class="o">=</span> <span class="nx">uie</span><span class="p">.</span><span class="nx">createIndicatorWindow</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">someViewObject</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">indicator</span><span class="p">.</span><span class="nx">openIndicator</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Do the work that takes a while</span>
+</span><span class='line'>        <span class="c1">// and requires an activity indicator</span>
+</span><span class='line'>        <span class="nx">indicator</span><span class="p">.</span><span class="nx">closeIndicator</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">},</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ExactTarget SOAP Upsert with PHP]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/10/31/exacttarget-soap-upsert-with-php/"/>
+    <updated>2011-10-31T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/10/31/exacttarget-soap-upsert-with-php</id>
+    <content type="html"><![CDATA[<p>There is quite a bit of documentation for the ExactTarget SOAP API that includes lots of code samples. But unfortunately the PHP code samples are not quite as plentiful as the .NET and Java ones.
+After lots of searching and lot of trial and error I finally got my upsert working. An upsert is a SOAP method in the ExactTarget SOAP API that will either update or insert a record depending on whether it is already present or not.</p>
+
+<!--more-->
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="nv">$uo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExactTarget_UpdateOptions</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$uo</span><span class="o">-&gt;</span><span class="na">SaveOptions</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$so</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExactTarget_SaveOption</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$so</span><span class="o">-&gt;</span><span class="na">PropertyName</span> <span class="o">=</span> <span class="s1">&#39;DataExtensionObject&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$so</span><span class="o">-&gt;</span><span class="na">SaveAction</span> <span class="o">=</span> <span class="nx">ExactTarget_SaveAction</span><span class="o">::</span><span class="na">UpdateAdd</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$uo</span><span class="o">-&gt;</span><span class="na">SaveOptions</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$so</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$uoSo</span> <span class="o">=</span> <span class="nx">ETCore</span><span class="o">::</span><span class="na">toSoapVar</span><span class="p">(</span><span class="nv">$uo</span><span class="p">,</span> <span class="s1">&#39;UpdateOptions&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExactTarget_UpdateRequest</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">Options</span> <span class="o">=</span> <span class="nv">$uoSo</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">Objects</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="nv">$deoSo</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$soapClient</span><span class="o">-&gt;</span><span class="na">Update</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Where <em>$deoSo</em> is a DataExtension Object that has been converted to a SoapVar and <em>$soapClient</em> is an ExactTarget soap client instance. The way you get the upsert behavior is to set the saveaction to <em>ExactTarget_SaveAction::UpdateAdd</em>.</p>
+
+<p>If you are looking for a minimal wrapper library that includes the above method take a look at <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOAP-API">this library on gitub</a>. This library gleans quite a few things from the Doctrine ORM, so if you are familiar with that you should feel right at home.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Connecting to Microsoft SQL Server from PHP on OSX and XAMPP]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/"/>
+    <updated>2011-06-06T00:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp</id>
+    <content type="html"><![CDATA[<blockquote><h4>UPDATE (March 23rd 2012):</h4>
+
+<p>I recently found a <a href="http://php-osx.liip.ch/">PHP binary </a>that has a one-line installer. It is actively maintained by Liip AG. I now use that in combination with <a href="http://mxcl.github.com/homebrew/">HomeBrew</a> for all the rest. The Liip package is compiled with pdo_dblib which makes the problem described in this post a non-issue.</p></blockquote>
+
+<p>I recently found myself in the position of having to connect to a remote Microsoft SQL Server from my OSX system using PHP. The production environment runs Ubuntu LINUX, where connecting via mssql_connect() was no problem, but I develop on OSX and I could not get this to work initially.</p>
+
+<!--more-->
+
+
+<p>mssql_connect() simply returns boolean FALSE on failure and PHP tells you little more than</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Warning: mssql_connect<span class="o">()</span>: Unable to connect to server: YOURSERVERNAME
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It took quite a few hours to finally figure out that I could turn on some additional logging on the driver level. I use XAMPP and its PHP distribution uses FreeTDS for mssql access.
+There is a configuration file for this driver located at</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/Applications/XAMPP/xamppfiles/etc/freetds.conf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>that lets you turn on debug logging to a file.</p>
+
+<p>Uncomment the following lines</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>;       dump <span class="nv">file</span> <span class="o">=</span> /tmp/freetds.log
+</span><span class='line'>;       debug <span class="nv">flags</span> <span class="o">=</span> 0xffff
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And then run your connection attempt again. Take a look at the log for details on the failure.</p>
+
+<p>In the end I added a new entry for an MS SQL server at the end of the freetds.conf file and used its name in the call to mssql_connect().</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>MyServerXYZ<span class="o">]</span>
+</span><span class='line'>        <span class="nv">host</span> <span class="o">=</span> the_host_name
+</span><span class='line'>        <span class="nv">instance</span> <span class="o">=</span> the_instance_name
+</span><span class='line'>        <span class="nv">port</span> <span class="o">=</span> 1433
+</span><span class='line'>        tds <span class="nv">version</span> <span class="o">=</span> 9.0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In my case I had to deal with an instance name that would normally be appended to the host name in a connection string, but for this driver configuration you have to use a variable called <em>instance</em>.</p>
+
+<p>In PHP I then use this code during development</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$conn</span> <span class="o">=</span> mssql_connect<span class="o">(</span><span class="s1">&#39;MyServerXYZ&#39;</span>, <span class="nv">$username</span>, <span class="nv">$password</span><span class="o">)</span>;
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Install Xdebug 2.1.0 on OSX 10.6]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6/"/>
+    <updated>2011-05-31T00:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6</id>
+    <content type="html"><![CDATA[<p>I have had to install Xdebug on a few systems now and I always find myself spending time going down the wrong, or should I say the harder, path. Which is to try to install via PECL as recommended. For some reason the PECL install on OSX does not work as designed. The built extension ends up being of the wrong architecture. My guess is that it is built as a 32 bit extension instead of 64 bit.</p>
+
+<!--more-->
+
+
+<p>Anyway, if Xdebug will not load after you installed on OSX using PECL and you find something like this in your apache error log:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Failed loading /Applications/XAMPP/xamppfiles/lib/php/php-
+</span><span class='line'>5.3.1/extensions/no-debug-non-zts-20090626/xdebug.so:
+</span><span class='line'>dlopen<span class="o">(</span>/Applications/XAMPP/xamppfiles/lib/php/php-5.3.1/extensions/no-
+</span><span class='line'>debug-non-zts-20090626/xdebug.so, 9<span class="o">)</span>: no suitable image found.  Did
+</span><span class='line'>find: /Applications/XAMPP/xamppfiles/lib/php/php-5.3.1/extensions/no-
+</span><span class='line'>debug-non-zts-20090626/xdebug.so: mach-o, but wrong architecture
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Go to <a href="http://code.activestate.com/komodo/remotedebugging/">http://code.activestate.com/komodo/remotedebugging/</a> and download the binary for your version of PHP and put it in the extension directory. Restart apache and you should be good to go.</p>
+
+<p>If anyone knows how to coax PECL into building the correct version of the Xdebug extension on OSX please drop me a comment.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Run a symfony Task from an Action]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/05/06/run-a-symfony-task-from-an-action/"/>
+    <updated>2011-05-06T00:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/05/06/run-a-symfony-task-from-an-action</id>
+    <content type="html"><![CDATA[<p>It is sometimes useful and necessary to run a symfony task from within an action. I have found that it is a good practice to keep the amount of code in a task to a minimum by putting all your logic into a class and then simply instantiating an object of that class in a task and then calling a method to which you pass the task arguments and options to get your work done.</p>
+
+<!--more-->
+
+
+<p>So instead of</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//myTask.class.php</span>
+</span><span class='line'><span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nv">$arguments</span> <span class="o">=</span> <span class="k">array</span><span class="p">(),</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// initialize the database connection</span>
+</span><span class='line'>  <span class="nv">$databaseManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sfDatabaseManager</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">configuration</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$connection</span> <span class="o">=</span> <span class="nv">$databaseManager</span><span class="o">-&gt;</span><span class="na">getDatabase</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;connection&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// all code to perform task goes here</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>do this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//myTask.class.php</span>
+</span><span class='line'><span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nv">$arguments</span> <span class="o">=</span> <span class="k">array</span><span class="p">(),</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">// initialize the database connection</span>
+</span><span class='line'>  <span class="nv">$databaseManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sfDatabaseManager</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">configuration</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$connection</span> <span class="o">=</span> <span class="nv">$databaseManager</span><span class="o">-&gt;</span><span class="na">getDatabase</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;connection&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$myObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">myClass</span><span class="p">();</span>
+</span><span class='line'>  <span class="nv">$myObj</span><span class="o">-&gt;</span><span class="na">someMethod</span><span class="p">(</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">&#39;arg&#39;</span><span class="p">],</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;opt&#39;</span><span class="p">],</span> <span class="o">...</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have a situation as just explained then it makes more sense to simply do the same in your action - instantiate an instance of the class - instead of executing a task in the action.</p>
+
+<p>However, I have run into situation where the task I want to run is actually executing in a different context (different symfony application within the same project). Then you really have to run the task from your action.
+There are a few things to consider when doing this and I have not found any good information on this. I do remember reading about this subject matter in the symfony docs, but I was not able to find it when I needed it.
+There are two things that need to happen to make this work:</p>
+
+<ul>
+<li>Before instantiating the task you wish to execute you must change the current working directory to the project root.</li>
+<li>After the task has completed you have to switch back to your current context otherwise bad things will happen.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// in one of your methods in actions.class.php</span>
+</span><span class='line'><span class="o">:</span>
+</span><span class='line'><span class="c1">// Remember the current dir and change it to sf root</span>
+</span><span class='line'><span class="nv">$currentDir</span> <span class="o">=</span> <span class="nb">getcwd</span><span class="p">();</span>
+</span><span class='line'><span class="nb">chdir</span><span class="p">(</span><span class="nx">sfConfig</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;sf_root_dir&#39;</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Instantiate the task and run it</span>
+</span><span class='line'><span class="nv">$task</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">myTask</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="p">,</span> <span class="k">new</span> <span class="nx">sfFormatter</span><span class="p">());</span>
+</span><span class='line'><span class="nv">$rc</span> <span class="o">=</span> <span class="nv">$task</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;arg1&#39;</span> <span class="o">=&gt;</span> <span class="nv">$argVal1</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;opt1&#39;</span> <span class="o">=&gt;</span> <span class="nv">$optVal1</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Restore original environment, change back to original directory</span>
+</span><span class='line'><span class="c1">// Switch the context back to where it was</span>
+</span><span class='line'><span class="nb">chdir</span><span class="p">(</span><span class="nv">$currentDir</span><span class="p">);</span>
+</span><span class='line'><span class="nx">sfContext</span><span class="o">::</span><span class="na">switchTo</span><span class="p">(</span><span class="s1">&#39;AppName&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above code sample <em>AppName</em> is the name of the context/sf application in which the action lives.
+So if for example your frontend application is called <em>frontend</em> and the task you are running needs to have <em>&#8211;application=backend</em>, then you need to switch it back to <em>frontend</em> once the task is done otherwise your application will most likely encounter a fatal error such as</p>
+
+<blockquote><p>The template &#8220;myTemplate.php&#8221; does not exist or is unreadable in &#8220;&#8221;</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Looping Through Dates in a Bash Script on OSX]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/02/19/looping-through-dates-in-a-bash-script-on-osx/"/>
+    <updated>2011-02-19T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/02/19/looping-through-dates-in-a-bash-script-on-osx</id>
+    <content type="html"><![CDATA[<p>A little while ago I came across a problem in PHP where I had to process large amounts of data from Google Analytics. If I choose a date range that was too large, PHP would run out of memory. I was not able to resolve the memory leak issue caused by parsing very large XML documents so I settled on writing a shell script that would process the data one day at a time by essentially calling the PHP script over and over instead of having it process all data during a single run. I got as far as confirming that this was not a case of simply not having enough memory to do the job, rather there appeared to be a memory leak in a library that I used to process the GA data.<!--more-->
+Anyway, that memory leak issue is a problem that still needs to be solved, but I did not have the necessary time when I needed this to work and that is not the topic here anyway.</p>
+
+<p>The bash script loops from a start date to an end date, incrementing one day at a time and calls the PHP script on each iteration, passing the date to the script as a parameter.</p>
+
+<p>On Linux it was not a big deal to get it to work:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nv">currentdate</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'><span class="nv">loopenddate</span><span class="o">=</span><span class="k">$(</span>/bin/date --date <span class="s2">&quot;$2 1 day&quot;</span> +%Y-%m-%d<span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">until</span> <span class="o">[</span> <span class="s2">&quot;$currentdate&quot;</span> <span class="o">==</span> <span class="s2">&quot;$loopenddate&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="nv">$currentdate</span>
+</span><span class='line'>  <span class="nv">currentdate</span><span class="o">=</span><span class="k">$(</span>/bin/date --date <span class="s2">&quot;$currentdate 1 day&quot;</span> +%Y-%m-%d<span class="k">)</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now execute the script, assuming you created a file called dateloop.sh and assigned it execute permissions:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./dateloop.sh 2011-01-01 2011-01-05
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And you should get this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>2011-01-01
+</span><span class='line'>2011-01-02
+</span><span class='line'>2011-01-03
+</span><span class='line'>2011-01-04
+</span><span class='line'>2011-01-05
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On OSX it is not quite as straight forward (to me), because the date command does not support the <em>&#45;&#45;date</em> option. Here you have to jump through a few hoops to get it to work. I was able to figure this out with the help of <a href="http://stackoverflow.com/users/207248/siegex">SiegeX</a> on <a href="http://stackoverflow.com/questions/4434782/loop-from-start-date-to-end-date-in-mac-os-x-shell-script">stackoverflow.com</a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nv">currentDateTs</span><span class="o">=</span><span class="k">$(</span>date -j -f <span class="s2">&quot;%Y-%m-%d&quot;</span> <span class="nv">$1</span> <span class="s2">&quot;+%s&quot;</span><span class="k">)</span>
+</span><span class='line'><span class="nv">endDateTs</span><span class="o">=</span><span class="k">$(</span>date -j -f <span class="s2">&quot;%Y-%m-%d&quot;</span> <span class="nv">$2</span> <span class="s2">&quot;+%s&quot;</span><span class="k">)</span>
+</span><span class='line'><span class="nv">offset</span><span class="o">=</span>86400
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span> <span class="o">[</span> <span class="s2">&quot;$currentDateTs&quot;</span> -le <span class="s2">&quot;$endDateTs&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">  </span><span class="nv">date</span><span class="o">=</span><span class="k">$(</span>date -j -f <span class="s2">&quot;%s&quot;</span> <span class="nv">$currentDateTs</span> <span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="nv">$date</span>
+</span><span class='line'>  <span class="nv">currentDateTs</span><span class="o">=</span><span class="k">$((</span><span class="nv">$currentDateTs</span><span class="o">+</span><span class="nv">$offset</span><span class="k">))</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The solution here was to convert both the start and end dates to seconds (epoch) using</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>date -j -f <span class="s2">&quot;%Y-%m-%d&quot;</span> <span class="nv">$1</span> <span class="s2">&quot;+%s&quot;</span> // Lines 2 and 3 above
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and then add the number of seconds for a day (86400) and convert it back to the format I wanted</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>date -j -f <span class="s2">&quot;%s&quot;</span> <span class="nv">$currentDateTs</span> <span class="s2">&quot;+%Y-%m-%d&quot;</span> // line 8 above
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Not that hard after all, as with everything else, once you understand it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My List of Useful Desktop and Mobile Applications, Plugins and Services]]></title>
+    <link href="http://glatter-gotz.com/blog/2010/12/13/my-list-of-useful-desktop-and-mobile-applications-plugins-and-services/"/>
+    <updated>2010-12-13T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2010/12/13/my-list-of-useful-desktop-and-mobile-applications-plugins-and-services</id>
+    <content type="html"><![CDATA[<p>I recently made the switch from the dark side and wonder almost daily why I did not get a Mac years ago. Getting this new device meant learning a whole bunch of new things. I have compiled a list of useful applications, browser plugins and some mobile apps I have come across in the last few months. Not all of them are specific to the Mac.</p>
+
+<!--more-->
+
+
+<p>Besides getting a Mac I also own an Android phone (or more accurately, it owns me) and really like the services and software that Google provides. Knowing this, you kind of get an idea of what to expect of this post. There is not really any particular order to this list since not all things fit in a single category.</p>
+
+<h3>File synchronization with Dropbox</h3>
+
+<p>By far the coolest and most useful service I have come across recently is <a title="Dropbox" href="http://www.dropbox.com" target="_blank">Dropbox</a>. In a nutshell, it is a file synchronization service that has clients for many different operating systems and mobile devices. This is something that I have been wanting for years. So, what this lets you do is synchronize 2GB (free) of any kind of data in a specific folder on your desktop to the cloud. So you create an account and connect it to a folder on your computer so to speak. Anything you drop into that folder immediately gets synchronized to your &#8220;hard drive in the cloud&#8221;. What makes this really useful is that any file or folder in your Dropbox has a unique URL that you can share with anyone to allow them to access the file or folder. So instead of emailing large files you just send a link via email or instant message. If the data happens to be a folder of images then Dropbox will generate a really cool online gallery.</p>
+
+<p>So all that by itself is already really great, but what makes this a totally kick ass service is that you can install a Dropbox client on any number of desktops or mobile devices and connect them to your account. Now you can synchronize files between multiple systems. Lets say you drop a file from your Mac at home into your Dropbox folder, it is immediately synchronized to lets say your PC at work and is available for download on your phone. Watch the video on their website for a much better explanation of what they have to offer.</p>
+
+<p>One last thing about this service: They offer a referral bonus. So if you get someone to sign up you get an extra 250MB of storage space on your account. So if you are reading this and want to sign up, do me a favor and use <a title="Signup for Dropbox" href="https://www.dropbox.com/referrals/NTEwNjg2MjQ2OQ?src=global0" target="_blank">this link</a> to do so and give me an extra 250MB.</p>
+
+<h3>Password management with 1Password</h3>
+
+<p>Unless you just got internet access last week, you probably have more online accounts than you can keep track of in your head. If you are like most people (me in the past) you probably have the same username and password on most if not all accounts. This is a significant security risk. <a title="Manage all your passwords in one place - 1Password" href="http://agilewebsolutions.com/onepassword" target="_blank">1Password</a> offers a central secure place to manage all your online account usernames and passwords and basically removes the burden of having to remember all but one password - the master password. This way you can assign random character strings like &#8220;kgPfVLWQ4TyDRsRPD8mr&#8221; as your password. Not only that, but you can and should have a different one for every account. &#8220;I don&#8217;t want to type that horrible looking string to log into an account!&#8221; you might say. Well, you don&#8217;t have to. 1Password comes with a plugin for every major browser and all you need to do is click a button and 1Password will fill in your credentials for you.</p>
+
+<p>But what if you are not at your Mac at home? There is a solution for that too. It is called Dropbox. 1Password allows you to store your key chain (the master password file) in your Dropbox account. See where this is going? You can install Dropbox on your phone and have it access the same keychain as your home system. That way you always have the very latest version of your passwords in your pocket. This application is not free, but it is worth every penny.</p>
+
+<h3>Web browser - Google Chrome</h3>
+
+<p>Google will probably take over the world some day. I bet they will change their name to <a title="SkyNet form the Terminator movie" href="http://en.wikipedia.org/wiki/Skynet_(Terminator)" target="_blank">SkyNet</a> in a few years and we all know what will happen then. But for now, their services and applications are nothing less than amazing. I use a lot of their API&#8217;s for my work and have to say: They kick ass!</p>
+
+<p>So it is no surprise that their web browser - <a title="Get Google Chrome" href="http://www.google.com/chrome/intl/en/landing_chrome_mac.html?hl=en" target="_blank">Chrome</a> - is my favorite. It has, in true Google manner, a minimalistic interface that provides raw speed. It starts up fast, runs fast and consumes fewer resources on your system than most or all other browsers (might be just my opinion).</p>
+
+<h3>Send a web page to your phone with Chrome to Phone</h3>
+
+<p>Since I am on the subject of Chrome I might as well mention a plugin that is available for this browser - <a title="Chrome to phone plugin" href="http://code.google.com/p/chrometophone/" target="_blank">Chrome to Phone</a>. Lets say you have the following scenario: You are reading a fascinating blog post like this one at your desktop and have to leave in a hurry. Maybe because you have to visit the throne room. So you have an Android mobile device (might also work on the iPhone, not sure) and could continue reading on that. To do this you would either have to remember the URL or send yourself an email to your phone that contains the link. Well, not anymore, if you have the Chrome plugin <em>Chrome to Phone</em> installed and have the companion app on your Android phone then all you need to do is click a button in your browser bar, grab your phone and run. Within seconds you phone will pop-up a browser with that exact web page and you can continue reading where you left off - pure genius!!!</p>
+
+<h3>Office Suite - OpenOffice</h3>
+
+<p>With my departure from Windows I also left pretty much all Microsoft software behind. Not all, but most. One of them is Microsoft Office. While there is a rather good version of Micro$oft Office for the Mac, I was not prepared to shell out a pile of money for it, after all, I was broke from buying a Mac Pro. Don&#8217;t get me wrong, it is the most magical device I have ever owned, but it costs a boat load. Anyway, for my needs I get everything from the open source office suite called <a title="OpenOffice" href="http://www.openoffice.org/" target="_blank">OpenOffice</a>. It provides most of what you would be used to from your previous life on Windows and it costs nothing.</p>
+
+<h3>Run Windows in a Window - Parallels</h3>
+
+<p>As I mentioned, I was not able to leave all Windows Applications behind. There are still things that I absolutely have to have that simply don&#8217;t exists for the Mac. For cases like this there is something called a virtual machine. It is an application that runs on your Mac (or most other operating systems) that will let you install a number of guest operating systems on it. So, you can, for example install Windows XP on your Mac using an application called <a title="Run Windows or a number of other guest operating systems on your Mac with Parallels" href="http://www.parallels.com/products/desktop/" target="_blank">Parallels</a>. This will let you launch Windows XP on your Mac as if it were another Mac application. Essentially you will have Windows XP running in an application window on your OS X box. You can then install any Windows application and run it when needed and then shut down or just minimize Windows when not needed. You can buy Parallels for about $80. Again, a small price to pay for being able to run your legacy applications.</p>
+
+<h3>Google Calendar Sync</h3>
+
+<p>Google provides a very powerful and free calendar service that comes with your gmail account. Since this synchronizes to my Android phone it is always in my pocket. Well, it also synchronizes to my iCal on my Mac with the help of <a title="Synchronize your Google calendar with iCal" href="http://www.google.com/support/calendar/bin/answer.py?hl=en&amp;answer=99358#ical" target="_blank">Google&#8217;s calendar sync feature</a>. So, if you make a change on your calendar on your Mac it will automatically synchronize to your Google Calendar as well as your phone and of course vice versa.</p>
+
+<h3>Google Contacts Sync</h3>
+
+<p>Just like Google Calendar provides synchronization with iCal, your Google contacts can be synchronized with your Mac Address book using <a title="Sync your Google Contacts to your Mac Address Book" href="http://www.google.com/support/contactsync/bin/answer.py?hl=en&amp;answer=92997&amp;rd=1" target="_blank">Google Sync service for Contacts</a> allowing you to have a single address book across your desktop, Google account and phone.</p>
+
+<h3>Maintain a ToDo list with TeuxDeux</h3>
+
+<p><a title="Maintain your todo list with TeuxDeux" href="http://teuxdeux.com/" target="_blank">TeuxDeux</a> is a minimalistic free service that lets you very easily maintain your todo list. It does not yet have an app for the Android, but they are supposedly working on it. Beats the hell out of doing this on a sheet of paper or in Excel or something similar.</p>
+
+<h3>Listen to your favorite music on your Desktop - Pandora</h3>
+
+<p>This is not really anything new, but maybe some folks have not heard of it yet. <a title="Listen to music for free on Pandora" href="http://www.pandora.com" target="_blank">Pandora</a> lest you setup your own radio stations that play music by a particular artist and other similar songs. The free version has a few commercials sprinkled in every now an then and has a 40 hour per month listening limit. And of course there is an app for pretty much every mobile device so you can also listen to it anywhere.</p>
+
+<h3>Share your desktop with TeamViewer</h3>
+
+<p>Ever wished you could show someone who is across town or on the other side of the planet what is on your screen while talking to them over the phone and do so without having to register for a service or even install any software? Download <a title="Get TeamViewer" href="http://www.teamviewer.com" target="_blank">TeamViewer</a> and put the executable on your desktop. You can simply run the program without installing anything. Have the other party do the same and then tell them what you user id and password is (you will be automatically assigned one). Not only can you give a presentation this way, but you can take control of another desktop (if permission is granted) and help someone out. Ever had a friend or a family member ask you the same thing over and over and you had to explain it step by step over the phone? Use this and make your life easier.</p>
+
+<p>TeamViewer is free for personal use. For commercial use there is a fee.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CodeWorks Orlando 2010]]></title>
+    <link href="http://glatter-gotz.com/blog/2010/11/18/codeworks-orlando-2010/"/>
+    <updated>2010-11-18T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2010/11/18/codeworks-orlando-2010</id>
+    <content type="html"><![CDATA[<p>CodeWorks is a relatively new PHP conference organized by the folks at <a title="php|architect Magazine" href="http://www.phparch.com/" target="_self">php|architect Magazine</a>. Now in its second year, it has been considerably scaled back in scope compared to the first conference. The Florida event was hosted in Orlando this year, which was a lot more convenient for me since it is smack in the middle of the state and a bit easier to get to than Miami. The idea behind this conference, which takes place in multiple cities throughout the US, is to bring a conference to people who usually do not attend events of this nature because they are either too far away or they are simply too long. According to <a title="Marco Tabini" href="http://blog.tabini.ca/" target="_self">Marco Tabini</a>, the purpose of this event was not so much to educate in a particular area of PHP, but to inspire attendees and encourage them to come away from the conference with more questions than they came with.</p>
+
+<!--more-->
+
+
+<p>CodeWorks 2010 featured a one day, single track line-up of six talks on a wide variety of topics. After <a title="Marco Tabini" href="http://blog.tabini.ca/" target="_self">Marco Tabini&#8217;s</a> brief opening remarks, <a title="Keith Casey" href="http://caseysoftware.com/" target="_self">Keith Casey</a> presented the first of two talks he gave at the conference.</p>
+
+<h3>Unit testing strategies – <a title="Keith Casey" href="http://caseysoftware.com/" target="_self">Keith Casey</a></h3>
+
+<p>Keith is a core contributor to web2project and used this open source project to illustrate some of the points he made in his talk.</p>
+
+<p>He provided a high level overview of what unit testing is and what to aim for when putting a system under test. He did a great job of explaining how theories like 100% code coverage are really not a useful metric in the real world to determine how well a system is tested and that it is more important to have meaningful tests that actually test the “annoying” areas of a project – the ones that generate the largest number of bugs – rather than trying to achieve a high code coverage number that does not necessarily have a practical value.</p>
+
+<p>I have been using unit testing in my projects for several years now but came away with lots of good information from this talk.</p>
+
+<h3>Learn to love the front end – <a title="Ryan Stewart" href="http://blog.digitalbackcountry.com/" target="_self">Ryan Stewart</a></h3>
+
+<p>I had no idea what to expect from this talk since most of my work has dealt with server side projects that don&#8217;t have a fancy GUI. Ryan started out by emphasizing that he was going to talk about “how to make it work” and not about “how to make it pretty or how to create a great user experience”, which were more the domain of the designer and the unicorn or rather the user experience guru. He made the case for obtaining front end skills based on economics by presenting data from the past few years that showed the increasing demand for PHP AND JavaScript skills vs. only PHP or only JavaScript skills.</p>
+
+<p>This was illustrated very nicely with a beer analogy, where the malted barley, the commodity and raw material for beer, represented the PHP developer with no front end skills that could easily be replaced or obtained elsewhere and the pub on the corner that provides beer and an atmosphere, a value added experience that people are willing to pay substantially more for. This was representative of a PHP developer that also had front end skills. A very effective and rather amusing way to bring across his point.</p>
+
+<p>Ryan went on to demonstrate some of the features that <a title="jQuery" href="http://jquery.com/" target="_self">jQuery</a> has to offer and how it helps to bring the desktop paradigm to the web browser. He then explained how <a title="jQuery" href="http://jquery.com/" target="_self">jQuery</a> takes care of a lot of cross browser compatibility issues and handles progressive enhancement for the developer and therefore puts the control in the users&#8217; hands.</p>
+
+<p>I have dabbled a bit in <a title="jQuery" href="http://jquery.com/" target="_self">jQuery</a> lately and have to say it actually makes front end development fun. I have beaten my head against the wall in the past trying to develop front ends that are compatible across multiple browsers, or just the same browser on different operating systems.</p>
+
+<p>While Ryan has a strong background in Flash and actually works for Adobe he did state that for 90% to 95% of applications Flash is overkill.</p>
+
+<p>A great talk packed full of good information.</p>
+
+<h3>APIs from the ground up – <a title="Cal Evans" href="http://blog.calevans.com/" target="_self">Cal Evans</a></h3>
+
+<p>Cal Evans is the only speaker whom I had heard before and also knew from his podcasts for Zend, and he did not disappoint. In his trademark laid-back and amusing way he provided a high level overview of the various API categories that are in general use today: Payload over HTTP, SOAP and REST.</p>
+
+<p>He went on to outline the most common status codes for these types of APIs and the importance of adhering to these standards.</p>
+
+<p>The remainder of the talk consisted of a demo of three different ways of implementing an API.
+* Hand coded – not recommended
+* <a title="Frapi" href="http://getfrapi.com" target="_self">Frapi</a> – High level API framework
+* <a title="Zend Framework" href="http://framework.zend.com/" target="_self">Zend Framework</a></p>
+
+<p>I was not aware of the Frapi framework and will definitely look into that for upcoming projects. As a rather amusing aside Cal explained what <a title="Yak Shavings" href="http://www.catb.org/~esr/jargon/html/Y/yak-shaving.html" target="_self">Yak Shavings</a> means in our industry.</p>
+
+<h3>A 100K users.. now what – <a title="Keith Casey" href="http://caseysoftware.com/" target="_self">Keith Casey</a></h3>
+
+<p>This is a talk I did not think I would get much out of since I do not deal with sites that have a user base that is remotely this large. But I was pleasantly surprised to see that there were numerous points that I could apply to my current projects even though they have only a handful of users.</p>
+
+<p>This talk nicely outlined at a high level the troubleshooting steps that are necessary to (ideally) prevent a site from going down or how to fix it if it is down.</p>
+
+<p>Surprisingly most of the suggestions had nothing or little to do with the actual PHP code but rather with the environment that the application runs in.</p>
+
+<p>The most common bottleneck for performance is the database because of disk IO and Casey outlined the various strategies for optimizing this, which ranged from having the proper indexes on your database tables and how to find out why queries are performing badly using the mySQL command EXPLAIN, over PHP Caching strategies and Memcached to Firefox Plugins such as Yslow.</p>
+
+<p>Great food for thought in this talk and more questions.</p>
+
+<h3>Object orientation the PHP 5.3 way – <a title="Marco Tabini" href="http://blog.tabini.ca/" target="_self">Marco Tabini</a></h3>
+
+<p>Marco argued that code is simply a means to an end (from his perspective) and that a project is judged by how well it fulfills the expectations of the user. And while we as developers feel like our code is a form of artistic expression (well, of course it is!!!), this is not necessarily relevant or important to everyone.</p>
+
+<p>He went on to provide a high level overview of OOP and how it has changed in PHP from version 4 to version 5 and briefly touched on the newly introduced namespaces in the latest release of PHP as well as SPL – the standard PHP library.</p>
+
+<h3>Five tools you should know &amp; love – <a title="Cal Evans" href="http://blog.calevans.com/" target="_self">Cal Evans</a></h3>
+
+<p>This was the last talk of the day and one of my favorites. I had heard a similar talk by Cal at last year&#8217;s CodeWorks conference.</p>
+
+<p>The tools on his list for this talk were:
+* <a title="PHP Lint" href="http://de.php.net/manual/en/features.commandline.options.php" target="_self">PHP Lint</a> (php -l)
+* <a title="phploc" href="https://github.com/sebastianbergmann/phploc" target="_self">phploc</a>
+* <a title="phpdepend" href="http://pdepend.org/" target="_self">phpdepend</a>
+* <a title="phpcpd" href="https://github.com/sebastianbergmann/phpcpd" target="_self">phpcpd</a>
+* <a title="phing" href="http://phing.info/trac/wiki/WikiStart" target="_self">phing</a></p>
+
+<p>He concluded the talk with a demo of a phing build script that ran all the above mentioned tools to build a set of reports for a given project.</p>
+
+<p>On one of the breaks I briefly spoke to <a title="Marco Tabini" href="http://blog.tabini.ca/" target="_self">Marco Tabini</a>, the organizer of the event, about his opinion on this year&#8217;s turnout and overall success of the event. He seemed quite satisfied with how the conference went this year and was positive about doing this again next year.</p>
+
+<p>If you registered early you were able to attend this jam-packed day for under $100, which is an unbelievable value.</p>
+
+<p>Last year&#8217;s line-up of international speakers was spectacular and as a first time PHP conference attendee I was blown away to see so many big names from the PHP community, but this years speakers were no less spectacular and passionate about their work and I have to say that the shorter format is actually really appealing and leaves absolutely no excuses for not attending. At this price it was a steal!!!</p>
+
+<p>Aside from having the opportunity to sit in on some really great talks you can meet your peers and do a bit of networking.</p>
+
+<p>If you have never attended a conference like this before try to do so next year, you will not be disappointed.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Secure File Transfers in WordPress with SFTP/SSH: Installing SSH2 for PHP]]></title>
+    <link href="http://glatter-gotz.com/blog/2010/11/10/secure-file-transfers-in-wordpress-with-sftpssh-installing-ssh2-for-php/"/>
+    <updated>2010-11-10T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2010/11/10/secure-file-transfers-in-wordpress-with-sftpssh-installing-ssh2-for-php</id>
+    <content type="html"><![CDATA[<blockquote><h4>Update, 2011-11-16: Added some troubleshooting info</h4></blockquote>
+
+<p>There are many reasons why you would want to install ssh2 for PHP on your server, mine was to allow me to use SFTP on a WordPress installation because my web host does not allow the use of FTP. Even if your host allows FTP I strongly urge you to use SFTP instead, since it uses SSH to encrypt all your data transfers. FTP sends your username and password as plain text!</p>
+
+<!--more-->
+
+
+<h3>Requirements for this tutorial</h3>
+
+<ul>
+<li>PHP 5.2.x (I have used this on 5.2.9)</li>
+<li>Apache</li>
+<li>LINUX (probably works on Windows too, but no details about that are described here, sorry)</li>
+<li>WordPress 3.0.1 (somewhat older versions should work too)</li>
+</ul>
+
+
+<p>A general overview of ssh2 for PHP can be found at <a title="PHP: Hypertext Processor" href="http://www.php.net/manual/en/book.ssh2.php">php.net</a>. If you look at the requirements section on <a title="PHP: Hypertext Processor" href="http://www.php.net/manual/en/ssh2.requirements.php">php.net</a> you will see that two other libraries are required for this to work. They are <a title="OpenSSL: Cryptography and SSL\TLS Toolkit" href="http://www.openssl.org/" target="_self">OpenSSL</a> and <a title="ibssh2 is a client-side C library implementing the SSH2 protocol" href="http://www.libssh2.org/" target="_self">libssh2</a>. I explain here how to install both of these as well.</p>
+
+<h3>Installing OpenSSL</h3>
+
+<p>First log in as root on your server on the command line and find out if OpenSSL is already installed by running the following command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@host ~<span class="o">]</span><span class="nv">$ </span>rpm -qa | grep openssl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you see something similar to the two lines below (might differ in version numbers) then OpenSSL is installed and you can skip to the next section.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>openssl-0.9.7a-43.17.2
+</span><span class='line'>openssl-devel-0.9.7a-43.17.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If it is not installed, then you can do so by running yum or apt-get (depending on your system) as follows:</p>
+
+<h4>RedHat based systems</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@host ~<span class="o">]</span><span class="nv">$ </span>yum install openssl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Debian based systems</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@host ~<span class="o">]</span><span class="nv">$ </span>apt-get install openssl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Installing libssh2</h3>
+
+<p>You can verify if it is already on your system by searching for libssh2.so like this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@host ~<span class="o">]</span><span class="nv">$ </span>find / -name libssh2.so -print
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If it is not installed then you will have to install it from source.</p>
+
+<p>Create a temporary directory to download the source files to and then cd to the newly created temporary directory</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>wget http://sourceforge.net/projects/libssh2/files/old-libssh2-releases/1.1/libssh2-1.1.tar.gz
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>tar -zxvf libssh2-1.1.tar.gz
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span><span class="nb">cd </span>libssh2-1.1
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>./configure
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>make
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once these steps have been successfully completed delete the previously created directory.</p>
+
+<h3>Installing the ssh2 module for php</h3>
+
+<p>This is available via PECL and can be installed as follows</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>pecl install channel://pecl.php.net/ssh2-0.11.3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This should have placed the ssh2.so file in your php extensions directory. Now add</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">extension</span><span class="o">=</span>ssh2.so
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to your php.ini or whatever file your extensions are specified in. Depending on your installation this might be in a separate file instead of your php.ini. Consult you php installation documentation for more information. The way this is done varies depending on your distribution.
+Also worth mentioning is that you will need the zlib.so extension enabled as well. Make sure this is the case while you are editing the extension ini file and then restart apache.</p>
+
+<h4>Ubuntu/Debian</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>/etc/init.d/apache2 restart
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Red Hat, CentOS, Fedora</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>/etc/init.d/httpd restart
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now make sure that ssh2.so is really loaded by executing the following command on the command line:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>php -i | grep ssh2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should see something like</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>libssh2 <span class="nv">version</span> <span class="o">=</span>&gt; 1.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you do not, then the ssh2.so file might have been placed in the wrong directory or you did not correctly configure your ini file to load it.</p>
+
+<h3>Generating the ssh keys</h3>
+
+<p>Wordpress needs to know the location of your ssh public and private keys. This is how you generate them:
+On the command line on your server login as the user that has access to the site. In my case I have the site installed as a virtual host and have a specific user that owns it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>user@server ~<span class="o">]</span><span class="nv">$ </span>ssh-keygen
+</span><span class='line'>Generating public/private rsa key pair.
+</span><span class='line'>Enter file in which to save the key <span class="o">(</span>/home/user/.ssh/id_rsa<span class="o">)</span>:
+</span><span class='line'>Created directory <span class="s1">&#39;/home/user/.ssh&#39;</span>.
+</span><span class='line'>Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>: <span class="o">(</span>enter a passphrase and make note of it<span class="o">)</span>
+</span><span class='line'>Enter same passphrase again: <span class="o">(</span>enter the same passphrase<span class="o">)</span>
+</span><span class='line'>Your identification has been saved in /home/bsf/.ssh/id_rsa.
+</span><span class='line'>Your public key has been saved in /home/bsf/.ssh/id_rsa.pub.
+</span><span class='line'>The key fingerprint is:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:X:X:XX:XX user@server.something.com
+</span><span class='line'>The key<span class="err">&#39;</span>s randomart image is:
+</span><span class='line'>+--<span class="o">[</span> RSA 2048<span class="o">]</span>----+
+</span><span class='line'><span class="o">(</span>info will be displayed here<span class="o">)</span>
+</span><span class='line'>+-----------------+
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create an &#8220;authorized_keys&#8221; file by copying the public key in place</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>user@server ~<span class="o">]</span><span class="nv">$ </span><span class="nb">cd</span> .ssh
+</span><span class='line'><span class="o">[</span>user@server .ssh<span class="o">]</span><span class="nv">$ </span>cp id_rsa.pub authorized_keys
+</span><span class='line'><span class="o">[</span>user@server .ssh<span class="o">]</span><span class="nv">$ </span><span class="nb">cd</span> ..
+</span><span class='line'><span class="o">[</span>user@server ~<span class="o">]</span><span class="nv">$ </span>chmod 755 .ssh
+</span><span class='line'><span class="o">[</span>user@server ~<span class="o">]</span><span class="nv">$ </span>chmod 644 .ssh/*
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, when you log into the WordPress admin dashboard and perform an action that requires a file transfer operation, such as installing or updating a plugin, you should be presented with more options for the connection type. Aside from FTP, which was there before, you should also have SSH2.
+Select SSH2 and it will add a few fields to the form and it should look something like the screenshot below.</p>
+
+<h4>Important:</h4>
+
+<p>The FTP/SSH Username here is the user name for SSH for which you created the ssh keys earlier, NOT your ftp user. And the password is the passphrase that you created during the key generation step earlier, not the users password.</p>
+
+<p><img class="left" src="http://glatter-gotz.com/images/wordpress_connection_settings.png" width="602" height="452" title="WordPress Connection Settings with SSH2 Enabled" alt="WordPress Connection Settings when SSH2 is installed"></p>
+
+<p>To avoid having to enter this information every time a file transfer is executed you can define a few constants in your WordPress configuration file wp-config.php:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_PUBKEY&#39;</span><span class="p">,</span><span class="s1">&#39;/home/user/.ssh/id_rsa.pub&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_PRIKEY&#39;</span><span class="p">,</span><span class="s1">&#39;/home/user/.ssh/id_rsa&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_USER&#39;</span><span class="p">,</span><span class="s1">&#39;user&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_PASS&#39;</span><span class="p">,</span><span class="s1">&#39;yourpassphrase&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_HOST&#39;</span><span class="p">,</span><span class="s1">&#39;server.something.com&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Important:</strong> Be sure to move your wp-config.php file out of the doc root for added security.</p>
+
+<h3>Troubleshooting</h3>
+
+<h5>Pecl installation of ssh2 fails</h5>
+
+<p><strong>Error</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Cannot find autoconf. Please check your autoconf installation and the
+</span><span class='line'><span class="nv">$PHP_AUTOCONF</span> environment variable. Then, rerun this script.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Solution</h5>
+
+<p>Check if autoconf is on your system but not in the path:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>which autoconf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If it is there then</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span>path/to/autoconf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Error</strong></p>
+
+<p>Pecl does not have write permissions to the tmp directories and fails with</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/usr/local/bin/phpize: /tmp/pear/temp/...: /bin/sh: bad interpreter: Permission denied
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Solution</h5>
+
+<p>Temporarily change permissions on the following folders.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mount -o remount,exec,suid /tmp
+</span><span class='line'>mount -o remount,exec,suid /var/tmp
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run the install again and then change the permissions back</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mount -o remount,noexec,suid /tmp
+</span><span class='line'>mount -o remount,noexec,suid /var/tmp
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>For getting this to work the first time for myself I referred to the following two posts:</h4>
+
+<p><a href="http://hostechs.com/2008/07/installing-ssh2-for-php-shell-connections-how-to/">http://hostechs.com/2008/07/installing-ssh2-for-php-shell-connections-how-to/</a>
+<a href="http://www.firesidemedia.net/dev/wordpress-install-upgrade-ssh/">http://www.firesidemedia.net/dev/wordpress-install-upgrade-ssh/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

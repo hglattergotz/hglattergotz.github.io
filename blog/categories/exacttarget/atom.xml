@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: exacttarget | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/exacttarget/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ExactTarget SOAP API: Obtaining an Accurate List of Retrievable Properties]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/"/>
+    <updated>2012-06-18T07:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions</id>
+    <content type="html"><![CDATA[<p>Aahhh! The joys of integrating with third-party API's.
+Trying to get your application to talk to a third-party API is sometimes tricky, especially if the API documentation is not up to date.
+SOAP is supposed to make this simpler by providing a WSDL from which you can generate classes.
+So what are you supposed to do if the documentation and the WSDL seem out of date?</p>
+
+<!-- more -->
+
+
+<p><strong>Clarification</strong>: By out of date I mean that the documentation for a particular object states it has retrievable properties <em>a</em>, <em>b</em> and <em>c</em>, the WSDL has properties <em>a</em>, <em>c</em> and <em>d</em>, and by trial and error you finally figure out that only <em>a</em> and <em>d</em> are retrievable.</p>
+
+<p>Not to fear, ExactTarget provides a SOAP method that describes objects. You pass the object name as a parameter and in return you get a list of all properties and their attributes. One of the attributes is <strong>isRetrievable</strong>, which is what I am after.</p>
+
+<p>Great! Right? Well, mostly...</p>
+
+<p>For most objects the method described below returns accurate results from what I can tell. The only object I have encountered so far that has an incorrect result form this method is <a href="http://docs.code.exacttarget.com/020_Web_Service_Guide/Objects/EmailSendDefinition">EmailSendDefinition</a>.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>EmailSendDefinition retrievable properties </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">Client</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'><span class="nx">CreatedDate</span>
+</span><span class='line'><span class="nx">ModifiedDate</span>
+</span><span class='line'><span class="nx">ObjectID</span>
+</span><span class='line'><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">Name</span>
+</span><span class='line'><span class="nx">CategoryID</span>
+</span><span class='line'><span class="nx">Description</span>
+</span><span class='line'><span class="nx">SendClassification</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">FromName</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">FromAddress</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">CusomterKey</span>            <span class="c1">// &amp;lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">SourceAddressType</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">PrivateIP</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">DomainType</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">PrivateDomain</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">HeaderSalutationSource</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">HeaderContentArea</span><span class="o">.</span><span class="nx">ID</span>   <span class="c1">// &amp;lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">FooterSalutationSource</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">FooterContentArea</span><span class="o">.</span><span class="nx">ID</span>   <span class="c1">// &amp;lt;-- Generates error</span>
+</span><span class='line'><span class="nx">SuppressTracking</span>
+</span><span class='line'><span class="nx">IsSendLogging</span>
+</span><span class='line'><span class="nx">Email</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'><span class="nx">CCEmail</span>
+</span><span class='line'><span class="nx">BccEmail</span>
+</span><span class='line'><span class="nx">AutoBccEmail</span>
+</span><span class='line'><span class="nx">TestEmailAddr</span>
+</span><span class='line'><span class="nx">EmailSubject</span>
+</span><span class='line'><span class="nx">DynamicEmailSubject</span>
+</span><span class='line'><span class="nx">IsMultipart</span>
+</span><span class='line'><span class="nx">IsWrapped</span>
+</span><span class='line'><span class="nx">SendLimit</span>
+</span><span class='line'><span class="nx">SendWindowOpen</span>
+</span><span class='line'><span class="nx">SendWindowCloses</span>                       <span class="c1">// &amp;lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeduplicateByEmail</span>
+</span><span class='line'><span class="nx">ExclusionFilter</span>
+</span><span class='line'><span class="nx">Additional</span>
+</span><span class='line'><span class="nx">SendDefinitionList</span>
+</span><span class='line'><span class="nx">IsPlatformObject</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The Describe method is quite handy and I use it quite a bit when exploring the API, so I added it to my PHP library for accessing ExactTarget's SOAP API.
+You can get the lib <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOAP-API">here</a>, and this is how you would get the definition for the above EmailSendDefinition object:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>describe.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">?</span><span class="nx">php</span>
+</span><span class='line'><span class="nx">ETCore</span><span class="o">::</span><span class="na">initialize</span><span class="p">(</span><span class="nv">$userName</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+</span><span class='line'><span class="nb">print_r</span><span class="p">(</span><span class="nx">ETCore</span><span class="o">::</span><span class="na">getObjectDefinition</span><span class="p">(</span><span class="s1">&#39;EmailSendDefinition&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Result </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">definition</span> <span class="o">=</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'><span class="p">(</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="p">[</span><span class="nx">ObjectType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">EmailSendDefinition</span>
+</span><span class='line'><span class="p">[</span><span class="nx">Properties</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">Array</span>
+</span><span class='line'>    <span class="p">(</span>
+</span><span class='line'>        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>            <span class="p">(</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Client</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Int32</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>            <span class="p">(</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">CreatedDate</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">DateTime</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>            <span class="p">(</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">ModifiedDate</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">DateTime</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>         <span class="o">:</span>
+</span><span class='line'>         <span class="o">:</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+As I learn more about the ExactTarget SOAP API and SOAP itself I will be posting my findings and expanding the library on github.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ExactTarget SOAP Upsert with PHP]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/10/31/exacttarget-soap-upsert-with-php/"/>
+    <updated>2011-10-31T00:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/10/31/exacttarget-soap-upsert-with-php</id>
+    <content type="html"><![CDATA[<p>There is quite a bit of documentation for the ExactTarget SOAP API that includes lots of code samples. But unfortunately the PHP code samples are not quite as plentiful as the .NET and Java ones.
+After lots of searching and lot of trial and error I finally got my upsert working. An upsert is a SOAP method in the ExactTarget SOAP API that will either update or insert a record depending on whether it is already present or not.</p>
+
+<!--more-->
+
+
+<p>``` php
+&lt;?php
+$uo = new ExactTarget_UpdateOptions();
+$uo->SaveOptions = array();</p>
+
+<p>$so = new ExactTarget_SaveOption();
+$so->PropertyName = 'DataExtensionObject';
+$so->SaveAction = ExactTarget_SaveAction::UpdateAdd;</p>
+
+<p>$uo->SaveOptions[] = $so;
+$uoSo = ETCore::toSoapVar($uo, 'UpdateOptions');</p>
+
+<p>$request = new ExactTarget_UpdateRequest();
+$request->Options = $uoSo;
+$request->Objects = array($deoSo);
+$result = $soapClient->Update($request);
+```</p>
+
+<p>Where <em>$deoSo</em> is a DataExtension Object that has been converted to a SoapVar and <em>$soapClient</em> is an ExactTarget soap client instance. The way you get the upsert behavior is to set the saveaction to <em>ExactTarget_SaveAction::UpdateAdd</em>.</p>
+
+<p>If you are looking for a minimal wrapper library that includes the above method take a look at <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOAP-API">this library on gitub</a>. This library gleans quite a few things from the Doctrine ORM, so if you are familiar with that you should feel right at home.</p>
+]]></content>
+  </entry>
+  
+</feed>

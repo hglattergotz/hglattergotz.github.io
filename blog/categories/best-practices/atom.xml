@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: best practices | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/best-practices/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PHP: The Right Way]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/07/10/php-the-right-way/"/>
+    <updated>2012-07-10T11:12:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/07/10/php-the-right-way</id>
+    <content type="html"><![CDATA[<p>Today I discovered an interesting new project called <a href="http://www.phptherightway.com/">"PHP: The Right Way"</a>. It is an open source project maintained by <a href="https://twitter.com/codeguy">Josh Lockhart</a> attempting to provide a well rounded set of best practices for developing in PHP.</p>
+
+<p>While I have not yet attempted to contribute any content I have added the banner to my personal blog to show my support. If you are interested it adding a "PHP: The Right Way" banner to the side bar of your <a href="http://octopress.org">Octopress</a> blog, here is how. Allthough, if you are using octopress you probably don't need help with this ;-).</p>
+
+<!--more-->
+
+
+<p>Following is the html for the aside. The 240x400 image size works well for the sidebar width that I have. This is easy to change.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/source/includes/custom/asides/php_the_right_way.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{% if site.php_the_right_way_show %}
+</span><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.phptherightway.com&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>img class=&quot;center&quot; src=&quot;http://www.phptherightway.com/images/banners/vert-rect-240x400.png&quot; alt=&quot;PHP: The Right Way&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>  <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span><span class='line'>{% endif %}
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>In <code>/_config.yml</code> add the aside to the list of <code>default_asides</code> in the location you want it to show up in. Mine is at the end.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/_config.yml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">default_asides</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">custom/asides/about.html</span><span class="p-Indicator">,</span> <span class="nv">asides/recent_posts.html</span><span class="p-Indicator">,</span> <span class="nv">asides/twitter.html</span><span class="p-Indicator">,</span> <span class="nv">asides/github.html</span><span class="p-Indicator">,</span> <span class="nv">custom/asides/php_the_right_way.html</span><span class="p-Indicator">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>In the configuration file add the following to the very end.
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/_config.yml </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">&lt;h1&gt;PHP The Right Way Banner image&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">&lt;p&gt;php_the_right_way_show</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That's it!</p>
+]]></content>
+  </entry>
+  
+</feed>

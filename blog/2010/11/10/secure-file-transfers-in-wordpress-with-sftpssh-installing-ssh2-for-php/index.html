@@ -1,0 +1,557 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Secure File Transfers in WordPress with SFTP/SSH: Installing SSH2 for PHP - henning glatter-götz</title>
+  <meta name="author" content="Henning Glatter-Götz">
+
+  
+  <meta name="description" content="Update, 2011-11-16: Added some troubleshooting info There are many reasons why you would want to install ssh2 for PHP on your server, mine was to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://glatter-gotz.com/blog/2010/11/10/secure-file-transfers-in-wordpress-with-sftpssh-installing-ssh2-for-php/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="henning glatter-götz" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href="https://plus.google.com/106312215703289201025" rel="author">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19709074-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">henning glatter-götz</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:glatter-gotz.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Secure File Transfers in WordPress with SFTP/SSH: Installing SSH2 for PHP</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-10T00:00:00+01:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><blockquote><h4>Update, 2011-11-16: Added some troubleshooting info</h4></blockquote>
+
+<p>There are many reasons why you would want to install ssh2 for PHP on your server, mine was to allow me to use SFTP on a WordPress installation because my web host does not allow the use of FTP. Even if your host allows FTP I strongly urge you to use SFTP instead, since it uses SSH to encrypt all your data transfers. FTP sends your username and password as plain text!</p>
+
+<!--more-->
+
+
+<h3>Requirements for this tutorial</h3>
+
+<ul>
+<li>PHP 5.2.x (I have used this on 5.2.9)</li>
+<li>Apache</li>
+<li>LINUX (probably works on Windows too, but no details about that are described here, sorry)</li>
+<li>WordPress 3.0.1 (somewhat older versions should work too)</li>
+</ul>
+
+
+<p>A general overview of ssh2 for PHP can be found at <a title="PHP: Hypertext Processor" href="http://www.php.net/manual/en/book.ssh2.php">php.net</a>. If you look at the requirements section on <a title="PHP: Hypertext Processor" href="http://www.php.net/manual/en/ssh2.requirements.php">php.net</a> you will see that two other libraries are required for this to work. They are <a title="OpenSSL: Cryptography and SSL\TLS Toolkit" href="http://www.openssl.org/" target="_self">OpenSSL</a> and <a title="ibssh2 is a client-side C library implementing the SSH2 protocol" href="http://www.libssh2.org/" target="_self">libssh2</a>. I explain here how to install both of these as well.</p>
+
+<h3>Installing OpenSSL</h3>
+
+<p>First log in as root on your server on the command line and find out if OpenSSL is already installed by running the following command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@host ~<span class="o">]</span><span class="nv">$ </span>rpm -qa | grep openssl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you see something similar to the two lines below (might differ in version numbers) then OpenSSL is installed and you can skip to the next section.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>openssl-0.9.7a-43.17.2
+</span><span class='line'>openssl-devel-0.9.7a-43.17.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If it is not installed, then you can do so by running yum or apt-get (depending on your system) as follows:</p>
+
+<h4>RedHat based systems</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@host ~<span class="o">]</span><span class="nv">$ </span>yum install openssl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Debian based systems</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@host ~<span class="o">]</span><span class="nv">$ </span>apt-get install openssl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Installing libssh2</h3>
+
+<p>You can verify if it is already on your system by searching for libssh2.so like this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@host ~<span class="o">]</span><span class="nv">$ </span>find / -name libssh2.so -print
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If it is not installed then you will have to install it from source.</p>
+
+<p>Create a temporary directory to download the source files to and then cd to the newly created temporary directory</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>wget http://sourceforge.net/projects/libssh2/files/old-libssh2-releases/1.1/libssh2-1.1.tar.gz
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>tar -zxvf libssh2-1.1.tar.gz
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span><span class="nb">cd </span>libssh2-1.1
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>./configure
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>make
+</span><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once these steps have been successfully completed delete the previously created directory.</p>
+
+<h3>Installing the ssh2 module for php</h3>
+
+<p>This is available via PECL and can be installed as follows</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>pecl install channel://pecl.php.net/ssh2-0.11.3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This should have placed the ssh2.so file in your php extensions directory. Now add</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">extension</span><span class="o">=</span>ssh2.so
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to your php.ini or whatever file your extensions are specified in. Depending on your installation this might be in a separate file instead of your php.ini. Consult you php installation documentation for more information. The way this is done varies depending on your distribution.
+Also worth mentioning is that you will need the zlib.so extension enabled as well. Make sure this is the case while you are editing the extension ini file and then restart apache.</p>
+
+<h4>Ubuntu/Debian</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>/etc/init.d/apache2 restart
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Red Hat, CentOS, Fedora</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>/etc/init.d/httpd restart
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now make sure that ssh2.so is really loaded by executing the following command on the command line:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>root@server ~<span class="o">]</span><span class="nv">$ </span>php -i | grep ssh2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should see something like</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>libssh2 <span class="nv">version</span> <span class="o">=</span>&gt; 1.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you do not, then the ssh2.so file might have been placed in the wrong directory or you did not correctly configure your ini file to load it.</p>
+
+<h3>Generating the ssh keys</h3>
+
+<p>Wordpress needs to know the location of your ssh public and private keys. This is how you generate them:
+On the command line on your server login as the user that has access to the site. In my case I have the site installed as a virtual host and have a specific user that owns it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>user@server ~<span class="o">]</span><span class="nv">$ </span>ssh-keygen
+</span><span class='line'>Generating public/private rsa key pair.
+</span><span class='line'>Enter file in which to save the key <span class="o">(</span>/home/user/.ssh/id_rsa<span class="o">)</span>:
+</span><span class='line'>Created directory <span class="s1">&#39;/home/user/.ssh&#39;</span>.
+</span><span class='line'>Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>: <span class="o">(</span>enter a passphrase and make note of it<span class="o">)</span>
+</span><span class='line'>Enter same passphrase again: <span class="o">(</span>enter the same passphrase<span class="o">)</span>
+</span><span class='line'>Your identification has been saved in /home/bsf/.ssh/id_rsa.
+</span><span class='line'>Your public key has been saved in /home/bsf/.ssh/id_rsa.pub.
+</span><span class='line'>The key fingerprint is:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:X:X:XX:XX user@server.something.com
+</span><span class='line'>The key<span class="err">&#39;</span>s randomart image is:
+</span><span class='line'>+--<span class="o">[</span> RSA 2048<span class="o">]</span>----+
+</span><span class='line'><span class="o">(</span>info will be displayed here<span class="o">)</span>
+</span><span class='line'>+-----------------+
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create an &#8220;authorized_keys&#8221; file by copying the public key in place</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>user@server ~<span class="o">]</span><span class="nv">$ </span><span class="nb">cd</span> .ssh
+</span><span class='line'><span class="o">[</span>user@server .ssh<span class="o">]</span><span class="nv">$ </span>cp id_rsa.pub authorized_keys
+</span><span class='line'><span class="o">[</span>user@server .ssh<span class="o">]</span><span class="nv">$ </span><span class="nb">cd</span> ..
+</span><span class='line'><span class="o">[</span>user@server ~<span class="o">]</span><span class="nv">$ </span>chmod 755 .ssh
+</span><span class='line'><span class="o">[</span>user@server ~<span class="o">]</span><span class="nv">$ </span>chmod 644 .ssh/*
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, when you log into the WordPress admin dashboard and perform an action that requires a file transfer operation, such as installing or updating a plugin, you should be presented with more options for the connection type. Aside from FTP, which was there before, you should also have SSH2.
+Select SSH2 and it will add a few fields to the form and it should look something like the screenshot below.</p>
+
+<h4>Important:</h4>
+
+<p>The FTP/SSH Username here is the user name for SSH for which you created the ssh keys earlier, NOT your ftp user. And the password is the passphrase that you created during the key generation step earlier, not the users password.</p>
+
+<p><img class="left" src="/images/wordpress_connection_settings.png" width="602" height="452" title="WordPress Connection Settings with SSH2 Enabled" alt="WordPress Connection Settings when SSH2 is installed"></p>
+
+<p>To avoid having to enter this information every time a file transfer is executed you can define a few constants in your WordPress configuration file wp-config.php:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_PUBKEY&#39;</span><span class="p">,</span><span class="s1">&#39;/home/user/.ssh/id_rsa.pub&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_PRIKEY&#39;</span><span class="p">,</span><span class="s1">&#39;/home/user/.ssh/id_rsa&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_USER&#39;</span><span class="p">,</span><span class="s1">&#39;user&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_PASS&#39;</span><span class="p">,</span><span class="s1">&#39;yourpassphrase&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;FTP_HOST&#39;</span><span class="p">,</span><span class="s1">&#39;server.something.com&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Important:</strong> Be sure to move your wp-config.php file out of the doc root for added security.</p>
+
+<h3>Troubleshooting</h3>
+
+<h5>Pecl installation of ssh2 fails</h5>
+
+<p><strong>Error</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Cannot find autoconf. Please check your autoconf installation and the
+</span><span class='line'><span class="nv">$PHP_AUTOCONF</span> environment variable. Then, rerun this script.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Solution</h5>
+
+<p>Check if autoconf is on your system but not in the path:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>which autoconf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If it is there then</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span>path/to/autoconf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Error</strong></p>
+
+<p>Pecl does not have write permissions to the tmp directories and fails with</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/usr/local/bin/phpize: /tmp/pear/temp/...: /bin/sh: bad interpreter: Permission denied
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Solution</h5>
+
+<p>Temporarily change permissions on the following folders.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mount -o remount,exec,suid /tmp
+</span><span class='line'>mount -o remount,exec,suid /var/tmp
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run the install again and then change the permissions back</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mount -o remount,noexec,suid /tmp
+</span><span class='line'>mount -o remount,noexec,suid /var/tmp
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>For getting this to work the first time for myself I referred to the following two posts:</h4>
+
+<p><a href="http://hostechs.com/2008/07/installing-ssh2-for-php-shell-connections-how-to/">http://hostechs.com/2008/07/installing-ssh2-for-php-shell-connections-how-to/</a>
+<a href="http://www.firesidemedia.net/dev/wordpress-install-upgrade-ssh/">http://www.firesidemedia.net/dev/wordpress-install-upgrade-ssh/</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Henning Glatter-Götz</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-10T00:00:00+01:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dev/'>dev</a>, <a class='category' href='/blog/categories/openssl/'>openssl</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/security/'>security</a>, <a class='category' href='/blog/categories/sftp/'>sftp</a>, <a class='category' href='/blog/categories/ssh/'>ssh</a>, <a class='category' href='/blog/categories/wordpress/'>wordpress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://glatter-gotz.com/blog/2010/11/10/secure-file-transfers-in-wordpress-with-sftpssh-installing-ssh2-for-php/" data-via="hglattergotz" data-counturl="http://glatter-gotz.com/blog/2010/11/10/secure-file-transfers-in-wordpress-with-sftpssh-installing-ssh2-for-php/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/11/18/codeworks-orlando-2010/" title="Next Post: CodeWorks Orlando 2010">CodeWorks Orlando 2010 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About me</h1>
+  <p style="padding-top: 6px">
+  <img class="left" src="/images/hgg_avatar.jpg" width="80px" height="80px" style="margin-top: 2px; margin-bottom: 0; margin-right: 12px">
+  Hi, I’m Henning,<br/> dad, husband, software developer, amateur shutter button pusher, star gazer, bonsai enthusiast.<br/>I live in Altenglan, Germany.
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/28/things-i-would-like-to-learn-in-2013/">Things I would like to learn in 2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/31/bye-bye-2012/">Bye bye 2012</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table/">./symfony doctrine:build-schema for a Single Table</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/10/php-the-right-way/">PHP: The Right Way</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/">ExactTarget SOAP API: Obtaining an Accurate List of Retrievable Properties</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/hglattergotz">@hglattergotz</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'hglattergotz',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <a href="http://www.phptherightway.com">
+    <img class="center" src="http://www.phptherightway.com/images/banners/vert-rect-240x400.png" alt="PHP: The Right Way"/>
+  </a>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Henning Glatter-Götz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>, Theme customization by <a href="http://melandri.net/">Alessandro Melandri</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hglattergotz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://glatter-gotz.com/blog/2010/11/10/secure-file-transfers-in-wordpress-with-sftpssh-installing-ssh2-for-php/';
+        var disqus_url = 'http://glatter-gotz.com/blog/2010/11/10/secure-file-transfers-in-wordpress-with-sftpssh-installing-ssh2-for-php/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

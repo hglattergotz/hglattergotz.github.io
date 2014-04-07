@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ExactTarget SOAP API: Obtaining an Accurate List of Retrievable Properties - henning glatter-götz</title>
+  <meta name="author" content="Henning Glatter-Götz">
+
+  
+  <meta name="description" content="Aahhh! The joys of integrating with third-party API&#8217;s.
+Trying to get your application to talk to a third-party API is sometimes tricky, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="henning glatter-götz" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href="https://plus.google.com/106312215703289201025" rel="author">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19709074-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">henning glatter-götz</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:glatter-gotz.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ExactTarget SOAP API: Obtaining an Accurate List of Retrievable Properties</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-18T07:00:00+02:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Aahhh! The joys of integrating with third-party API&#8217;s.
+Trying to get your application to talk to a third-party API is sometimes tricky, especially if the API documentation is not up to date.
+SOAP is supposed to make this simpler by providing a WSDL from which you can generate classes.
+So what are you supposed to do if the documentation and the WSDL seem out of date?</p>
+
+<!-- more -->
+
+
+<p><strong>Clarification</strong>: By out of date I mean that the documentation for a particular object states it has retrievable properties <em>a</em>, <em>b</em> and <em>c</em>, the WSDL has properties <em>a</em>, <em>c</em> and <em>d</em>, and by trial and error you finally figure out that only <em>a</em> and <em>d</em> are retrievable.</p>
+
+<p>Not to fear, ExactTarget provides a SOAP method that describes objects. You pass the object name as a parameter and in return you get a list of all properties and their attributes. One of the attributes is <strong>isRetrievable</strong>, which is what I am after.</p>
+
+<p>Great! Right? Well, mostly&#8230;</p>
+
+<p>For most objects the method described below returns accurate results from what I can tell. The only object I have encountered so far that has an incorrect result form this method is <a href="http://docs.code.exacttarget.com/020_Web_Service_Guide/Objects/EmailSendDefinition">EmailSendDefinition</a>.</p>
+
+<figure class='code'><figcaption><span>EmailSendDefinition retrievable properties </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">Client</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'><span class="nx">CreatedDate</span>
+</span><span class='line'><span class="nx">ModifiedDate</span>
+</span><span class='line'><span class="nx">ObjectID</span>
+</span><span class='line'><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">Name</span>
+</span><span class='line'><span class="nx">CategoryID</span>
+</span><span class='line'><span class="nx">Description</span>
+</span><span class='line'><span class="nx">SendClassification</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">FromName</span>
+</span><span class='line'><span class="nx">SenderProfile</span><span class="o">.</span><span class="nx">FromAddress</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">CusomterKey</span>            <span class="c1">// &lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">CustomerKey</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">SourceAddressType</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">PrivateIP</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">DomainType</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">PrivateDomain</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">HeaderSalutationSource</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">HeaderContentArea</span><span class="o">.</span><span class="nx">ID</span>   <span class="c1">// &lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">FooterSalutationSource</span>
+</span><span class='line'><span class="nx">DeliveryProfile</span><span class="o">.</span><span class="nx">FooterContentArea</span><span class="o">.</span><span class="nx">ID</span>   <span class="c1">// &lt;-- Generates error</span>
+</span><span class='line'><span class="nx">SuppressTracking</span>
+</span><span class='line'><span class="nx">IsSendLogging</span>
+</span><span class='line'><span class="nx">Email</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'><span class="nx">CCEmail</span>
+</span><span class='line'><span class="nx">BccEmail</span>
+</span><span class='line'><span class="nx">AutoBccEmail</span>
+</span><span class='line'><span class="nx">TestEmailAddr</span>
+</span><span class='line'><span class="nx">EmailSubject</span>
+</span><span class='line'><span class="nx">DynamicEmailSubject</span>
+</span><span class='line'><span class="nx">IsMultipart</span>
+</span><span class='line'><span class="nx">IsWrapped</span>
+</span><span class='line'><span class="nx">SendLimit</span>
+</span><span class='line'><span class="nx">SendWindowOpen</span>
+</span><span class='line'><span class="nx">SendWindowCloses</span>                       <span class="c1">// &lt;-- Generates error</span>
+</span><span class='line'><span class="nx">DeduplicateByEmail</span>
+</span><span class='line'><span class="nx">ExclusionFilter</span>
+</span><span class='line'><span class="nx">Additional</span>
+</span><span class='line'><span class="nx">SendDefinitionList</span>
+</span><span class='line'><span class="nx">IsPlatformObject</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The Describe method is quite handy and I use it quite a bit when exploring the API, so I added it to my PHP library for accessing ExactTarget&#8217;s SOAP API.
+You can get the lib <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOAP-API">here</a>, and this is how you would get the definition for the above EmailSendDefinition object:</p>
+
+<figure class='code'><figcaption><span>describe.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="nx">ETCore</span><span class="o">::</span><span class="na">initialize</span><span class="p">(</span><span class="nv">$userName</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+</span><span class='line'><span class="nb">print_r</span><span class="p">(</span><span class="nx">ETCore</span><span class="o">::</span><span class="na">getObjectDefinition</span><span class="p">(</span><span class="s1">&#39;EmailSendDefinition&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Result </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">definition</span> <span class="o">=</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>    <span class="p">[</span><span class="nx">ObjectType</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">EmailSendDefinition</span>
+</span><span class='line'>    <span class="p">[</span><span class="nx">Properties</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>        <span class="p">(</span>
+</span><span class='line'>            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Client</span><span class="o">.</span><span class="nx">ID</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Int32</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">CreatedDate</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">DateTime</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">stdClass</span> <span class="nx">Object</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">PartnerKey</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">ObjectID</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">Name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">ModifiedDate</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">DataType</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">DateTime</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsUpdatable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRetrievable</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">IsRequired</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>             <span class="o">:</span>
+</span><span class='line'>             <span class="o">:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As I learn more about the ExactTarget SOAP API and SOAP itself I will be posting my findings and expanding the library on github.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Henning Glatter-Götz</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-18T07:00:00+02:00" pubdate data-updated="true">Jun 18<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dev/'>dev</a>, <a class='category' href='/blog/categories/exacttarget/'>exacttarget</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/soap/'>soap</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/" data-via="hglattergotz" data-counturl="http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/30/appcelerator-titanium-email-a-screen-shot-with-a-single-button-click/" title="Previous Post: Appcelerator Titanium - Email a Screen Shot with a Single Button Click">&laquo; Appcelerator Titanium - Email a Screen Shot with a Single Button Click</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/07/10/php-the-right-way/" title="Next Post: PHP: The Right Way">PHP: The Right Way &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About me</h1>
+  <p style="padding-top: 6px">
+  <img class="left" src="/images/hgg_avatar.jpg" width="80px" height="80px" style="margin-top: 2px; margin-bottom: 0; margin-right: 12px">
+  Hi, I’m Henning,<br/> dad, husband, software developer, amateur shutter button pusher, star gazer, bonsai enthusiast.<br/>I live in Altenglan, Germany.
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/28/things-i-would-like-to-learn-in-2013/">Things I would like to learn in 2013</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/31/bye-bye-2012/">Bye bye 2012</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table/">./symfony doctrine:build-schema for a Single Table</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/10/php-the-right-way/">PHP: The Right Way</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/">ExactTarget SOAP API: Obtaining an Accurate List of Retrievable Properties</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/hglattergotz">@hglattergotz</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'hglattergotz',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <a href="http://www.phptherightway.com">
+    <img class="center" src="http://www.phptherightway.com/images/banners/vert-rect-240x400.png" alt="PHP: The Right Way"/>
+  </a>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Henning Glatter-Götz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>, Theme customization by <a href="http://melandri.net/">Alessandro Melandri</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hglattergotz';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/';
+        var disqus_url = 'http://glatter-gotz.com/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

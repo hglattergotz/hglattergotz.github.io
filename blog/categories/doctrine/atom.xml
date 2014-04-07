@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: doctrine | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/doctrine/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[./symfony doctrine:build-schema for a Single Table]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table/"/>
+    <updated>2012-07-16T06:52:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table</id>
+    <content type="html"><![CDATA[<p>The built-in command line tasks in symfony 1.4 (yes, I am still stuck on 1.4)
+are very handy for quickly performing all sorts of project related tasks.
+Doctrines own command line tasks are exposed through the symfony CLI in the
+<em>doctrine</em> namespace.
+I use the <code>doctrine:build-schema</code> task, which generates a yml schema for an
+existing database, all the time. This allows one to very rapidly build models
+from and for an existing database.</p>
+
+<!--more-->
+
+
+<p>But therein also lies a problem - at least sometimes. I am often working on
+projects with multiple large databases that consist of dozens or hundreds of
+tables. And most often I only need to have models for a very small subset of
+the total list of tables.
+I used to simply generate the yml schema with <code>./symfony docrine:build-schema</code>
+and then manually remove the tables I did not need. Horrible!! Slow, error
+prone and mind numbing.</p>
+
+<p>It would be great if there was a more granular version of this task.
+For example
+<blockquote><p>Add the schema for table X on database Y to the existing schema file</p></blockquote></p>
+
+<p>Enter <code>doctrine:build-table-schema</code>.
+I wrapped the functionality in a class that is really nothing more than a slight
+variation of part of the <code>Doctrine_Import</code> class. More specifically its
+<code>importSchema</code> method. But instead of building the schema for all tables of
+the database it simply builds the ones that have been explicitly requested.
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>SchemaBuilder.class.php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="o">?</span><span class="nx">php</span>
+</span><span class='line'><span class="o">/&lt;</span><span class="nx">em</span><span class="o">&gt;*</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">Build</span> <span class="nx">the</span> <span class="nx">schema</span> <span class="k">for</span> <span class="nx">multiple</span> <span class="nx">connections</span> <span class="k">and</span> <span class="nx">specific</span> <span class="nx">tables</span> <span class="k">for</span> <span class="nx">those</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">connections</span><span class="o">.</span>
+</span><span class='line'> <span class="o">*</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">Example</span><span class="o">:</span>
+</span><span class='line'> <span class="o">*</span>   <span class="nv">$connections</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'> <span class="o">*</span>       <span class="s1">&#39;connection1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table1&#39;</span><span class="p">,</span> <span class="s1">&#39;table2&#39;</span><span class="p">),</span>
+</span><span class='line'> <span class="o">*</span>       <span class="s1">&#39;connection2&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table1&#39;</span><span class="p">,</span> <span class="s1">&#39;table2&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="o">*</span>   <span class="p">);</span>
+</span><span class='line'> <span class="o">*</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">@</span><span class="nx">param</span> <span class="nx">type</span> <span class="nv">$directory</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">@</span><span class="nx">param</span> <span class="k">array</span> <span class="nv">$connections</span> <span class="k">Array</span> <span class="nx">of</span> <span class="nx">connection</span> <span class="nx">names</span> <span class="nx">with</span> <span class="nx">their</span> <span class="nx">associated</span>
+</span><span class='line'> <span class="o">*</span>                           <span class="nx">tables</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">@</span><span class="nx">param</span> <span class="k">array</span> <span class="nv">$options</span>
+</span><span class='line'> <span class="o">*</span> <span class="o">@</span><span class="k">return</span> <span class="k">array</span>
+</span><span class='line'> <span class="o">&lt;/</span><span class="nx">em</span><span class="o">&gt;/</span>
+</span><span class='line'><span class="k">protected</span> <span class="k">function</span> <span class="nf">buildPHPModels</span><span class="p">(</span><span class="nv">$directory</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$connections</span> <span class="o">=</span> <span class="k">array</span><span class="p">(),</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$classes</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nv">$manager</span> <span class="o">=</span> <span class="nx">Doctrine_Manager</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="k">foreach</span> <span class="p">(</span><span class="nv">$manager</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$connection</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;//</span> <span class="nx">Limit</span> <span class="nx">the</span> <span class="nx">databases</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">ones</span> <span class="nx">specified</span> <span class="nx">by</span> <span class="nv">$connections</span><span class="o">.</span>
+</span><span class='line'><span class="c1">// Check only happens if array is not empty</span>
+</span><span class='line'><span class="nv">$connectionNames</span> <span class="o">=</span> <span class="nb">array_keys</span><span class="p">(</span><span class="nv">$connections</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$connections</span><span class="p">)</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="o">!</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$connectionNames</span><span class="p">))</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">continue</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$builder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Doctrine_Import_Builder</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$builder</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">setTargetPath</span><span class="p">(</span><span class="nv">$directory</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$builder</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">setOptions</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$definitions</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$currentConnName</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">getName</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">import</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">listTables</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$table</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$table</span><span class="p">,</span> <span class="nv">$connections</span><span class="p">[</span><span class="nv">$currentConnName</span><span class="p">]))</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="k">continue</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$definition</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;tableName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$table</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">classify</span><span class="p">(</span><span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">tableize</span><span class="p">(</span><span class="nv">$table</span><span class="p">));</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">import</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">listTableColumns</span><span class="p">(</span><span class="nv">$table</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;connection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">getName</span><span class="p">();</span>
+</span><span class='line'>  <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;connectionClassName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>    <span class="nv">$relations</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">import</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">listTableRelations</span><span class="p">(</span><span class="nv">$table</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$relClasses</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$relations</span> <span class="k">as</span> <span class="nv">$relation</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$table</span> <span class="o">=</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">];</span>
+</span><span class='line'>      <span class="nv">$class</span> <span class="o">=</span> <span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">classify</span><span class="p">(</span><span class="nx">Doctrine_Inflector</span><span class="o">::</span><span class="na">tableize</span><span class="p">(</span><span class="nv">$table</span><span class="p">));</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$relClasses</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$class</span> <span class="o">.</span> <span class="s1">&#39;_&#39;</span> <span class="o">.</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$relClasses</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$class</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nv">$relClasses</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$class</span><span class="p">;</span>
+</span><span class='line'>      <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">][</span><span class="nv">$alias</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s1">&#39;alias&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$alias</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;class&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$class</span><span class="p">,</span>
+</span><span class='line'>          <span class="s1">&#39;local&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="s1">&#39;foreign&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;foreign&#39;</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$definitions</span><span class="p">[</span><span class="nx">strtolower</span><span class="p">(</span><span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$classes</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Build opposite end of relationships</span>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$definitions</span> <span class="k">as</span> <span class="nv">$definition</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$className</span> <span class="o">=</span> <span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;className&#39;</span><span class="p">];</span>
+</span><span class='line'>  <span class="nv">$relClasses</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">foreach</span> <span class="p">(</span><span class="nv">$definition</span><span class="p">[</span><span class="s1">&#39;relations&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$alias</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">],</span> <span class="nv">$relClasses</span><span class="p">)</span> <span class="o">||</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$definitions</span><span class="p">[</span><span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]][</span><span class="s1">&#39;relations&#39;</span><span class="p">][</span><span class="nv">$className</span><span class="p">]))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$className</span> <span class="o">.</span> <span class="s1">&#39;_&#39;</span> <span class="o">.</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$relClasses</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$alias</span> <span class="o">=</span> <span class="nv">$className</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nv">$relClasses</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">];</span>
+</span><span class='line'>    <span class="nv">$definitions</span><span class="p">[</span><span class="nx">strtolower</span><span class="p">(</span><span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">])][</span><span class="s1">&#39;relations&#39;</span><span class="p">][</span><span class="nv">$alias</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;type&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nx">Doctrine_Relation</span><span class="o">::</span><span class="na">MANY</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;alias&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$alias</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;class&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$className</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;local&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;foreign&#39;</span><span class="p">],</span>
+</span><span class='line'>        <span class="s1">&#39;foreign&#39;</span> <span class="o">=&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="nv">$relation</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Build records</span>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$definitions</span> <span class="k">as</span> <span class="nv">$definition</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$builder</span><span class="o">-&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="nx">buildRecord</span><span class="p">(</span><span class="nv">$definition</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="k">return</span> <span class="nv">$classes</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The entire code including a symfony task to call it is available as a symfony 1.4
+plugin on github.com. It is part of a utilities plugin that is available at
+<a href="http://github.com/hglattergotz/uUtilitiesPlugin">http://github.com/hglattergotz/uUtilitiesPlugin</a>.</p>
+
+<p>The class can be found here <code>uUtilitiesPlugin/lib/SchemaBuilder</code></p>
+
+<p>To add the schema for table <em>A</em> in database connection <em>Z</em> you would execute this from the
+symfony project folder:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>./symfony doctrine:build-schema-table --connection<span class="o">=</span>Z --table<span class="o">=</span>A --application<span class="o">=</span>myapp
+</span><span class='line'>./symfony doctrine:build-model
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

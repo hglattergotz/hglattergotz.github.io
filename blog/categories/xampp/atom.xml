@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: xampp | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/xampp/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Connecting to Microsoft SQL Server from PHP on OSX and XAMPP]]></title>
+    <link href="http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/"/>
+    <updated>2011-06-06T00:00:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp</id>
+    <content type="html"><![CDATA[<blockquote><h4>UPDATE (March 23rd 2012):</h4>
+
+<p>I recently found a <a href="http://php-osx.liip.ch/">PHP binary </a>that has a one-line installer. It is actively maintained by Liip AG. I now use that in combination with <a href="http://mxcl.github.com/homebrew/">HomeBrew</a> for all the rest. The Liip package is compiled with pdo_dblib which makes the problem described in this post a non-issue.</p></blockquote>
+
+<p>I recently found myself in the position of having to connect to a remote Microsoft SQL Server from my OSX system using PHP. The production environment runs Ubuntu LINUX, where connecting via mssql_connect() was no problem, but I develop on OSX and I could not get this to work initially.</p>
+
+<!--more-->
+
+
+<p>mssql_connect() simply returns boolean FALSE on failure and PHP tells you little more than</p>
+
+<p><code>bash
+Warning: mssql_connect(): Unable to connect to server: YOURSERVERNAME
+</code></p>
+
+<p>It took quite a few hours to finally figure out that I could turn on some additional logging on the driver level. I use XAMPP and its PHP distribution uses FreeTDS for mssql access.
+There is a configuration file for this driver located at</p>
+
+<p><code>bash
+/Applications/XAMPP/xamppfiles/etc/freetds.conf
+</code></p>
+
+<p>that lets you turn on debug logging to a file.</p>
+
+<p>Uncomment the following lines</p>
+
+<p><code>bash
+;       dump file = /tmp/freetds.log
+;       debug flags = 0xffff
+</code></p>
+
+<p>And then run your connection attempt again. Take a look at the log for details on the failure.</p>
+
+<p>In the end I added a new entry for an MS SQL server at the end of the freetds.conf file and used its name in the call to mssql_connect().</p>
+
+<p>``` bash
+[MyServerXYZ]</p>
+
+<pre><code>    host = the_host_name
+    instance = the_instance_name
+    port = 1433
+    tds version = 9.0
+</code></pre>
+
+<p>```</p>
+
+<p>In my case I had to deal with an instance name that would normally be appended to the host name in a connection string, but for this driver configuration you have to use a variable called <em>instance</em>.</p>
+
+<p>In PHP I then use this code during development</p>
+
+<p><code>bash
+$conn = mssql_connect('MyServerXYZ', $username, $password);
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

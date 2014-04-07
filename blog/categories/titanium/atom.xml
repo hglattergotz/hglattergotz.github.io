@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: titanium | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/titanium/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-07T13:25:37+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Appcelerator Titanium - Email a Screen Shot with a Single Button Click]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/04/30/appcelerator-titanium-email-a-screen-shot-with-a-single-button-click/"/>
+    <updated>2012-04-30T16:30:00+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/04/30/appcelerator-titanium-email-a-screen-shot-with-a-single-button-click</id>
+    <content type="html"><![CDATA[<p>During testing it is often helpful if a tester can send you, the developer, a screen shot of a particular window in the app.
+Of course this is generally very simple to do on an iOS device right out of the box. However, you can make it even easer for your testers.</p>
+
+<!-- more -->
+
+
+<p>With a single click of a button in your app you can</p>
+
+<ul>
+<li>grab the screen content</li>
+<li>save it as an image</li>
+<li>attach it to an email</li>
+<li>prepopulate the message with default values</li>
+<li>allow the user to write a comment and send</li>
+</ul>
+
+
+<p>Providing all that cuts down on a whole lot of steps and might make it more likely that you get that much needed feedback.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>lib/UiElements.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">/&lt;em&gt;</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">For</span> <span class="nx">beta</span> <span class="nx">testing</span> <span class="nx">purposes</span> <span class="nx">create</span> <span class="nx">a</span> <span class="nx">camera</span> <span class="nx">button</span> <span class="nx">that</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">set</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">as</span> <span class="nx">the</span> <span class="nx">right</span> <span class="nx">nav</span> <span class="nx">button</span><span class="p">.</span> <span class="nx">Upon</span> <span class="nx">clicking</span> <span class="nx">create</span> <span class="nx">a</span> <span class="nx">screenshot</span> <span class="nx">and</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">display</span> <span class="nx">the</span> <span class="nx">email</span> <span class="nx">dialog</span> <span class="kd">with</span> <span class="nx">pre</span><span class="o">-</span><span class="nx">populated</span> <span class="nx">fields</span><span class="p">.</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">convenience</span> <span class="k">for</span> <span class="nx">testers</span> <span class="nx">to</span> <span class="nx">send</span> <span class="nx">a</span> <span class="nx">screenshot</span> <span class="nx">straight</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">out</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">applicaiton</span><span class="p">.</span>
+</span><span class='line'> <span class="o">&lt;</span><span class="sr">/em&gt;/</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">createScreenShotButton</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">buttonObjects</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span><span class="nx">image</span><span class="o">:</span><span class="s1">&#39;images/camera.png&#39;</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span><span class="mi">45</span><span class="p">}</span>
+</span><span class='line'><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">buttonBar</span> <span class="o">=</span> <span class="nx">Titanium</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createButtonBar</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">labels</span><span class="o">:</span><span class="nx">buttonObjects</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">backgroundColor</span><span class="o">:</span><span class="s1">&#39;#000&#39;</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">indicator</span> <span class="o">=</span> <span class="nx">createIndicatorWindow</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">buttonBar</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">index</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">Ti</span><span class="p">.</span><span class="nx">Media</span><span class="p">.</span><span class="nx">takeScreenshot</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">indicator</span><span class="p">.</span><span class="nx">openIndicator</span><span class="p">();</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">emailDialog</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createEmailDialog</span><span class="p">()</span>
+</span><span class='line'>            <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">subject</span> <span class="o">=</span> <span class="s2">&quot;Screenshot from myApp&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">toRecipients</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;my@email-address.com&#39;</span><span class="p">];</span>
+</span><span class='line'>            <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">messageBody</span> <span class="o">=</span> <span class="s1">&#39;Describe the problem please&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">addAttachment</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">media</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">emailDialog</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+</span><span class='line'>            <span class="nx">indicator</span><span class="p">.</span><span class="nx">closeIndicator</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">return</span> <span class="nx">buttonBar</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">exports</span><span class="p">.</span><span class="nx">createScreenShotButton</span> <span class="o">=</span> <span class="nx">createScreenShotButton</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The activity indicator used in this example is described <a href="/blog/2012/03/19/appcelerator-titanium-a-nice-looking-activity-indicator-window">here</a>.</p>
+
+<p>A great place to get free icons for this button is at <a href="http://glyphish.com/">glyphish.com</a>.</p>
+
+<p>To provide this screen shot button on specific windows of your application simply do the following</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">win</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createWindow</span><span class="p">({});</span>
+</span><span class='line'><span class="nx">uie</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lib/UiElements&#39;</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">bb</span> <span class="o">=</span> <span class="nx">uie</span><span class="p">.</span><span class="nx">createScreenShotButton</span><span class="p">();</span>
+</span><span class='line'><span class="nx">win</span><span class="p">.</span><span class="nx">setRightNavButton</span><span class="p">(</span><span class="nx">bb</span><span class="p">);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="c1">// When returning to this window from a child view the nav button gets</span>
+</span><span class='line'><span class="c1">// removed by default. This will show it again.</span>
+</span><span class='line'><span class="nx">win</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;focus&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">win</span><span class="p">.</span><span class="nx">setRightNavButton</span><span class="p">(</span><span class="nx">bb</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Appcelerator Titanium - A Nice Looking Activity Indicator Window]]></title>
+    <link href="http://glatter-gotz.com/blog/2012/03/19/appcelerator-titanium-a-nice-looking-activity-indicator-window/"/>
+    <updated>2012-03-19T13:13:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2012/03/19/appcelerator-titanium-a-nice-looking-activity-indicator-window</id>
+    <content type="html"><![CDATA[<blockquote><h4>UPDATE (April 11th 2013):</h4>
+
+<p>I updated the demo project on <a href="http://github.com/hglattergotz/indicatordemo">github</a> with a patch from Khawar. The demo now also works on android.</p></blockquote>
+
+<p>The <em>Titanium.UI.ActivityIndicator</em> is a commonly used component in my iOS applications, but on its own it does not look very appealing.
+To make the activity indicator look a little nicer I dressed it up in its own window that has is slightly opaque and stuck it in a commonjs module.</p>
+
+<!--more-->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>lib/UiElements.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">/&lt;em&gt;*</span>
+</span><span class='line'> <span class="o">*</span> <span class="nx">Indicator</span> <span class="nb">window</span> <span class="kd">with</span> <span class="nx">a</span> <span class="nx">spinner</span> <span class="nx">and</span> <span class="nx">a</span> <span class="nx">label</span>
+</span><span class='line'> <span class="o">*</span>
+</span><span class='line'> <span class="o">*</span> <span class="err">@</span><span class="nx">param</span> <span class="p">{</span><span class="nb">Object</span><span class="p">}</span> <span class="nx">args</span>
+</span><span class='line'> <span class="o">&lt;</span><span class="sr">/em&gt;/</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">createIndicatorWindow</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="mi">180</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">height</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">args</span> <span class="o">||</span> <span class="p">{};</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">top</span> <span class="o">||</span> <span class="mi">140</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">text</span> <span class="o">||</span> <span class="s1">&#39;Loading ...&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">Titanium</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createWindow</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">height</span><span class="o">:</span>           <span class="nx">height</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">width</span><span class="o">:</span>            <span class="nx">width</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">top</span><span class="o">:</span>              <span class="nx">top</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">borderRadius</span><span class="o">:</span>     <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">touchEnabled</span><span class="o">:</span>     <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">opacity</span><span class="o">:</span>          <span class="mf">0.6</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">view</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createView</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">width</span><span class="o">:</span>   <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">SIZE</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">height</span><span class="o">:</span>  <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FILL</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">center</span><span class="o">:</span>  <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="p">(</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="nx">y</span><span class="o">:</span> <span class="p">(</span><span class="nx">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="p">},</span>
+</span><span class='line'>    <span class="nx">layout</span><span class="o">:</span>  <span class="s1">&#39;horizontal&#39;</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">osIndicatorStyle</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">style</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">iPhone</span><span class="p">.</span><span class="nx">ActivityIndicatorStyle</span><span class="p">.</span><span class="nx">PLAIN</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;iPhone OS&#39;</span> <span class="o">!==</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">style</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ActivityIndicatorStyle</span><span class="p">.</span><span class="nx">DARK</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">style</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">activityIndicator</span> <span class="o">=</span> <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createActivityIndicator</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">style</span><span class="o">:</span>   <span class="nx">osIndicatorStyle</span><span class="p">(),</span>
+</span><span class='line'>    <span class="nx">left</span><span class="o">:</span>    <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">height</span><span class="o">:</span>  <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FILL</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">width</span><span class="o">:</span>   <span class="mi">30</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">Titanium</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">createLabel</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">left</span><span class="o">:</span>    <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">width</span><span class="o">:</span>   <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FILL</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">height</span><span class="o">:</span>  <span class="nx">Ti</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FILL</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">text</span><span class="o">:</span>    <span class="nx">text</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">color</span><span class="o">:</span>   <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">font</span><span class="o">:</span>    <span class="p">{</span> <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Helvetica Neue&#39;</span><span class="p">,</span> <span class="nx">fontSize</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span> <span class="nx">fontWeight</span><span class="o">:</span> <span class="s1">&#39;bold&#39;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">view</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">activityIndicator</span><span class="p">);</span>
+</span><span class='line'><span class="nx">view</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">label</span><span class="p">);</span>
+</span><span class='line'><span class="nx">win</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">view</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">openIndicator</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">win</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">activityIndicator</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">win</span><span class="p">.</span><span class="nx">openIndicator</span> <span class="o">=</span> <span class="nx">openIndicator</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">closeIndicator</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">activityIndicator</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">win</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">win</span><span class="p">.</span><span class="nx">closeIndicator</span> <span class="o">=</span> <span class="nx">closeIndicator</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">return</span> <span class="nx">win</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="c1">// Public interface</span>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">createIndicatorWindow</span> <span class="o">=</span> <span class="nx">createIndicatorWindow</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This would then be called from inside an event listener like this:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">uie</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lib/UiElements&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">indicator</span> <span class="o">=</span> <span class="nx">uie</span><span class="p">.</span><span class="nx">createIndicatorWindow</span><span class="p">();</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">someViewObject</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">indicator</span><span class="p">.</span><span class="nx">openIndicator</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Do the work that takes a while</span>
+</span><span class='line'>    <span class="c1">// and requires an activity indicator</span>
+</span><span class='line'>    <span class="nx">indicator</span><span class="p">.</span><span class="nx">closeIndicator</span><span class="p">();</span>
+</span><span class='line'><span class="p">},</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>
