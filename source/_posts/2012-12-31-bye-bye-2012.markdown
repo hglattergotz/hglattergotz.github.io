@@ -1,0 +1,35 @@
+---
+layout: post
+title: "Bye bye 2012"
+date: 2012-12-31 19:48
+comments: true
+categories: 
+published: true
+---
+This year was certainly tumultuous!!
+
+* Had another big "0" Birthday
+* Had a second child - a daughter
+* Moved to a different continent
+
+Those are some major changes that definitely caused some moments of temporary insanity, some where longer than others and seemed to never end. But I am still standing!
+<!--more-->
+
+Things I learned:
+
+* Becoming a dad for the second time does not make the sleep deprivation less painful in any way! Whatsoever! If anything it is worse, because you know what is about to happen to you in the next 18 to 24 months - NO SLEEP!!!
+* Moving internationally with small children takes about 5 years off your life.
+* Hiring the company [Inhouse Relocation](http://www.inhouserelocation.com) to ease the pain of moving internationally is a waste of money.
+* [Symfony2](http://www.symfony.com) is pretty amazing
+* [Composer](http://getcomposer.org) rocks!
+* Parallel processing with PHP is doable
+* Beanstalkd is really cool
+* A day does not have enough hours in it to be a great husband, and dad, put in a 8 hour workday, work on a side project, maintain your hobbies, and learn new things.
+
+So whats in store for 2013?
+
+* I shall be [lazier](http://webadvent.org/2012/be-lazy-by-kitt-hodsden) than ever! Especially at work.
+* I want to get at least one app into the app store.
+* I shall blog more frequently (once a week).
+
+2013 bring it on!
