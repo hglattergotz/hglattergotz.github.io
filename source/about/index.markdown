@@ -12,4 +12,11 @@ footer: false
 * My hobbies keep me rather stationary
 * My children keep me moving
 * When I step outside at night I look up. My wife does the same, I love that
-* I consider practically all reality TV shows to be mental pollution, actually most everything on TV is mental pollution
+
+###Other
+
+* [GitHub](https://github.com/hglattergotz)
+* [Twitter](https://twitter.com/hglattergotz)
+* [LinkedIn](https://www.linkedin.com/in/hglattergotz)
+* [MojoLive](http://mojolive.com/profile/hglattergotz)
+
