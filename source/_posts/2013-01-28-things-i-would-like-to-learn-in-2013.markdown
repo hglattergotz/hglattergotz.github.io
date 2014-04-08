@@ -18,6 +18,7 @@ So here is my list:
    in popularity of JS due to things like [node.js](http://nodejs.org/) and the 
    [Appcelerator Titanium](http://www.appcelerator.com/) platform I feel like 
    the time might be right. Ember.js looks extremely promising and interesting.
+<!--more-->
  * **[Vagrant:](http://www.vagrantup.com/)** I have never gotten past the very 
    first example script that is on the Vagrant site due to time issues. But with
    ever more complex development environments it just makes sense to put in the 
