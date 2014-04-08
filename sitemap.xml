@@ -74,7 +74,13 @@
     </url>
     <url>
         <loc>http://glatter-gotz.com/blog/2013/01/28/things-i-would-like-to-learn-in-2013/</loc>
-        <lastmod>2014-04-07T13:22:54+02:00</lastmod>
+        <lastmod>2014-04-08T10:28:22+02:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://glatter-gotz.com/blog/2014/04/08/git-merge-specific-files-from-one-branch-into-another/
+        </loc>
+        <lastmod>2014-04-08T10:29:51+02:00</lastmod>
     </url>
     <url>
         <loc>http://glatter-gotz.com/about/</loc>
@@ -82,10 +88,10 @@
     </url>
     <url>
         <loc>http://glatter-gotz.com/blog/archives/</loc>
-        <lastmod>2014-04-07T13:22:54+02:00</lastmod>
+        <lastmod>2014-04-08T10:29:51+02:00</lastmod>
     </url>
     <url>
         <loc>http://glatter-gotz.com/</loc>
-        <lastmod>2014-04-07T13:22:54+02:00</lastmod>
+        <lastmod>2014-04-08T10:29:51+02:00</lastmod>
     </url>
 </urlset>

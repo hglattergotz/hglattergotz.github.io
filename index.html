@@ -9,8 +9,9 @@
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="There are a number of new (and not so new) things I would like to learn or have
-been meaning to learn. Maybe putting them down on &#8220;paper&#8221 &hellip;">
+  <meta name="description" content="I have started to use git branching
+more heavily in recent months and also make it a point to have small and well
+documented commits. This sometimes &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,54 @@ been meaning to learn. Maybe putting them down on &#8220;paper&#8221 &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/04/08/git-merge-specific-files-from-one-branch-into-another/">Git merge specific files from one branch into another</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-08T10:10:41+02:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have started to use <a href="http://nvie.com/posts/a-successful-git-branching-model/">git branching</a>
+more heavily in recent months and also make it a point to have small and well
+documented commits. This sometimes leads to the need to merge specific files
+from one branch into another (good or bad, it just happens). Git facilitates
+this with <code>checkout</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout <span class="nb">source</span>-branch-name/commit-sha path/tofile/of/interest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you do not provide the commit sha it will simply checkout the file at the
+HEAD of the source branch.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/01/28/things-i-would-like-to-learn-in-2013/">Things I would like to learn in 2013</a></h1>
     
     
@@ -117,32 +166,15 @@ code. But with the rise of so many Javascript frameworks and the huge surge
 in popularity of JS due to things like <a href="http://nodejs.org/">node.js</a> and the
 <a href="http://www.appcelerator.com/">Appcelerator Titanium</a> platform I feel like
 the time might be right. Ember.js looks extremely promising and interesting.</li>
-<li><strong><a href="http://www.vagrantup.com/">Vagrant:</a></strong> I have never gotten past the very
-first example script that is on the Vagrant site due to time issues. But with
-ever more complex development environments it just makes sense to put in the
-time to get this to work.</li>
-<li><strong><a href="http://symfony.com/">Symfony2</a>:</strong> It&#8217;s time, it is sooo time. I have been
-working with sf1 since 2009 and have started using sf2 components and more
-recently been playing with composer a bit and really want to put the sf1
-times behind me as much as that is possible with a fairly large sf1 code base
-to maintain. Since attending Symfony LIVE in Berlin last year I really want
-to start developing in Symfony2 full time.</li>
-<li><strong><a href="http://www.python.org/">Python</a>:</strong> I have a very limited knowledge of
-Python at this point. The only exposure I have gotten is due to my work with
-<a href="http://docs.fabfile.org/en/1.5/">fabric</a>. But I would like to gain a deeper
-understanding of the language to possibly write some of my long running data
-processing scripts in Python instead of PHP.</li>
-<li><strong>TDD:</strong> My first experience with TDD was back in 2006 with C++. This is when
-I came to understand all the benefits and started advocating TDD within my
-organisation. I practiced TDD quite consistently until 2009 when I switched
-to PHP (don&#8217;t ask). Ever since, I have only ever &#8220;started&#8221; to get back into
-it. In fact I have started several times. The tools are there, I have the
-knowledge (for the most part), so there really is not excuse to not
-consistently practice TDD.</li>
 </ul>
+
 
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/01/28/things-i-would-like-to-learn-in-2013/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -507,47 +539,6 @@ After lots of searching and lot of trial and error I finally got my upsert worki
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6/">Install Xdebug 2.1.0 on OSX 10.6</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-31T00:00:00+02:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have had to install Xdebug on a few systems now and I always find myself spending time going down the wrong, or should I say the harder, path. Which is to try to install via PECL as recommended. For some reason the PECL install on OSX does not work as designed. The built extension ends up being of the wrong architecture. My guess is that it is built as a 32 bit extension instead of 64 bit.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -570,6 +561,10 @@ After lots of searching and lot of trial and error I finally got my upsert worki
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/08/git-merge-specific-files-from-one-branch-into-another/">Git merge specific files from one branch into another</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/28/things-i-would-like-to-learn-in-2013/">Things I would like to learn in 2013</a>
       </li>
     
@@ -583,10 +578,6 @@ After lots of searching and lot of trial and error I finally got my upsert worki
     
       <li class="post">
         <a href="/blog/2012/07/10/php-the-right-way/">PHP: The Right Way</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/06/18/exacttarget-soap-api-obtaining-accurate-object-definitions/">ExactTarget SOAP API: Obtaining an Accurate List of Retrievable Properties</a>
       </li>
     
   </ul>

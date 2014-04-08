@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2014-04-08T10:30:08+02:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Git merge specific files from one branch into another]]></title>
+    <link href="http://glatter-gotz.com/blog/2014/04/08/git-merge-specific-files-from-one-branch-into-another/"/>
+    <updated>2014-04-08T10:10:41+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2014/04/08/git-merge-specific-files-from-one-branch-into-another</id>
+    <content type="html"><![CDATA[<p>I have started to use <a href="http://nvie.com/posts/a-successful-git-branching-model/">git branching</a>
+more heavily in recent months and also make it a point to have small and well
+documented commits. This sometimes leads to the need to merge specific files
+from one branch into another (good or bad, it just happens). Git facilitates
+this with <code>checkout</code>:</p>
+
+<p><code>bash
+$ git checkout source-branch-name/commit-sha path/tofile/of/interest
+</code></p>
+
+<p>If you do not provide the commit sha it will simply checkout the file at the
+HEAD of the source branch.</p>
+]]></content>
+  </entry>
+  
+</feed>

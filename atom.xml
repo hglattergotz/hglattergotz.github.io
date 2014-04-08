@@ -4,7 +4,7 @@
   <title><![CDATA[henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2014-04-07T15:11:44+02:00</updated>
+  <updated>2014-04-08T10:30:08+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git merge specific files from one branch into another]]></title>
+    <link href="http://glatter-gotz.com/blog/2014/04/08/git-merge-specific-files-from-one-branch-into-another/"/>
+    <updated>2014-04-08T10:10:41+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2014/04/08/git-merge-specific-files-from-one-branch-into-another</id>
+    <content type="html"><![CDATA[<p>I have started to use <a href="http://nvie.com/posts/a-successful-git-branching-model/">git branching</a>
+more heavily in recent months and also make it a point to have small and well
+documented commits. This sometimes leads to the need to merge specific files
+from one branch into another (good or bad, it just happens). Git facilitates
+this with <code>checkout</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout <span class="nb">source</span>-branch-name/commit-sha path/tofile/of/interest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you do not provide the commit sha it will simply checkout the file at the
+HEAD of the source branch.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Things I would like to learn in 2013]]></title>
@@ -31,6 +52,13 @@ code. But with the rise of so many Javascript frameworks and the huge surge
 in popularity of JS due to things like <a href="http://nodejs.org/">node.js</a> and the
 <a href="http://www.appcelerator.com/">Appcelerator Titanium</a> platform I feel like
 the time might be right. Ember.js looks extremely promising and interesting.</li>
+</ul>
+
+
+<!--more-->
+
+
+<ul>
 <li><strong><a href="http://www.vagrantup.com/">Vagrant:</a></strong> I have never gotten past the very
 first example script that is on the Vagrant site due to time issues. But with
 ever more complex development environments it just makes sense to put in the
