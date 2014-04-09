@@ -4,7 +4,7 @@
   <title><![CDATA[henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2014-04-08T10:30:08+02:00</updated>
+  <updated>2014-04-09T10:26:28+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PHP Composer: Working with local repositories]]></title>
+    <link href="http://glatter-gotz.com/blog/2014/04/09/php-composer-working-with-local-repositories/"/>
+    <updated>2014-04-09T10:03:10+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2014/04/09/php-composer-working-with-local-repositories</id>
+    <content type="html"><![CDATA[<p>When developing packages or Bundles for your Symfony2 project it is nice to be
+able to manage them in their own repository and have Composer deal with installing
+them in your test project. This is a bit slow and quite cumbersome if you are
+using something like GitHub since you have to push changes to remote and then
+Composer has to pull it all back down.</p>
+
+<!--more-->
+
+
+<p>To make this a bit more convenient it is possible to configure your project to
+use a package from a local git repository:</p>
+
+<p>In composer.json:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">:</span>
+</span><span class='line'><span class="s2">&quot;repositories&quot;</span><span class="err">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;vcs&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/the/local/git/repository&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">]</span><span class="err">,</span>
+</span><span class='line'><span class="s2">&quot;require&quot;</span><span class="err">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="err">:</span>
+</span><span class='line'>    <span class="nt">&quot;username/package-name&quot;</span><span class="p">:</span> <span class="s2">&quot;dev-master&quot;</span>
+</span><span class='line'><span class="p">}</span><span class="err">,</span>
+</span><span class='line'><span class="err">:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here username/package-name is the value that is specified under the &#8220;name&#8221; key
+in the composer.json of the package.</p>
+
+<p>So the work flow would be as follows:</p>
+
+<ul>
+<li>Work on Bundle and commit to its repository locally</li>
+<li>In your Symfony2 project execute <code>composer update username/package-name</code></li>
+</ul>
+
+
+<p>This also lets you use a git repo hosted on GitHub that is not registered on
+packagist.org</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">:</span>
+</span><span class='line'><span class="s2">&quot;repositories&quot;</span><span class="err">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;vcs&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://github.com/username/reponame&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">]</span><span class="err">,</span>
+</span><span class='line'><span class="err">:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git merge specific files from one branch into another]]></title>

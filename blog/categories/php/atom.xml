@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2014-04-08T10:30:08+02:00</updated>
+  <updated>2014-04-09T10:26:28+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PHP Composer: Working with local repositories]]></title>
+    <link href="http://glatter-gotz.com/blog/2014/04/09/php-composer-working-with-local-repositories/"/>
+    <updated>2014-04-09T10:03:10+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2014/04/09/php-composer-working-with-local-repositories</id>
+    <content type="html"><![CDATA[<p>When developing packages or Bundles for your Symfony2 project it is nice to be
+able to manage them in their own repository and have Composer deal with installing
+them in your test project. This is a bit slow and quite cumbersome if you are
+using something like GitHub since you have to push changes to remote and then
+Composer has to pull it all back down.</p>
+
+<!--more-->
+
+
+<p>To make this a bit more convenient it is possible to configure your project to
+use a package from a local git repository:</p>
+
+<p>In composer.json:
+```json</p>
+
+<pre><code>:
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "/path/to/the/local/git/repository"
+    }
+],
+"require": {
+    :
+    "username/package-name": "dev-master"
+},
+:
+</code></pre>
+
+<p>```
+Here username/package-name is the value that is specified under the "name" key
+in the composer.json of the package.</p>
+
+<p>So the work flow would be as follows:</p>
+
+<ul>
+<li>Work on Bundle and commit to its repository locally</li>
+<li>In your Symfony2 project execute <code>composer update username/package-name</code></li>
+</ul>
+
+
+<p>This also lets you use a git repo hosted on GitHub that is not registered on
+packagist.org
+```json</p>
+
+<pre><code>:
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "http://github.com/username/reponame"
+    }
+],
+:
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[./symfony doctrine:build-schema for a Single Table]]></title>
@@ -625,67 +689,6 @@ $result = $soapClient->Update($request);
 <p>Where <em>$deoSo</em> is a DataExtension Object that has been converted to a SoapVar and <em>$soapClient</em> is an ExactTarget soap client instance. The way you get the upsert behavior is to set the saveaction to <em>ExactTarget_SaveAction::UpdateAdd</em>.</p>
 
 <p>If you are looking for a minimal wrapper library that includes the above method take a look at <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOAP-API">this library on gitub</a>. This library gleans quite a few things from the Doctrine ORM, so if you are familiar with that you should feel right at home.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Connecting to Microsoft SQL Server from PHP on OSX and XAMPP]]></title>
-    <link href="http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/"/>
-    <updated>2011-06-06T00:00:00+02:00</updated>
-    <id>http://glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp</id>
-    <content type="html"><![CDATA[<blockquote><h4>UPDATE (March 23rd 2012):</h4>
-
-<p>I recently found a <a href="http://php-osx.liip.ch/">PHP binary </a>that has a one-line installer. It is actively maintained by Liip AG. I now use that in combination with <a href="http://mxcl.github.com/homebrew/">HomeBrew</a> for all the rest. The Liip package is compiled with pdo_dblib which makes the problem described in this post a non-issue.</p></blockquote>
-
-<p>I recently found myself in the position of having to connect to a remote Microsoft SQL Server from my OSX system using PHP. The production environment runs Ubuntu LINUX, where connecting via mssql_connect() was no problem, but I develop on OSX and I could not get this to work initially.</p>
-
-<!--more-->
-
-
-<p>mssql_connect() simply returns boolean FALSE on failure and PHP tells you little more than</p>
-
-<p><code>bash
-Warning: mssql_connect(): Unable to connect to server: YOURSERVERNAME
-</code></p>
-
-<p>It took quite a few hours to finally figure out that I could turn on some additional logging on the driver level. I use XAMPP and its PHP distribution uses FreeTDS for mssql access.
-There is a configuration file for this driver located at</p>
-
-<p><code>bash
-/Applications/XAMPP/xamppfiles/etc/freetds.conf
-</code></p>
-
-<p>that lets you turn on debug logging to a file.</p>
-
-<p>Uncomment the following lines</p>
-
-<p><code>bash
-;       dump file = /tmp/freetds.log
-;       debug flags = 0xffff
-</code></p>
-
-<p>And then run your connection attempt again. Take a look at the log for details on the failure.</p>
-
-<p>In the end I added a new entry for an MS SQL server at the end of the freetds.conf file and used its name in the call to mssql_connect().</p>
-
-<p>``` bash
-[MyServerXYZ]</p>
-
-<pre><code>    host = the_host_name
-    instance = the_instance_name
-    port = 1433
-    tds version = 9.0
-</code></pre>
-
-<p>```</p>
-
-<p>In my case I had to deal with an instance name that would normally be appended to the host name in a connection string, but for this driver configuration you have to use a variable called <em>instance</em>.</p>
-
-<p>In PHP I then use this code during development</p>
-
-<p><code>bash
-$conn = mssql_connect('MyServerXYZ', $username, $password);
-</code></p>
 ]]></content>
   </entry>
   
