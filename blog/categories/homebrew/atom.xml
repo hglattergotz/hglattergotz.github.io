@@ -4,7 +4,7 @@
   <title><![CDATA[Category: homebrew | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/homebrew/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2014-04-24T23:15:36+02:00</updated>
+  <updated>2014-04-24T23:16:24+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>The <a href="http://expressjs.com/guide.html#executable">express</a> docs claim that you
 can simply install the express-generator globally and use it to generate
 application skeletons.</p>
+
+<!--more-->
+
 
 <p>Well, I followed the instructions to install express-generator</p>
 
