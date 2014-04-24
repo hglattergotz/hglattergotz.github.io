@@ -4,7 +4,7 @@
   <title><![CDATA[henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2014-04-09T10:26:28+02:00</updated>
+  <updated>2014-04-24T23:15:36+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[express-generator on OSX/homebrew node install]]></title>
+    <link href="http://glatter-gotz.com/blog/2014/04/24/express-generator-on-osx-slash-homebrew-node-install/"/>
+    <updated>2014-04-24T23:01:47+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2014/04/24/express-generator-on-osx-slash-homebrew-node-install</id>
+    <content type="html"><![CDATA[<p>The <a href="http://expressjs.com/guide.html#executable">express</a> docs claim that you
+can simply install the express-generator globally and use it to generate
+application skeletons.</p>
+
+<p>Well, I followed the instructions to install express-generator</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>npm install -g express-generator
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and got</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>express
+</span><span class='line'>-bash: express: <span class="nb">command </span>not found
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am working on OSX and installed node via homebrew, which is what is causing
+this issue, at least for express. Because other globally installed packages
+worked fine.</p>
+
+<p>The output of the installation gives you a hint. The executable is installed in</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/usr/local/share/npm/bin/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add that directory to your path and it will solve the problem.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/share/npm/bin:<span class="nv">$PATH</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHP Composer: Working with local repositories]]></title>

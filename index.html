@@ -9,8 +9,9 @@
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="When developing packages or Bundles for your Symfony2 project it is nice to be
-able to manage them in their own repository and have Composer deal &hellip;">
+  <meta name="description" content="The express docs claim that you
+can simply install the express-generator globally and use it to generate
+application skeletons. Well, I followed the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +76,80 @@ able to manage them in their own repository and have Composer deal &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/24/express-generator-on-osx-slash-homebrew-node-install/">express-generator on OSX/homebrew node install</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-24T23:01:47+02:00" pubdate data-updated="true">Apr 24<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The <a href="http://expressjs.com/guide.html#executable">express</a> docs claim that you
+can simply install the express-generator globally and use it to generate
+application skeletons.</p>
+
+<p>Well, I followed the instructions to install express-generator</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>npm install -g express-generator
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and got</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>express
+</span><span class='line'>-bash: express: <span class="nb">command </span>not found
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am working on OSX and installed node via homebrew, which is what is causing
+this issue, at least for express. Because other globally installed packages
+worked fine.</p>
+
+<p>The output of the installation gives you a hint. The executable is installed in</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/usr/local/share/npm/bin/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add that directory to your path and it will solve the problem.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/share/npm/bin:<span class="nv">$PATH</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -496,48 +571,6 @@ To make the activity indicator look a little nicer I dressed it up in its own wi
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/10/31/exacttarget-soap-upsert-with-php/">ExactTarget SOAP Upsert with PHP</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-31T00:00:00+01:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There is quite a bit of documentation for the ExactTarget SOAP API that includes lots of code samples. But unfortunately the PHP code samples are not quite as plentiful as the .NET and Java ones.
-After lots of searching and lot of trial and error I finally got my upsert working. An upsert is a SOAP method in the ExactTarget SOAP API that will either update or insert a record depending on whether it is already present or not.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/10/31/exacttarget-soap-upsert-with-php/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -560,6 +593,10 @@ After lots of searching and lot of trial and error I finally got my upsert worki
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/24/express-generator-on-osx-slash-homebrew-node-install/">express-generator on OSX/homebrew node install</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/09/php-composer-working-with-local-repositories/">PHP Composer: Working with local repositories</a>
       </li>
     
@@ -573,10 +610,6 @@ After lots of searching and lot of trial and error I finally got my upsert worki
     
       <li class="post">
         <a href="/blog/2012/12/31/bye-bye-2012/">Bye bye 2012</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table/">./symfony doctrine:build-schema for a Single Table</a>
       </li>
     
   </ul>
