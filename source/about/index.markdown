@@ -21,4 +21,4 @@ footer: false
 * [MojoLive](http://mojolive.com/profile/hglattergotz)
 
 
-[Send me email](mailto:henning@glatter-gotz.com)
+Send me and email at [henning@glatter-gotz.com](mailto:henning@glatter-gotz.com)
