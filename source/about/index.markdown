@@ -20,3 +20,5 @@ footer: false
 * [LinkedIn](https://www.linkedin.com/in/hglattergotz)
 * [MojoLive](http://mojolive.com/profile/hglattergotz)
 
+
+[Send me email](mailto:henning@glatter-gotz.com)
