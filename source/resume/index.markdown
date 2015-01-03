@@ -21,9 +21,9 @@ translating these into successful solutions.
 
 ### Specialties
 
-* PHP/Javascript
+* PHP/Symfony2/Composer
+* Javascript/node.js/ember.js
 * MySQL/MSSQL
-* Symfony2/Composer
 * XUnit/TravisCi/XDebug
 * REST/JSON
 * git/Subversion
