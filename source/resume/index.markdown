@@ -21,7 +21,7 @@ translating these into successful solutions.
 
 ### Specialties
 
-* PHP/Javascrip
+* PHP/Javascript
 * MySQL/MSSQL
 * Symfony2/Composer
 * XUnit/TravisCi/XDebug
@@ -35,7 +35,7 @@ translating these into successful solutions.
 **Senior Software Developer** (Independent Contractor / Remote)  
 Laser Spine Institute  
 July 2009 – Present  
-Tampa/St. Petersburg, Florida Area  
+Tampa/St. Petersburg, Florida  
 
 * reliable long running backend services
 * developed ETL system to serve both internal and external customer data needs
@@ -49,7 +49,7 @@ _PHP, Symfony 2, Message Queues, MySql, Web services (REST, SOAP), node.js, embe
 **Senior Software Developer**  
 Local Matters, Inc.  
 January 2005 – February 2009  
-Ft. Lauderdale/Miami, Florida Area
+Ft. Lauderdale/Miami, Florida  
 
 Developed components of a database build system for Telco directory assistance
 
@@ -64,7 +64,7 @@ _C++, POSIX threads, CppUnit, XML, XSLT, Linux, AIX_
 **Web Developer** (Independent Contractor / Remote)  
 Iggesund Tools, Inc.  
 September 2004 – January 2005  
-Tampa/St. Petersburg, Florida Area  
+Tampa/St. Petersburg, Florida  
 
 * Developed web based customer inventory management
 
@@ -74,7 +74,7 @@ _PHP, MySQL, Javascript_
 **Software Developer / System Administrator** (part time during college)  
 Iggesund Tools, Inc.  
 August 1999 – August 2004 (5 years 1 month)  
-Tampa/St. Petersburg, Florida Area  
+Tampa/St. Petersburg, Florida  
 
 * Maintained Silicon Graphics/IRIX CAD network and Windows Network
 * Developed several small utility applications for the business and engineering
