@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-01-03T13:43:25+01:00</updated>
+  <updated>2015-01-04T23:09:03+01:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ember.js Resources]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/01/05/ember-dot-js-resources/"/>
+    <updated>2015-01-05T04:00:00+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/01/05/ember-dot-js-resources</id>
+    <content type="html"><![CDATA[<blockquote><p>Please note that this was published in January of 2015. So keep in mind that the
+shelf-life is limited</p></blockquote>
+
+<p>The following is a helpful list of where to find current information on Ember.js:</p>
+
+<!--more-->
+
+
+<ul>
+<li>The best place to start is the Ember website itself <a href="http://emberjs.com">emberjs.com</a>.
+The docs live there and on the blog you can find current news on the project.</li>
+<li><a href="http://emberweekly.com/">Ember Weekly</a> is a newsletter all about ember. It is an
+outstanding aggregation of what is happening in the Ember ecosystem.</li>
+</ul>
+
+
+<p>Two recent podcasts with great info about the upcoming Ember 2.0 release:</p>
+
+<ul>
+<li><p><a href="https://frontsidethepodcast.simplecast.fm/16"><strong>Frontside the Podcast: Ember 2.0 and the Indie Web with Yehuda Katz and Tom Dale</strong></a><br/>
+This is a fairly new podcast that I came across recently. This episode from December
+23rd 2014 features Tom Dale and Yehuda Katz and they talk about current work on
+Ember.js.</p>
+
+<p>Highlights:</p>
+
+<ul>
+<li>HTMLBars - Complete replacement of the render engine</li>
+<li>FastBoot - server side rendering</li>
+<li>Important aspects of running a successful OSS project</li>
+</ul>
+</li>
+<li><p><a href="http://thechangelog.com/131/"><strong>The Changelog: The road to Ember 2.0 with Tom Dale and Yehuda Katz</strong></a><br/>
+Similar info to the previous one</p></li>
+<li><p>The Ember.js <a href="https://www.youtube.com/user/EmberNYC">Meetup in NYC</a> is probably one of the most professional I have found.
+The meetings are all recorded and core team members speak there on a regular basis.</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Appcelerator Titanium - Email a Screen Shot with a Single Button Click]]></title>
