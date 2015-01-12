@@ -3,7 +3,7 @@ layout: post
 title: "Things I would like to learn in 2013"
 date: 2013-01-28 05:38
 comments: true
-categories: 
+categories: [ emberjs, vagrant, symfony2, python, tdd ]
 published: true
 ---
 There are a number of new (and not so new) things I would like to learn or have 
