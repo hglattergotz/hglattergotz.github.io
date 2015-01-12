@@ -4,7 +4,7 @@
   <title><![CDATA[Category: online backup | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/online-backup/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-01-12T11:20:26+01:00</updated>
+  <updated>2015-01-12T11:58:45+01:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -31,7 +31,7 @@ product even though slow support response times have always been something that 
 a bit to be desired. By slow, I mean days, not months, as is the case with this issue.</p>
 
 <p>I have three systems in my household backing up to SpiderOak, which has at last check
-used roughly 700GB. Back in September one of these systems had a total failure and
+used roughly 850GB. Back in September one of these systems had a total failure and
 needed to be replaced. This is where the issues started. After you install the
 SpiderOak application it tries to synchronize itself with the SpiderOak server. This
 process is called syndication. From what I can gather this is to provide each client
@@ -53,7 +53,7 @@ already overworked/understaffed support department. Or even worse, that it might
 last ditch effort to raise capital before going out of business. So far I can only
 confirm that their support department has basically imploded.</p>
 
-<p>Despite the many free months of service that I have received as a result of the slow
+<p>Despite the 13 free months of service that I have received as a result of the slow
 resolution of this case I can no longer use SpiderOak. It simply does not work!
 Zero-Knowledge privacy is all fine and dandy, but if the service cannot backup your
 files, then what is the point?</p>
