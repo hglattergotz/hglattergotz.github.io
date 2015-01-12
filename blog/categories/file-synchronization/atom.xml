@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: file synchronization | henning glatter-götz]]></title>
+  <link href="http://glatter-gotz.com/blog/categories/file-synchronization/atom.xml" rel="self"/>
+  <link href="http://glatter-gotz.com/"/>
+  <updated>2015-01-12T11:20:26+01:00</updated>
+  <id>http://glatter-gotz.com/</id>
+  <author>
+    <name><![CDATA[Henning Glatter-Götz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bye Bye Spideroak]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/01/12/bye-bye-spideroak/"/>
+    <updated>2015-01-12T10:35:49+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/01/12/bye-bye-spideroak</id>
+    <content type="html"><![CDATA[<p>Yesterday marked the beginning of the 5th (fifth!!) month, yes, MONTH(!!), that I
+have an open and unresolved support ticket with <a href="https://spideroak.com/">SpiderOak</a>.
+I nag them every few weeks and then they go quiet after a brief exchange and a promise
+that they are working hard to resolve the issue.</p>
+
+<!--more-->
+
+
+<p>I have been a paying customer for many years now and have always been happy with their
+product even though slow support response times have always been something that left
+a bit to be desired. By slow, I mean days, not months, as is the case with this issue.</p>
+
+<p>I have three systems in my household backing up to SpiderOak, which has at last check
+used roughly 700GB. Back in September one of these systems had a total failure and
+needed to be replaced. This is where the issues started. After you install the
+SpiderOak application it tries to synchronize itself with the SpiderOak server. This
+process is called syndication. From what I can gather this is to provide each client
+a view of your entire file system inside of SpiderOak. This process simply never
+completes, even after two weeks on a 100/6 Mbit/s Internet connection.</p>
+
+<p>SpiderOak support has at this point only let me know that there is an issue with my
+account on their end and that they are working hard to resolve it. That has been the
+story since September 2014. It is now January 2015.</p>
+
+<p>I really liked SpiderOak, strangely I still do. It seemed like a product and company by nerds
+for nerds. The <a href="https://spideroak.com/zero-knowledge/">Zero-Knowledge</a> privacy feature was
+the most appealing thing to me. Just before they came out with their offer for unlimited
+storage for about $120 per year I was gladly paying $500 per year for 500GB.</p>
+
+<p>I remember being concerned about this offer that they announced in March of 2014.
+It would surely have a negative effect on their service and most definitely on their
+already overworked/understaffed support department. Or even worse, that it might be a
+last ditch effort to raise capital before going out of business. So far I can only
+confirm that their support department has basically imploded.</p>
+
+<p>Despite the many free months of service that I have received as a result of the slow
+resolution of this case I can no longer use SpiderOak. It simply does not work!
+Zero-Knowledge privacy is all fine and dandy, but if the service cannot backup your
+files, then what is the point?</p>
+
+<p>I started using CrashPlan with a custom encryption key and as soon as all files are
+backed up I will be closing my account with SpiderOak.
+Over the years I have recommended SpiderOak to many friends, co-workers and family,
+but I can no longer do that. I know of people that are happy with SpiderOak and it
+works fine for them. Maybe it is just some kind of limitation in their system that
+does not scale well or at all after a certain backup size.</p>
+
+<p>So, bye bye SpiderOak!</p>
+]]></content>
+  </entry>
+  
+</feed>
