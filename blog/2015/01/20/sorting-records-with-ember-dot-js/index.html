@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: appcelerator - henning glatter-götz</title>
+  <title>Sorting records with Ember.js - henning glatter-götz</title>
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="Category: appcelerator">
+  <meta name="description" content="Ember.js provides a few really nice features out of the box to let you sort your records
+for display purposes. In the docs
+there is a short paragraph &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://glatter-gotz.comblog/categories/appcelerator/">
+  <link rel="canonical" href="http://glatter-gotz.com/blog/2015/01/20/sorting-records-with-ember-dot-js/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -74,50 +76,143 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: appcelerator</h1>
+    
+      <h1 class="entry-title">Sorting records with Ember.js</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-20T22:48:42+01:00" pubdate data-updated="true">Jan 20<span>th</span>, 2015</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Ember.js provides a few really nice features out of the box to let you sort your records
+for display purposes. In the <a href="http://emberjs.com/guides/controllers/representing-multiple-models-with-arraycontroller/">docs</a>
+there is a short paragraph about it (SORTING) that does not tell the whole story so be
+sure to click the link about the <a href="http://emberjs.com/api/classes/Ember.SortableMixin.html">Ember.SortableMixin</a>
+for some more information.</p>
 
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/04/30/appcelerator-titanium-email-a-screen-shot-with-a-single-button-click/">Appcelerator Titanium - Email a Screen Shot with a Single Button Click</a></h1>
-<time datetime="2012-04-30T16:30:00+02:00" pubdate><span class='month'>Apr</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/appcelerator/'>appcelerator</a>, <a class='category' href='/blog/categories/dev/'>dev</a>, <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/mobile-dev/'>mobile dev</a>, <a class='category' href='/blog/categories/testing/'>testing</a>, <a class='category' href='/blog/categories/titanium/'>titanium</a></span>
-</footer>
+<!--more-->
 
 
-</article>
+<p>The important detail is in the last two paragraphs:</p>
+
+<blockquote><p>SortableMixin works by sorting the arrangedContent array, which is the array that
+ArrayProxy displays. Due to the fact that the underlying &#8216;content&#8217; array is not changed.</p></blockquote>
+
+<p>So if you changed your controller to an <strong>ArrayController</strong> and added the properties
+<strong>sortProperties</strong> and <strong>sortAscending</strong> so your controller looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">SongsController</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">ArrayController</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">sortProperties</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;artist&#39;</span><span class="p">],</span>
+</span><span class='line'>  <span class="nx">sortAscending</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// false for descending</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
+<p>and you are wondering why your content is not sorted when writing the following in your template</p>
 
-<article>
-  
-<h1><a href="/blog/2012/03/19/appcelerator-titanium-a-nice-looking-activity-indicator-window/">Appcelerator Titanium - A Nice Looking Activity Indicator Window</a></h1>
-<time datetime="2012-03-19T13:13:00+01:00" pubdate><span class='month'>Mar</span> <span class='day'>19</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/appcelerator/'>appcelerator</a>, <a class='category' href='/blog/categories/dev/'>dev</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/mobile-dev/'>mobile dev</a>, <a class='category' href='/blog/categories/titanium/'>titanium</a></span>
-</footer>
-
-
-</article>
-
+<div>
+  <pre><code class='html'>{{#each record in content}}
+ :
+{{/each}}</code></pre>
 </div>
 
+
+<p>It is because it should be</p>
+
+<div>
+  <pre><code class='html'>{{#each record in arrangedContent}}
+ :
+{{/each}}</code></pre>
+</div>
+
+
+<p>However the very last paragraph on the above mentioned API docs page states</p>
+
+<blockquote><p>Although the sorted content can also be accessed through the arrangedContent property,
+it is preferable to use the proxied class and not the arrangedContent array directly.</p></blockquote>
+
+<p>That makes sense, but I am not sure how to do that in a template. So far it seems to work
+as needed.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Henning Glatter-Götz</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-20T22:48:42+01:00" pubdate data-updated="true">Jan 20<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/emberjs/'>emberjs</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://glatter-gotz.com/blog/2015/01/20/sorting-records-with-ember-dot-js/" data-via="hglattergotz" data-counturl="http://glatter-gotz.com/blog/2015/01/20/sorting-records-with-ember-dot-js/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/01/12/bye-bye-spideroak/" title="Previous Post: Bye Bye Spideroak">&laquo; Bye Bye Spideroak</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -213,7 +308,10 @@
       var disqus_shortname = 'hglattergotz';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://glatter-gotz.com/blog/2015/01/20/sorting-records-with-ember-dot-js/';
+        var disqus_url = 'http://glatter-gotz.com/blog/2015/01/20/sorting-records-with-ember-dot-js/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

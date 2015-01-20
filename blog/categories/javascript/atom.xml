@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-01-12T11:58:45+01:00</updated>
+  <updated>2015-01-20T23:15:34+01:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sorting records with Ember.js]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/01/20/sorting-records-with-ember-dot-js/"/>
+    <updated>2015-01-20T22:48:42+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/01/20/sorting-records-with-ember-dot-js</id>
+    <content type="html"><![CDATA[<p>Ember.js provides a few really nice features out of the box to let you sort your records
+for display purposes. In the <a href="http://emberjs.com/guides/controllers/representing-multiple-models-with-arraycontroller/">docs</a>
+there is a short paragraph about it (SORTING) that does not tell the whole story so be
+sure to click the link about the <a href="http://emberjs.com/api/classes/Ember.SortableMixin.html">Ember.SortableMixin</a>
+for some more information.</p>
+
+<!--more-->
+
+
+<p>The important detail is in the last two paragraphs:</p>
+
+<blockquote><p>SortableMixin works by sorting the arrangedContent array, which is the array that
+ArrayProxy displays. Due to the fact that the underlying 'content' array is not changed.</p></blockquote>
+
+<p>So if you changed your controller to an <strong>ArrayController</strong> and added the properties
+<strong>sortProperties</strong> and <strong>sortAscending</strong> so your controller looks like this:</p>
+
+<p><code>javascript
+App.SongsController = Ember.ArrayController.extend({
+  sortProperties: ['name', 'artist'],
+  sortAscending: true // false for descending
+});
+</code>
+and you are wondering why your content is not sorted when writing the following in your template</p>
+
+<p><div>
+  <pre><code class='html'>{{#each record in content}}
+ :
+{{/each}}</code></pre>
+</div>
+</p>
+
+<p>It is because it should be
+<div>
+  <pre><code class='html'>{{#each record in arrangedContent}}
+ :
+{{/each}}</code></pre>
+</div>
+</p>
+
+<p>However the very last paragraph on the above mentioned API docs page states</p>
+
+<blockquote><p>Although the sorted content can also be accessed through the arrangedContent property,
+it is preferable to use the proxied class and not the arrangedContent array directly.</p></blockquote>
+
+<p>That makes sense, but I am not sure how to do that in a template. So far it seems to work
+as needed.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ember.js Resources]]></title>
