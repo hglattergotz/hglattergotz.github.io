@@ -9,9 +9,7 @@
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="Ember.js provides a few really nice features out of the box to let you sort your records
-for display purposes. In the docs
-there is a short paragraph &hellip;">
+  <meta name="description" content="I have been using the */n syntax for the minute field for some time now to run a cron task every &#8220;n&#8221; minutes starting at the top of the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +75,118 @@ there is a short paragraph &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/21/how-to-run-cron-jobs-with-an-offset/">How to run cron jobs with an offset</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-21T10:07:04+01:00" pubdate data-updated="true">Feb 21<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have been using the <code>*/n</code> syntax for the minute field for some time now to run a cron task every &#8220;n&#8221; minutes starting at the top of the hour.</p>
+
+<p>What I did not realize is that</p>
+
+<pre><code>*/5
+</code></pre>
+
+<p>is actually equivalent to</p>
+
+<pre><code>0-59/5
+</code></pre>
+
+<p>which basically means: run every 5 minutes starting at the top of the hour (0).</p>
+
+<p>So if you would like to run every 5 minutes starting at 2 minutes after the hour you would simply specify</p>
+
+<pre><code>2-59/5
+</code></pre>
+
+<p>Other examples:</p>
+
+<pre><code>5-59/15 run at 5, 20, 35, 50 minutes
+
+1-59/2 run every 2 minutes starting at 1 minute after the hour
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/28/why-you-should-take-a-look-at-ember-again/">Why you should take a look at Ember (again)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-28T08:36:24+01:00" pubdate data-updated="true">Jan 28<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last week I gave a talk at the <a href="http://frankfurtjs.org">FrankfurtJS</a> Meetup on this topic and
+it generated quite a bit of interest. The motivation behind it was actually quite selfish, I needed
+a bit of pressure to dive into Ember.js a bit more and what better way to do that than to try
+and explain it to a room full of people?</p>
+
+<p>By now most front-end developers have certainly heard of Ember.js and many have even given it a try.
+So how could I combine an introduction with a bit more current info on the framework? Well,
+there have been significant changes in the past 6 months that in my opinion warrant another look
+at the framework even if you have evaluated it thoroughly before.</p>
+
+<script async class="speakerdeck-embed" data-id="3d3f1dc0851801328fc62e7b8af14da2" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/01/28/why-you-should-take-a-look-at-ember-again/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -452,96 +562,6 @@ the time might be right. Ember.js looks extremely promising and interesting.</li
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table/">./symfony doctrine:build-schema for a Single Table</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-16T06:52:00+02:00" pubdate data-updated="true">Jul 16<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The built-in command line tasks in symfony 1.4 (yes, I am still stuck on 1.4)
-are very handy for quickly performing all sorts of project related tasks.
-Doctrines own command line tasks are exposed through the symfony CLI in the
-<em>doctrine</em> namespace.
-I use the <code>doctrine:build-schema</code> task, which generates a yml schema for an
-existing database, all the time. This allows one to very rapidly build models
-from and for an existing database.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/16/symfony-doctrine-build-schema-for-a-single-table/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/10/php-the-right-way/">PHP: The Right Way</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-10T11:12:00+02:00" pubdate data-updated="true">Jul 10<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today I discovered an interesting new project called <a href="http://www.phptherightway.com/">&#8220;PHP: The Right Way&#8221;</a>. It is an open source project maintained by <a href="https://twitter.com/codeguy">Josh Lockhart</a> attempting to provide a well rounded set of best practices for developing in PHP.</p>
-
-<p>While I have not yet attempted to contribute any content I have added the banner to my personal blog to show my support. If you are interested it adding a &#8220;PHP: The Right Way&#8221; banner to the side bar of your <a href="http://octopress.org">Octopress</a> blog, here is how. Allthough, if you are using octopress you probably don&#8217;t need help with this ;-).</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/07/10/php-the-right-way/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -564,6 +584,14 @@ from and for an existing database.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/02/21/how-to-run-cron-jobs-with-an-offset/">How to run cron jobs with an offset</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/01/28/why-you-should-take-a-look-at-ember-again/">Why you should take a look at Ember (again)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/01/20/sorting-records-with-ember-dot-js/">Sorting records with Ember.js</a>
       </li>
     
@@ -573,14 +601,6 @@ from and for an existing database.</p>
     
       <li class="post">
         <a href="/blog/2015/01/05/ember-dot-js-resources/">Ember.js Resources</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/24/express-generator-on-osx-slash-homebrew-node-install/">express-generator on OSX/homebrew node install</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/09/php-composer-working-with-local-repositories/">PHP Composer: Working with local repositories</a>
       </li>
     
   </ul>

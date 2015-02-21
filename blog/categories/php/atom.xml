@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-01-20T23:15:34+01:00</updated>
+  <updated>2015-02-21T10:23:02+01:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to run cron jobs with an offset]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/02/21/how-to-run-cron-jobs-with-an-offset/"/>
+    <updated>2015-02-21T10:07:04+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/02/21/how-to-run-cron-jobs-with-an-offset</id>
+    <content type="html"><![CDATA[<p>I have been using the <code>*/n</code> syntax for the minute field for some time now to run a cron task every "n" minutes starting at the top of the hour.</p>
+
+<p>What I did not realize is that</p>
+
+<pre><code>*/5
+</code></pre>
+
+<p>is actually equivalent to</p>
+
+<pre><code>0-59/5
+</code></pre>
+
+<p>which basically means: run every 5 minutes starting at the top of the hour (0).</p>
+
+<p>So if you would like to run every 5 minutes starting at 2 minutes after the hour you would simply specify</p>
+
+<pre><code>2-59/5
+</code></pre>
+
+<p>Other examples:</p>
+
+<pre><code>5-59/15 run at 5, 20, 35, 50 minutes
+
+1-59/2 run every 2 minutes starting at 1 minute after the hour
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHP Composer: Working with local repositories]]></title>
@@ -654,41 +687,6 @@ You can get the lib <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOA
 </span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 As I learn more about the ExactTarget SOAP API and SOAP itself I will be posting my findings and expanding the library on github.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ExactTarget SOAP Upsert with PHP]]></title>
-    <link href="http://glatter-gotz.com/blog/2011/10/31/exacttarget-soap-upsert-with-php/"/>
-    <updated>2011-10-31T00:00:00+01:00</updated>
-    <id>http://glatter-gotz.com/blog/2011/10/31/exacttarget-soap-upsert-with-php</id>
-    <content type="html"><![CDATA[<p>There is quite a bit of documentation for the ExactTarget SOAP API that includes lots of code samples. But unfortunately the PHP code samples are not quite as plentiful as the .NET and Java ones.
-After lots of searching and lot of trial and error I finally got my upsert working. An upsert is a SOAP method in the ExactTarget SOAP API that will either update or insert a record depending on whether it is already present or not.</p>
-
-<!--more-->
-
-
-<p>``` php
-&lt;?php
-$uo = new ExactTarget_UpdateOptions();
-$uo->SaveOptions = array();</p>
-
-<p>$so = new ExactTarget_SaveOption();
-$so->PropertyName = 'DataExtensionObject';
-$so->SaveAction = ExactTarget_SaveAction::UpdateAdd;</p>
-
-<p>$uo->SaveOptions[] = $so;
-$uoSo = ETCore::toSoapVar($uo, 'UpdateOptions');</p>
-
-<p>$request = new ExactTarget_UpdateRequest();
-$request->Options = $uoSo;
-$request->Objects = array($deoSo);
-$result = $soapClient->Update($request);
-```</p>
-
-<p>Where <em>$deoSo</em> is a DataExtension Object that has been converted to a SoapVar and <em>$soapClient</em> is an ExactTarget soap client instance. The way you get the upsert behavior is to set the saveaction to <em>ExactTarget_SaveAction::UpdateAdd</em>.</p>
-
-<p>If you are looking for a minimal wrapper library that includes the above method take a look at <a href="https://github.com/hglattergotz/ExactTarget-PHP-SOAP-API">this library on gitub</a>. This library gleans quite a few things from the Doctrine ORM, so if you are familiar with that you should feel right at home.</p>
 ]]></content>
   </entry>
   
