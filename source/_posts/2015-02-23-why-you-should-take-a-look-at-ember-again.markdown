@@ -3,8 +3,7 @@ layout: post
 title: "Why you should take a look at Ember (again)"
 date: 2015-02-23 08:36:24 +0100
 comments: true
-categories: 
-published: false
+categories: [ ember, javascript, front-end, framework ]
 ---
 In January 2015 I gave a talk at the [FrankfurtJS](http://frankfurtjs.org) Meetup on this topic and it generated quite a bit of interest. The motivation behind it was actually quite selfish, I needed a bit of pressure to dive into Ember.js a bit more and what better way to do that than to try and explain it to a room full of people?
 
