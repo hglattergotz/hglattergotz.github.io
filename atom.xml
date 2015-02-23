@@ -4,7 +4,7 @@
   <title><![CDATA[henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-02-23T14:04:44+01:00</updated>
+  <updated>2015-02-23T14:16:14+01:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -115,7 +115,7 @@ The meetings are all recorded and core team members speak there on a regular bas
 
 <h4>ember-cli</h4>
 
-<p>In my opinion <a href="http://www.ember-cli.com/">ember-cli</a> is probably one of the most significant improvements to come out in the last 6-12 months. What I mean by that is that it is a huge factor in reducing the barrier of entry to ember. The reason for this is that it eliminates an number of complicated tasks required for getting an Ember.js production app going and lets you get right to it. Not only does it take care of the entire build process, but it also provides an application skeleton, a dev server, a watcher to rebuild your app, auto-reload in the browser, ES6 modules and a proxy to allow you to make calls to your backend.</p>
+<p>In my opinion <a href="http://www.ember-cli.com/">ember-cli</a> is probably one of the most significant improvements to come out in the last 6-12 months. What I mean by that is that it is a huge factor in reducing the barrier of entry to Ember.js. The reason for this is that it eliminates an number of complicated tasks required for getting an Ember.js production app going and lets you get right to it. Not only does it take care of the entire build process, but it also provides an application skeleton, a dev server, a watcher to rebuild your app, auto-reload in the browser, ES6 modules and a proxy to allow you to make calls to your backend.</p>
 
 <p>If you are starting a new app, use ember-cli, period.</p>
 
