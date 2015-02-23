@@ -4,7 +4,7 @@
   <title><![CDATA[henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-02-23T13:59:45+01:00</updated>
+  <updated>2015-02-23T14:04:44+01:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -38,7 +38,7 @@
 
 <blockquote><p>A framework for creating ambitious web applications</p></blockquote>
 
-<p>What does that mean? Because Ember.js is highly opinionated (and proud of it) it allows for larger teams to be very productive with it. This comes from its stand on &#8220;Convention over Configuration&#8221;, which basically means &#8220;The Ember way or the highway&#8221;, but it also means that once you get over the admittedly steep learning curve you will be able to focus on building your application and not worrying about the mundane small stuff like where to put your files and how to name things.</p>
+<p>What does that mean? Because Ember.js is highly opinionated (and proud of it) it allows for larger teams to be very productive with it. This comes from its stand on &#8220;Convention over Configuration&#8221;, which basically means &#8220;The Ember way or the highway&#8221;, but it also means that once you get over the admittedly steep learning curve you will be able to focus on building your application and won&#8217;t be worrying about the mundane small stuff like where to put your files and how to name things.</p>
 
 <p>Yehuda Kats gave a really good talk at <a href="http://www.confreaks.com/videos/3337-railsconf-keynote-10-years">RailsConf</a> about the concept of &#8220;Cognitive Depletion&#8221;. In a nutshell it means that the human brain only has a limited amount of cycles per day to make decisions and after that limit is reached you become fatigued and in turn less productive. He does a really good job of explaining this and even backs it up with scientific studies on this subject.</p>
 
