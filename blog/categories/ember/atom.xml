@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ember | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/ember/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-02-23T11:20:43+01:00</updated>
+  <updated>2015-02-23T11:22:30+01:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,138 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why you should take a look at Ember (again)]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/02/23/why-you-should-take-a-look-at-ember-again/"/>
+    <updated>2015-02-23T08:36:24+01:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/02/23/why-you-should-take-a-look-at-ember-again</id>
+    <content type="html"><![CDATA[<p>In January 2015 I gave a talk at the <a href="http://frankfurtjs.org">FrankfurtJS</a> Meetup on this topic and it generated quite a bit of interest. The motivation behind it was actually quite selfish, I needed a bit of pressure to dive into Ember.js a bit more and what better way to do that than to try and explain it to a room full of people?</p>
+
+<p>By now most front-end developers have certainly heard of Ember.js and many have even given it a try. I therefore tried to combine an introduction with a bit of current information on the framework as well as the Community around Ember.js? There have been significant changes in the past 6 months that in my opinion warrant another look at the framework even if you have evaluated it thoroughly before.</p>
+
+<script async class="speakerdeck-embed" data-id="3d3f1dc0851801328fc62e7b8af14da2" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<!--more-->
+
+
+<p>Following is a brief summary of the talk and a list of all the resources that were discussed. The demo application that was written as part of the live coding session will be discussed in a separate post. If you want to take a look at the code you can do so for the <a href="https://github.com/hglattergotz/node-twitter-example">backend</a> and the <a href="https://github.com/hglattergotz/ember-twitter-demo">Ember application</a> itself.</p>
+
+<h2>What is Ember.js?</h2>
+
+<p>Taken straight from the official website:</p>
+
+<blockquote><p>A framework for creating ambitious web applications</p></blockquote>
+
+<p>What does that mean? Because Ember.js is highly opinionated (and proud of it) it allows for larger teams to be very productive with it. This comes from its stand on "Convention over Configuration", which basically means "The Ember way or the highway", but it also means that once you get over the admittedly steep learning curve you will be able to focus on building your application and not worrying about the mundane small stuff like where to put your files and how to name things.</p>
+
+<p>Yehuda Kats gave a really good talk at <a href="http://www.confreaks.com/videos/3337-railsconf-keynote-10-years">RailsConf</a> about the concept of "Cognitive Depletion". In a nutshell it means that the human brain only has a limited amount of cycles per day to make decisions and after that limit is reached you become fatigued and in turn less productive. He does a really good job of explaining this and even backs it up with scientific studies on this subject.</p>
+
+<p>The strong conventions that Ember.js and <a href="http://ember-cli.com">ember-cli</a> enforce also result in a project structure that lets new team members become familiar with a project very quickly.</p>
+
+<p>And lastly <em>Ember.js is optimized for developer happiness.</em> Maybe this sounds cheesy, but this is what got my attention about Ember.js in the first place. In a talk or podcast that Tom Dale and Yehuda Kats were on they talked about their mission to create a framework that makes and keeps developers happy to do their job. This is a hard one to explain because it really has to do with every aspect of Ember.js and its community but once it clicks you will know what I mean.</p>
+
+<h2>Who is behind Ember.js?</h2>
+
+<p>Yehuda Kats and Tom Dale are the two guys that started it, but as of January 2015 there are <a href="http://emberjs.com/team/">9 other core team members</a> from a variety of companies and places around the world. And of course there are many community members that are contributers to Ember.js in a variety of ways.</p>
+
+<h2>The Community</h2>
+
+<p>The Javascript community in general seems to be made up of a bunch of friendly enthusiastic people, but the Ember.js community in particular is extremely helpful and welcoming.</p>
+
+<h4>IRC</h4>
+
+<p>On the #emberjs IRC channel I have never seen comments like "RTFM" or the likes. In fact, in the <a href="https://www.youtube.com/watch?v=pON2erqemDY">opening keynote</a> at <a href="http://emberconf.com/">EmberConf 2014</a> Tom and Yehuda spent considerable time on explaining the code of conduct for the Ember community and what it means to make people feel welcome. From my experience it shows.</p>
+
+<h4>Questions &amp; Discussions</h4>
+
+<p><a href="http://stackoverflow.com/questions/tagged/ember.js">Stackoverflow</a> is of course a great place to ask questions, I have <a href="http://www.alfredapp.com/">Alfred</a> configured to look there for my programming questions.
+For more involved discussions check out the <a href="http://discuss.emberjs.com/">discussion forum</a> hosted on Discourse, which coincidentally is one of the first Ember.js apps to appear in the wild, and its <a href="https://github.com/discourse/discourse">open source</a>!</p>
+
+<h4>Conferences</h4>
+
+<p>There are at this point in time two Ember.js conferences. One is in the US - <a href="http://emberconf.com">EmberConf</a> - and the other is in Europe - <a href="https://emberfest.eu/">Ember Fest</a>.</p>
+
+<h4>Meetups</h4>
+
+<p>If you are fortunate enough to have an Ember.js meetup near you - GO! A list of the currently active meetups can be found <a href="http://emberjs.com/community/meetups/">here</a>.</p>
+
+<h2>Useful Resources</h2>
+
+<h4>Website</h4>
+
+<p>Probably the best place to start is the <a href="http://emberjs.com">Ember.js website</a>. It has excellent documentation and tons of current examples. You will also find information about the current releases as well as upcoming releases.</p>
+
+<h4>Newsletter</h4>
+
+<p>I find that the newsletter <a href="http://emberweekly.com">emberweekly.com</a> is a great resource for staying on top of what is going on in ember land. It lists the developments of Ember.js as well as related projects and provides links to videos, blog posts and upcoming events.</p>
+
+<h4>Podcasts</h4>
+
+<p>I get a lot of information from podcasts. They are a great source of current information directly from the people close to various projects and technologies.</p>
+
+<p>Some of the more interesting ones for Ember.js developers:</p>
+
+<ul>
+<li><a href="http://www.ember.land/"><strong>Ember Land</strong></a> is a brand new podcast dedicated to Ember.js</li>
+<li><a href="http://devchat.tv/js-jabber/"><strong>Javascript Jabber</strong></a>
+There are some episodes dedicated to Ember.js. <a href="http://devchat.tv/js-jabber/121-jsj-broccoli-js-with-jo-liss">121</a>, <a href="http://devchat.tv/js-jabber/112-jsj-refactoring-javascript-apps-into-a-framework-with-brandon-hays">112</a>, <a href="http://devchat.tv/js-jabber/111-jsj-the-ember-js-project-with-erik-bryn">111</a></li>
+<li><a href="https://frontsidethepodcast.simplecast.fm"><strong>Frontside the Podcast</strong></a>
+This is a fairly Ember.js centric podcast since the hosts are Ember.js consultants (well, they do most of their work in Ember.js).</li>
+<li><a href="http://thechangelog.com/"><strong>The Changelog</strong></a>
+Episode <a href="http://thechangelog.com/131/">131</a> is an interview with Tom Dale and Yehuda Katz</li>
+<li><a href="http://descriptive.audio/"><strong>Descriptive</strong></a>
+Episode <a href="http://descriptive.audio/episodes/2">2</a> is a really interesting discussion about refactoring to Ember.js</li>
+</ul>
+
+
+<h4>Videos</h4>
+
+<ul>
+<li>The Ember.js <a href="https://www.youtube.com/user/EmberNYC">Meetup in NYC</a> is probably one of the most professional I have found.
+The meetings are all recorded and core team members speak there on a regular basis.</li>
+<li>EmberConf 2014 has a <a href="https://www.youtube.com/playlist?list=PLE7tQUdRKcyaOyfBnAndJxQ9PNVmKva0d">playlist on YouTube</a></li>
+<li>Ember London has a good <a href="https://vimeo.com/emberlondon/videos">collection</a> of videos</li>
+<li>EmberFest 2014 has published a <a href="https://www.youtube.com/playlist?list=PLN4SpDLOSVkSbGTLohVaYGDB8hxWxGPBA">playlist on YouTube</a></li>
+</ul>
+
+
+<h2>Tools</h2>
+
+<h4>ember-cli</h4>
+
+<p>In my opinion <a href="http://www.ember-cli.com/">ember-cli</a> is probably one of the most significant improvements to come out in the last 6-12 months. What I mean by that is that it is a huge factor in reducing the barrier of entry to ember. The reason for this is that it eliminates an number of complicated tasks required for getting an Ember.js production app going and lets you get right to it. Not only does it take care of the entire build process, but it also provides an application skeleton, a dev server, a watcher to rebuild your app, auto-reload in the browser, ES6 modules and a proxy to allow you to make calls to your backend.</p>
+
+<p>If you are starting a new app, use ember-cli, period.</p>
+
+<h4>Ember Inspector</h4>
+
+<p>There is a handy tool called the Ember Inspector for both Chrome and Firefox that provides insights into your Ember.js application, that not only helps with debugging but provides a visual representation of many of the applications components.</p>
+
+<h2>Noteworthy features</h2>
+
+<h4>Ember Data</h4>
+
+<p>Ember data will allow you to talk to your backend API with very little effort IF it follows the conventions that Ember Data expects. So, if you are on a green field project where you are building your own API or if you have control of the API you are in luck.  But even if you have to use an existing API it might be possible to write custom serializers and still take advantage of Ember Data. In any case it is worth a look! It is very close to 1.0.0.</p>
+
+<h4>Components</h4>
+
+<p><a href="http://emberjs.com/guides/components/">Ember components</a> are trying to adhere to the official Web Components Specification as closely as possible with the intention to allow for a painless migration of the Ember Components to the W3C standard components that can then be used in other frameworks as well.</p>
+
+<h4>Fastboot</h4>
+
+<p>There is currently an effort under way to implement a feature called <a href="http://emberjs.com/blog/2015/01/08/inside-fastboot-faking-the-dom-in-node.html">Fastboot</a>, which aims to provide server side rendering of the initial page. This effort will provide the ability load HTML and CSS immediately with the Javascript downloading in the background to provide fast initial page loads.</p>
+
+<h4>Maintainability</h4>
+
+<p>The Ember.js project has adopted a six week release cycle very similar to the process that Google Chrome uses.  This provides a clear and predictable path forward with small incremental changes that make it manageable to keep your applications up to date with the most current framework release.  Because the changes are small-isch it is not as time consuming to move from one release to the next and does not require full rewrites.</p>
+
+<h2>Live Coding Demo</h2>
+
+<p>The demo application will be discussed in one or more future posts. It consists of a node.js <a href="https://github.com/hglattergotz/node-twitter-example">backend</a> and the actual <a href="https://github.com/hglattergotz/ember-twitter-demo">Ember.js frontend application</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ember.js Resources]]></title>
