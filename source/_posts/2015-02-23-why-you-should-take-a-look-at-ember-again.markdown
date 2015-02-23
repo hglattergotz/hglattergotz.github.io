@@ -7,7 +7,9 @@ categories: [ ember, javascript, front-end, framework ]
 ---
 In January 2015 I gave a talk at the [FrankfurtJS](http://frankfurtjs.org) Meetup on this topic and it generated quite a bit of interest. The motivation behind it was actually quite selfish, I needed a bit of pressure to dive into Ember.js a bit more and what better way to do that than to try and explain it to a room full of people?
 
-By now most front-end developers have certainly heard of Ember.js and many have even given it a try. I therefore tried to combine an introduction with a bit of current information on the framework as well as the Community around Ember.js? There have been significant changes in the past 6 months that in my opinion warrant another look at the framework even if you have evaluated it thoroughly before.
+By now most front-end developers have certainly heard of Ember.js and many have even given it a try. I therefore tried to combine an introduction with a bit of current information on the framework as well as the Community around Ember.js.
+
+There have been significant changes in the past 6 months that in my opinion warrant another look at the framework even if you have evaluated it thoroughly before.
 
 <script async class="speakerdeck-embed" data-id="3d3f1dc0851801328fc62e7b8af14da2" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 <!--more-->
