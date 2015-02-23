@@ -22,7 +22,7 @@ Taken straight from the official website:
 
 >A framework for creating ambitious web applications
 
-What does that mean? Because Ember.js is highly opinionated (and proud of it) it allows for larger teams to be very productive with it. This comes from its stand on "Convention over Configuration", which basically means "The Ember way or the highway", but it also means that once you get over the admittedly steep learning curve you will be able to focus on building your application and not worrying about the mundane small stuff like where to put your files and how to name things.
+What does that mean? Because Ember.js is highly opinionated (and proud of it) it allows for larger teams to be very productive with it. This comes from its stand on "Convention over Configuration", which basically means "The Ember way or the highway", but it also means that once you get over the admittedly steep learning curve you will be able to focus on building your application and won't be worrying about the mundane small stuff like where to put your files and how to name things.
 
 Yehuda Kats gave a really good talk at [RailsConf](http://www.confreaks.com/videos/3337-railsconf-keynote-10-years) about the concept of "Cognitive Depletion". In a nutshell it means that the human brain only has a limited amount of cycles per day to make decisions and after that limit is reached you become fatigued and in turn less productive. He does a really good job of explaining this and even backs it up with scientific studies on this subject.
 
@@ -93,7 +93,7 @@ Some of the more interesting ones for Ember.js developers:
 
 ####ember-cli
 
-In my opinion [ember-cli](http://www.ember-cli.com/) is probably one of the most significant improvements to come out in the last 6-12 months. What I mean by that is that it is a huge factor in reducing the barrier of entry to ember. The reason for this is that it eliminates an number of complicated tasks required for getting an Ember.js production app going and lets you get right to it. Not only does it take care of the entire build process, but it also provides an application skeleton, a dev server, a watcher to rebuild your app, auto-reload in the browser, ES6 modules and a proxy to allow you to make calls to your backend.
+In my opinion [ember-cli](http://www.ember-cli.com/) is probably one of the most significant improvements to come out in the last 6-12 months. What I mean by that is that it is a huge factor in reducing the barrier of entry to Ember.js. The reason for this is that it eliminates an number of complicated tasks required for getting an Ember.js production app going and lets you get right to it. Not only does it take care of the entire build process, but it also provides an application skeleton, a dev server, a watcher to rebuild your app, auto-reload in the browser, ES6 modules and a proxy to allow you to make calls to your backend.
 
 If you are starting a new app, use ember-cli, period.
 
