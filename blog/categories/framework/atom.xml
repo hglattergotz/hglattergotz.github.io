@@ -4,7 +4,7 @@
   <title><![CDATA[Category: framework | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/framework/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-03-16T15:09:40+01:00</updated>
+  <updated>2015-03-23T16:59:02+01:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -144,7 +144,7 @@ The meetings are all recorded and core team members speak there on a regular bas
 
 <h2>Live Coding Demo</h2>
 
-<p>The demo application will be discussed in one or more future posts. It consists of a node.js <a href="https://github.com/hglattergotz/node-twitter-example">backend</a> and the actual <a href="https://github.com/hglattergotz/ember-twitter-demo">Ember.js frontend application</a>.</p>
+<p>The demo application will be discussed in one or more future posts. It consists of a <a href="https://github.com/hglattergotz/node-twitter-example">node.js backend</a> and the actual <a href="https://github.com/hglattergotz/ember-twitter-demo">Ember.js frontend application</a>.</p>
 ]]></content>
   </entry>
   
