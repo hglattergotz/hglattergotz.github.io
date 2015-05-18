@@ -5,6 +5,8 @@ date: 2015-02-23 08:36:24 +0100
 comments: true
 categories: [ ember, javascript, front-end, framework ]
 ---
+> Update: The video from this talk given at [KarlsruheJS](http://karlsruhejs.org/post/113364758894/polymer-emberjs-tabrisjs) is now available [here](http://bit.ly/ember-video).
+
 In January 2015 I gave a talk at the [FrankfurtJS](http://frankfurtjs.org) Meetup on this topic and it generated quite a bit of interest. The motivation behind it was actually quite selfish, I needed a bit of pressure to dive into Ember.js a bit more and what better way to do that than to try and explain it to a room full of people?
 
 By now most front-end developers have certainly heard of Ember.js and many have even given it a try. I therefore tried to combine an introduction with a bit of current information on the framework as well as the Community around Ember.js.
@@ -32,7 +34,7 @@ And lastly *Ember.js is optimized for developer happiness.* Maybe this sounds ch
 
 ##Who is behind Ember.js?
 
-Yehuda Kats and Tom Dale are the two guys that started it, but as of January 2015 there are [9 other core team members](http://emberjs.com/team/) from a variety of companies and places around the world. And of course there are many community members that are contributers to Ember.js in a variety of ways.
+Yehuda Kats and Tom Dale are the two guys that started it, but as of March 2015 there are [11 other core team members](http://emberjs.com/team/) from a variety of companies and places around the world. And of course there are many community members that are contributers to Ember.js in a variety of ways.
 
 ##The Community
 
@@ -85,6 +87,7 @@ Some of the more interesting ones for Ember.js developers:
 
 * The Ember.js [Meetup in NYC](https://www.youtube.com/user/EmberNYC) is probably one of the most professional I have found.
   The meetings are all recorded and core team members speak there on a regular basis.
+* EmberConf 2015 has a [playlist on YouTube](https://www.youtube.com/playlist?list=PLE7tQUdRKcyacwiUPs0CjPYt6tJub4xXU)
 * EmberConf 2014 has a [playlist on YouTube](https://www.youtube.com/playlist?list=PLE7tQUdRKcyaOyfBnAndJxQ9PNVmKva0d)
 * Ember London has a good [collection](https://vimeo.com/emberlondon/videos) of videos
 * EmberFest 2014 has published a [playlist on YouTube](https://www.youtube.com/playlist?list=PLN4SpDLOSVkSbGTLohVaYGDB8hxWxGPBA)
@@ -121,5 +124,5 @@ The Ember.js project has adopted a six week release cycle very similar to the pr
 
 ##Live Coding Demo
 
-The demo application will be discussed in one or more future posts. It consists of a node.js [backend](https://github.com/hglattergotz/node-twitter-example) and the actual [Ember.js frontend application](https://github.com/hglattergotz/ember-twitter-demo).
+The demo application will be discussed in one or more future posts. It consists of a [node.js backend](https://github.com/hglattergotz/node-twitter-example) and the actual [Ember.js frontend application](https://github.com/hglattergotz/ember-twitter-demo).
 

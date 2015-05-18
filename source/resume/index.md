@@ -1,12 +1,3 @@
----
-layout: page
-title: "Resume"
-date: 2015-01-01 08:00
-comments: false
-sharing: true
-footer: false
----
-
 # Henning Glatter-Götz
 [henning@glatter-gotz.com](mailto:henning@glatter-gotz.com)  
 [glatter-gotz.com](http://glatter-gotz.com)  
