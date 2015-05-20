@@ -4,7 +4,7 @@
   <title><![CDATA[henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-05-18T11:50:54+02:00</updated>
+  <updated>2015-05-20T12:29:28+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Setting the Symfony2 default environment]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/"/>
+    <updated>2015-05-20T12:13:22+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment</id>
+    <content type="html"><![CDATA[<p>In my quest to type less because I am getting lazy I am trying to automate as much as I can.
+Something that is a bit tiresome in Symfony2 is to have to specify the <code>--env</code> flag for each run on the command-line if you do not wish to run in the default built-in <code>dev</code> environment.</p>
+
+<!--more-->
+
+
+<p>Turns out there is an extremely simple way to override this:</p>
+
+<p>In your <code>~/.profile</code> (or <code>~/.bash_profile</code>) simply add</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">SYMFONY_ENV</span><span class="o">=</span>prod
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Any console command in your Symfony2 project will now run with &#8211;env=prod if you omit the flag.</p>
+
+<p>Another useful thing to put in your <code>~/.profile</code> is an alias for the app/console portion of your console command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Symfony2 aliases</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">sf</span><span class="o">=</span><span class="s1">&#39;app/console&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, instead of having to type</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>app/console namespace:command
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>you can simply type</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sf namespace:command
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why you should take a look at Ember (again)]]></title>
@@ -1789,106 +1836,6 @@ There are two things that need to happen to make this work:</p>
 So if for example your frontend application is called <em>frontend</em> and the task you are running needs to have <em>&#8211;application=backend</em>, then you need to switch it back to <em>frontend</em> once the task is done otherwise your application will most likely encounter a fatal error such as</p>
 
 <blockquote><p>The template &#8220;myTemplate.php&#8221; does not exist or is unreadable in &#8220;&#8221;</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Looping Through Dates in a Bash Script on OSX]]></title>
-    <link href="http://glatter-gotz.com/blog/2011/02/19/looping-through-dates-in-a-bash-script-on-osx/"/>
-    <updated>2011-02-19T00:00:00+01:00</updated>
-    <id>http://glatter-gotz.com/blog/2011/02/19/looping-through-dates-in-a-bash-script-on-osx</id>
-    <content type="html"><![CDATA[<p>A little while ago I came across a problem in PHP where I had to process large amounts of data from Google Analytics. If I choose a date range that was too large, PHP would run out of memory. I was not able to resolve the memory leak issue caused by parsing very large XML documents so I settled on writing a shell script that would process the data one day at a time by essentially calling the PHP script over and over instead of having it process all data during a single run. I got as far as confirming that this was not a case of simply not having enough memory to do the job, rather there appeared to be a memory leak in a library that I used to process the GA data.<!--more-->
-Anyway, that memory leak issue is a problem that still needs to be solved, but I did not have the necessary time when I needed this to work and that is not the topic here anyway.</p>
-
-<p>The bash script loops from a start date to an end date, incrementing one day at a time and calls the PHP script on each iteration, passing the date to the script as a parameter.</p>
-
-<p>On Linux it was not a big deal to get it to work:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'><span class="nv">currentdate</span><span class="o">=</span><span class="nv">$1</span>
-</span><span class='line'><span class="nv">loopenddate</span><span class="o">=</span><span class="k">$(</span>/bin/date --date <span class="s2">&quot;$2 1 day&quot;</span> +%Y-%m-%d<span class="k">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">until</span> <span class="o">[</span> <span class="s2">&quot;$currentdate&quot;</span> <span class="o">==</span> <span class="s2">&quot;$loopenddate&quot;</span> <span class="o">]</span>
-</span><span class='line'><span class="k">do</span>
-</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="nv">$currentdate</span>
-</span><span class='line'>  <span class="nv">currentdate</span><span class="o">=</span><span class="k">$(</span>/bin/date --date <span class="s2">&quot;$currentdate 1 day&quot;</span> +%Y-%m-%d<span class="k">)</span>
-</span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now execute the script, assuming you created a file called dateloop.sh and assigned it execute permissions:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>./dateloop.sh 2011-01-01 2011-01-05
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And you should get this</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>2011-01-01
-</span><span class='line'>2011-01-02
-</span><span class='line'>2011-01-03
-</span><span class='line'>2011-01-04
-</span><span class='line'>2011-01-05
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>On OSX it is not quite as straight forward (to me), because the date command does not support the <em>&#45;&#45;date</em> option. Here you have to jump through a few hoops to get it to work. I was able to figure this out with the help of <a href="http://stackoverflow.com/users/207248/siegex">SiegeX</a> on <a href="http://stackoverflow.com/questions/4434782/loop-from-start-date-to-end-date-in-mac-os-x-shell-script">stackoverflow.com</a>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'><span class="nv">currentDateTs</span><span class="o">=</span><span class="k">$(</span>date -j -f <span class="s2">&quot;%Y-%m-%d&quot;</span> <span class="nv">$1</span> <span class="s2">&quot;+%s&quot;</span><span class="k">)</span>
-</span><span class='line'><span class="nv">endDateTs</span><span class="o">=</span><span class="k">$(</span>date -j -f <span class="s2">&quot;%Y-%m-%d&quot;</span> <span class="nv">$2</span> <span class="s2">&quot;+%s&quot;</span><span class="k">)</span>
-</span><span class='line'><span class="nv">offset</span><span class="o">=</span>86400
-</span><span class='line'>
-</span><span class='line'><span class="k">while</span> <span class="o">[</span> <span class="s2">&quot;$currentDateTs&quot;</span> -le <span class="s2">&quot;$endDateTs&quot;</span> <span class="o">]</span>
-</span><span class='line'><span class="k">do</span>
-</span><span class='line'><span class="k">  </span><span class="nv">date</span><span class="o">=</span><span class="k">$(</span>date -j -f <span class="s2">&quot;%s&quot;</span> <span class="nv">$currentDateTs</span> <span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
-</span><span class='line'>  <span class="nb">echo</span> <span class="nv">$date</span>
-</span><span class='line'>  <span class="nv">currentDateTs</span><span class="o">=</span><span class="k">$((</span><span class="nv">$currentDateTs</span><span class="o">+</span><span class="nv">$offset</span><span class="k">))</span>
-</span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The solution here was to convert both the start and end dates to seconds (epoch) using</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>date -j -f <span class="s2">&quot;%Y-%m-%d&quot;</span> <span class="nv">$1</span> <span class="s2">&quot;+%s&quot;</span> // Lines 2 and 3 above
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and then add the number of seconds for a day (86400) and convert it back to the format I wanted</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>date -j -f <span class="s2">&quot;%s&quot;</span> <span class="nv">$currentDateTs</span> <span class="s2">&quot;+%Y-%m-%d&quot;</span> // line 8 above
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Not that hard after all, as with everything else, once you understand it.</p>
 ]]></content>
   </entry>
   

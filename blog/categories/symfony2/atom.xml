@@ -4,7 +4,7 @@
   <title><![CDATA[Category: symfony2 | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/symfony2/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-05-18T11:50:54+02:00</updated>
+  <updated>2015-05-20T12:29:28+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Setting the Symfony2 default environment]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/"/>
+    <updated>2015-05-20T12:13:22+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment</id>
+    <content type="html"><![CDATA[<p>In my quest to type less because I am getting lazy I am trying to automate as much as I can.
+Something that is a bit tiresome in Symfony2 is to have to specify the <code>--env</code> flag for each run on the command-line if you do not wish to run in the default built-in <code>dev</code> environment.</p>
+
+<!--more-->
+
+
+<p>Turns out there is an extremely simple way to override this:</p>
+
+<p>In your <code>~/.profile</code> (or <code>~/.bash_profile</code>) simply add</p>
+
+<p><code>bash
+export SYMFONY_ENV=prod
+</code></p>
+
+<p>Any console command in your Symfony2 project will now run with --env=prod if you omit the flag.</p>
+
+<p>Another useful thing to put in your <code>~/.profile</code> is an alias for the app/console portion of your console command:</p>
+
+<p>```bash</p>
+
+<h1>Symfony2 aliases</h1>
+
+<p>alias sf='app/console'
+```</p>
+
+<p>Now, instead of having to type</p>
+
+<p><code>bash
+$ app/console namespace:command
+</code></p>
+
+<p>you can simply type</p>
+
+<p><code>bash
+$ sf namespace:command
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Things I would like to learn in 2013]]></title>

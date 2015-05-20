@@ -9,7 +9,7 @@
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="I recently made the switch from the dark side and wonder almost daily why I did not get a Mac years ago. Getting this new device meant learning a &hellip;">
+  <meta name="description" content="A little while ago I came across a problem in PHP where I had to process large amounts of data from Google Analytics. If I choose a date range that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +75,45 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/02/19/looping-through-dates-in-a-bash-script-on-osx/">Looping Through Dates in a Bash Script on OSX</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-19T00:00:00+01:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A little while ago I came across a problem in PHP where I had to process large amounts of data from Google Analytics. If I choose a date range that was too large, PHP would run out of memory. I was not able to resolve the memory leak issue caused by parsing very large XML documents so I settled on writing a shell script that would process the data one day at a time by essentially calling the PHP script over and over instead of having it process all data during a single run. I got as far as confirming that this was not a case of simply not having enough memory to do the job, rather there appeared to be a memory leak in a library that I used to process the GA data.</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/02/19/looping-through-dates-in-a-bash-script-on-osx/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -223,6 +262,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/20/setting-the-symfony2-default-environment/">Setting the Symfony2 default environment</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/02/23/why-you-should-take-a-look-at-ember-again/">Why you should take a look at Ember (again)</a>
       </li>
     
@@ -236,10 +279,6 @@
     
       <li class="post">
         <a href="/blog/2015/01/12/bye-bye-spideroak/">Bye Bye Spideroak</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/05/ember-dot-js-resources/">Ember.js Resources</a>
       </li>
     
   </ul>

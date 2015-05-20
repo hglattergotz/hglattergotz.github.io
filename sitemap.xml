@@ -117,16 +117,22 @@
         <lastmod>2015-05-18T11:34:04+02:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/
+        </loc>
+        <lastmod>2015-05-20T12:24:36+02:00</lastmod>
+    </url>
+    <url>
         <loc>http://glatter-gotz.com/about/</loc>
         <lastmod>2014-12-21T09:02:33+01:00</lastmod>
     </url>
     <url>
         <loc>http://glatter-gotz.com/blog/archives/</loc>
-        <lastmod>2015-05-18T11:34:04+02:00</lastmod>
+        <lastmod>2015-05-20T12:24:36+02:00</lastmod>
     </url>
     <url>
         <loc>http://glatter-gotz.com/</loc>
-        <lastmod>2015-05-18T11:34:04+02:00</lastmod>
+        <lastmod>2015-05-20T12:24:36+02:00</lastmod>
     </url>
     <url>
         <loc>http://glatter-gotz.com/resume/</loc>
