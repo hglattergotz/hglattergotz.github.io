@@ -4,7 +4,7 @@
   <title><![CDATA[Category: symfony | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/symfony/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-05-21T23:45:45+02:00</updated>
+  <updated>2015-05-21T23:47:20+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -28,7 +28,7 @@ Even if you have figured out how to connect to MSSQL with PHP itself as outlined
 The later creates a dsn in its driver class (Doctrine\DBAL\Driver\PDOSqlsrv\Driver) that looks like this:</p>
 
 <p><code>php
-$dsn = sqlsrv:server=';
+$dsn = 'sqlsrv:server=';
 </code></p>
 
 <p>When it should actually be this:</p>
