@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Setting the Symfony2 default environment - henning glatter-götz</title>
+  <title>Connecting to MSSQL from Symfony2 on Linux - henning glatter-götz</title>
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="In my quest to type less because I am getting lazy I am trying to automate as much as I can.
-Something that is a bit tiresome in Symfony2 is to have &hellip;">
+  <meta name="description" content="If you find yourself trying to connect to a MSSQL database in your Symfony 2 project that is running on Linux you will soon discover that it does not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Something that is a bit tiresome in Symfony2 is to have &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/">
+  <link rel="canonical" href="http://glatter-gotz.com/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +78,7 @@ Something that is a bit tiresome in Symfony2 is to have &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Setting the Symfony2 default environment</h1>
+      <h1 class="entry-title">Connecting to MSSQL from Symfony2 on Linux</h1>
     
     
       <p class="meta">
@@ -95,52 +94,78 @@ Something that is a bit tiresome in Symfony2 is to have &hellip;">
   
 
 
-<time datetime="2015-05-20T12:13:22+02:00" pubdate data-updated="true">May 20<span>th</span>, 2015</time>
+<time datetime="2015-05-21T23:01:56+02:00" pubdate data-updated="true">May 21<span>st</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>In my quest to type less because I am getting lazy I am trying to automate as much as I can.
-Something that is a bit tiresome in Symfony2 is to have to specify the <code>--env</code> flag for each run on the command-line if you do not wish to run in the default built-in <code>dev</code> environment.</p>
+<div class="entry-content"><p>If you find yourself trying to connect to a MSSQL database in your Symfony 2 project that is running on Linux you will soon discover that it does not work.
+Even if you have figured out how to connect to MSSQL with PHP itself as outlined <a href="http://www.glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/">here</a>.</p>
 
 <!--more-->
 
 
-<p>Turns out there is an extremely simple way to override this:</p>
-
-<p>In your <code>~/.profile</code> (or <code>~/.bash_profile</code>) simply add</p>
+<p>Doctrine 2 currently supports drivers called <em>sqlsrv</em>, which is Windows only, and <em>pdo_sqlsrv</em>.
+The later creates a dsn in its driver class (Doctrine\DBAL\Driver\PDOSqlsrv\Driver) that looks like this:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">SYMFONY_ENV</span><span class="o">=</span>prod
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$dsn</span> <span class="o">=</span> <span class="nx">sqlsrv</span><span class="o">:</span><span class="nx">server</span><span class="o">=</span><span class="err">&#39;</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Any console command in your Symfony2 project will now run with &#8211;env=prod if you omit the flag.</p>
+<p>When it should actually be this:</p>
 
-<p>Another useful thing to put in your <code>~/.profile</code> is an alias for the app/console portion of your console command:</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$dsn</span> <span class="o">=</span> <span class="s1">&#39;dblib:host=&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So what we need is a custom driver class that creates the correct connection instance. Fortunately this already exists and can be installed via composer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>composer require leaseweb/doctrine-pdo-dblib
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The docs for this bundle state that you need to install FreeTDS, configure a connection and use that connection name as the value for the <code>host</code> key in your <code>config.yml</code>.
+I have not found that to be necessary on Linux. And on OSX if you follow <a href="http://www.glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/">this</a> I did not see the need for it either.</p>
+
+<p>In your <code>config.yml</code></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Symfony2 aliases</span>
-</span><span class='line'><span class="nb">alias </span><span class="nv">sf</span><span class="o">=</span><span class="s1">&#39;app/console&#39;</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># Doctrine Configuration</span>
+</span><span class='line'><span class="l-Scalar-Plain">doctrine</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">dbal</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">default_connection</span><span class="p-Indicator">:</span>   <span class="l-Scalar-Plain">default</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">connections</span><span class="p-Indicator">:</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
+</span><span class='line'>                <span class="c1">#driver:       &quot;%default_database_driver%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">driver_class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Lsw\DoctrinePdoDblib\Doctrine\DBAL\Driver\PDODblib\Driver</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span>         <span class="s">&quot;%default_database_host%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span>         <span class="s">&quot;%default_database_port%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">dbname</span><span class="p-Indicator">:</span>       <span class="s">&quot;%default_database_name%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span>         <span class="s">&quot;%default_database_user%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span>     <span class="s">&quot;%default_database_password%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">charset</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">UTF8</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now, instead of having to type</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>app/console namespace:command
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>you can simply type</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sf namespace:command
-</span></code></pre></td></tr></table></div></figure>
-
+<p>Notice that the <code>driver</code> parameter is commented out and a new parameter called <code>driver_class</code> is added, which tells doctrine to use the custom driver class that we installed.</p>
 </div>
 
 
@@ -163,12 +188,12 @@ Something that is a bit tiresome in Symfony2 is to have to specify the <code>--e
   
 
 
-<time datetime="2015-05-20T12:13:22+02:00" pubdate data-updated="true">May 20<span>th</span>, 2015</time>
+<time datetime="2015-05-21T23:01:56+02:00" pubdate data-updated="true">May 21<span>st</span>, 2015</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cli/'>cli</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/symfony2/'>symfony2</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mssql/'>mssql</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/symfony/'>symfony</a>
   
 </span>
 
@@ -177,7 +202,7 @@ Something that is a bit tiresome in Symfony2 is to have to specify the <code>--e
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/" data-via="hglattergotz" data-counturl="http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://glatter-gotz.com/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/" data-via="hglattergotz" data-counturl="http://glatter-gotz.com/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/" >Tweet</a>
   
   
   
@@ -186,10 +211,8 @@ Something that is a bit tiresome in Symfony2 is to have to specify the <code>--e
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/02/23/why-you-should-take-a-look-at-ember-again/" title="Previous Post: Why you should take a look at Ember (again)">&laquo; Why you should take a look at Ember (again)</a>
+        <a class="basic-alignment left" href="/blog/2015/05/20/setting-the-symfony2-default-environment/" title="Previous Post: Setting the Symfony2 default environment">&laquo; Setting the Symfony2 default environment</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/" title="Next Post: Connecting to MSSQL from Symfony2 on Linux">Connecting to MSSQL from Symfony2 on Linux &raquo;</a>
       
     </p>
   </footer>
@@ -296,8 +319,8 @@ Something that is a bit tiresome in Symfony2 is to have to specify the <code>--e
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/';
-        var disqus_url = 'http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/';
+        var disqus_identifier = 'http://glatter-gotz.com/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/';
+        var disqus_url = 'http://glatter-gotz.com/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/';
         var disqus_script = 'embed.js';
       
     (function () {

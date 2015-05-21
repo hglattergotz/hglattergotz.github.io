@@ -4,7 +4,7 @@
   <title><![CDATA[henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-05-20T12:29:28+02:00</updated>
+  <updated>2015-05-21T23:45:45+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Connecting to MSSQL from Symfony2 on Linux]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/"/>
+    <updated>2015-05-21T23:01:56+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux</id>
+    <content type="html"><![CDATA[<p>If you find yourself trying to connect to a MSSQL database in your Symfony 2 project that is running on Linux you will soon discover that it does not work.
+Even if you have figured out how to connect to MSSQL with PHP itself as outlined <a href="http://www.glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/">here</a>.</p>
+
+<!--more-->
+
+
+<p>Doctrine 2 currently supports drivers called <em>sqlsrv</em>, which is Windows only, and <em>pdo_sqlsrv</em>.
+The later creates a dsn in its driver class (Doctrine\DBAL\Driver\PDOSqlsrv\Driver) that looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$dsn</span> <span class="o">=</span> <span class="nx">sqlsrv</span><span class="o">:</span><span class="nx">server</span><span class="o">=</span><span class="err">&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When it should actually be this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$dsn</span> <span class="o">=</span> <span class="s1">&#39;dblib:host=&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So what we need is a custom driver class that creates the correct connection instance. Fortunately this already exists and can be installed via composer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>composer require leaseweb/doctrine-pdo-dblib
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The docs for this bundle state that you need to install FreeTDS, configure a connection and use that connection name as the value for the <code>host</code> key in your <code>config.yml</code>.
+I have not found that to be necessary on Linux. And on OSX if you follow <a href="http://www.glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/">this</a> I did not see the need for it either.</p>
+
+<p>In your <code>config.yml</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># Doctrine Configuration</span>
+</span><span class='line'><span class="l-Scalar-Plain">doctrine</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">dbal</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">default_connection</span><span class="p-Indicator">:</span>   <span class="l-Scalar-Plain">default</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">connections</span><span class="p-Indicator">:</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
+</span><span class='line'>                <span class="c1">#driver:       &quot;%default_database_driver%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">driver_class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Lsw\DoctrinePdoDblib\Doctrine\DBAL\Driver\PDODblib\Driver</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span>         <span class="s">&quot;%default_database_host%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span>         <span class="s">&quot;%default_database_port%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">dbname</span><span class="p-Indicator">:</span>       <span class="s">&quot;%default_database_name%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span>         <span class="s">&quot;%default_database_user%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span>     <span class="s">&quot;%default_database_password%&quot;</span>
+</span><span class='line'>                <span class="l-Scalar-Plain">charset</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">UTF8</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice that the <code>driver</code> parameter is commented out and a new parameter called <code>driver_class</code> is added, which tells doctrine to use the custom driver class that we installed.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setting the Symfony2 default environment]]></title>
@@ -1714,128 +1787,6 @@ There is a configuration file for this driver located at</p>
 <p>Go to <a href="http://code.activestate.com/komodo/remotedebugging/">http://code.activestate.com/komodo/remotedebugging/</a> and download the binary for your version of PHP and put it in the extension directory. Restart apache and you should be good to go.</p>
 
 <p>If anyone knows how to coax PECL into building the correct version of the Xdebug extension on OSX please drop me a comment.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Run a symfony Task from an Action]]></title>
-    <link href="http://glatter-gotz.com/blog/2011/05/06/run-a-symfony-task-from-an-action/"/>
-    <updated>2011-05-06T00:00:00+02:00</updated>
-    <id>http://glatter-gotz.com/blog/2011/05/06/run-a-symfony-task-from-an-action</id>
-    <content type="html"><![CDATA[<p>It is sometimes useful and necessary to run a symfony task from within an action. I have found that it is a good practice to keep the amount of code in a task to a minimum by putting all your logic into a class and then simply instantiating an object of that class in a task and then calling a method to which you pass the task arguments and options to get your work done.</p>
-
-<!--more-->
-
-
-<p>So instead of</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//myTask.class.php</span>
-</span><span class='line'><span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nv">$arguments</span> <span class="o">=</span> <span class="k">array</span><span class="p">(),</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="c1">// initialize the database connection</span>
-</span><span class='line'>  <span class="nv">$databaseManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sfDatabaseManager</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">configuration</span><span class="p">);</span>
-</span><span class='line'>  <span class="nv">$connection</span> <span class="o">=</span> <span class="nv">$databaseManager</span><span class="o">-&gt;</span><span class="na">getDatabase</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;connection&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// all code to perform task goes here</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>do this</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//myTask.class.php</span>
-</span><span class='line'><span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nv">$arguments</span> <span class="o">=</span> <span class="k">array</span><span class="p">(),</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="c1">// initialize the database connection</span>
-</span><span class='line'>  <span class="nv">$databaseManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sfDatabaseManager</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">configuration</span><span class="p">);</span>
-</span><span class='line'>  <span class="nv">$connection</span> <span class="o">=</span> <span class="nv">$databaseManager</span><span class="o">-&gt;</span><span class="na">getDatabase</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;connection&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nv">$myObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">myClass</span><span class="p">();</span>
-</span><span class='line'>  <span class="nv">$myObj</span><span class="o">-&gt;</span><span class="na">someMethod</span><span class="p">(</span><span class="nv">$arguments</span><span class="p">[</span><span class="s1">&#39;arg&#39;</span><span class="p">],</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;opt&#39;</span><span class="p">],</span> <span class="o">...</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you have a situation as just explained then it makes more sense to simply do the same in your action - instantiate an instance of the class - instead of executing a task in the action.</p>
-
-<p>However, I have run into situation where the task I want to run is actually executing in a different context (different symfony application within the same project). Then you really have to run the task from your action.
-There are a few things to consider when doing this and I have not found any good information on this. I do remember reading about this subject matter in the symfony docs, but I was not able to find it when I needed it.
-There are two things that need to happen to make this work:</p>
-
-<ul>
-<li>Before instantiating the task you wish to execute you must change the current working directory to the project root.</li>
-<li>After the task has completed you have to switch back to your current context otherwise bad things will happen.</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// in one of your methods in actions.class.php</span>
-</span><span class='line'><span class="o">:</span>
-</span><span class='line'><span class="c1">// Remember the current dir and change it to sf root</span>
-</span><span class='line'><span class="nv">$currentDir</span> <span class="o">=</span> <span class="nb">getcwd</span><span class="p">();</span>
-</span><span class='line'><span class="nb">chdir</span><span class="p">(</span><span class="nx">sfConfig</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;sf_root_dir&#39;</span><span class="p">));</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// Instantiate the task and run it</span>
-</span><span class='line'><span class="nv">$task</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">myTask</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="p">,</span> <span class="k">new</span> <span class="nx">sfFormatter</span><span class="p">());</span>
-</span><span class='line'><span class="nv">$rc</span> <span class="o">=</span> <span class="nv">$task</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;arg1&#39;</span> <span class="o">=&gt;</span> <span class="nv">$argVal1</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;opt1&#39;</span> <span class="o">=&gt;</span> <span class="nv">$optVal1</span><span class="p">));</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// Restore original environment, change back to original directory</span>
-</span><span class='line'><span class="c1">// Switch the context back to where it was</span>
-</span><span class='line'><span class="nb">chdir</span><span class="p">(</span><span class="nv">$currentDir</span><span class="p">);</span>
-</span><span class='line'><span class="nx">sfContext</span><span class="o">::</span><span class="na">switchTo</span><span class="p">(</span><span class="s1">&#39;AppName&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="o">:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In the above code sample <em>AppName</em> is the name of the context/sf application in which the action lives.
-So if for example your frontend application is called <em>frontend</em> and the task you are running needs to have <em>&#8211;application=backend</em>, then you need to switch it back to <em>frontend</em> once the task is done otherwise your application will most likely encounter a fatal error such as</p>
-
-<blockquote><p>The template &#8220;myTemplate.php&#8221; does not exist or is unreadable in &#8220;&#8221;</p></blockquote>
 ]]></content>
   </entry>
   

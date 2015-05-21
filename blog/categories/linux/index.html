@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Setting the Symfony2 default environment - henning glatter-götz</title>
+  <title>Category: linux - henning glatter-götz</title>
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="In my quest to type less because I am getting lazy I am trying to automate as much as I can.
-Something that is a bit tiresome in Symfony2 is to have &hellip;">
+  <meta name="description" content="Category: linux">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Something that is a bit tiresome in Symfony2 is to have &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/">
+  <link rel="canonical" href="http://glatter-gotz.comblog/categories/linux/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -75,131 +74,36 @@ Something that is a bit tiresome in Symfony2 is to have &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Setting the Symfony2 default environment</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-20T12:13:22+02:00" pubdate data-updated="true">May 20<span>th</span>, 2015</time>
-        
-      </p>
+    <h1 class="entry-title">Category: linux</h1>
     
   </header>
-
-
-<div class="entry-content"><p>In my quest to type less because I am getting lazy I am trying to automate as much as I can.
-Something that is a bit tiresome in Symfony2 is to have to specify the <code>--env</code> flag for each run on the command-line if you do not wish to run in the default built-in <code>dev</code> environment.</p>
-
-<!--more-->
-
-
-<p>Turns out there is an extremely simple way to override this:</p>
-
-<p>In your <code>~/.profile</code> (or <code>~/.bash_profile</code>) simply add</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">SYMFONY_ENV</span><span class="o">=</span>prod
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Any console command in your Symfony2 project will now run with &#8211;env=prod if you omit the flag.</p>
-
-<p>Another useful thing to put in your <code>~/.profile</code> is an alias for the app/console portion of your console command:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Symfony2 aliases</span>
-</span><span class='line'><span class="nb">alias </span><span class="nv">sf</span><span class="o">=</span><span class="s1">&#39;app/console&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now, instead of having to type</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>app/console namespace:command
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>you can simply type</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sf namespace:command
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Henning Glatter-Götz</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2015</h2>
+
+<article>
+  
+<h1><a href="/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/">Connecting to MSSQL from Symfony2 on Linux</a></h1>
+<time datetime="2015-05-21T23:01:56+02:00" pubdate><span class='month'>May</span> <span class='day'>21</span> <span class='year'>2015</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mssql/'>mssql</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/symfony/'>symfony</a></span>
+</footer>
 
 
-<time datetime="2015-05-20T12:13:22+02:00" pubdate data-updated="true">May 20<span>th</span>, 2015</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/cli/'>cli</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/symfony2/'>symfony2</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/" data-via="hglattergotz" data-counturl="http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2015/02/23/why-you-should-take-a-look-at-ember-again/" title="Previous Post: Why you should take a look at Ember (again)">&laquo; Why you should take a look at Ember (again)</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/" title="Next Post: Connecting to MSSQL from Symfony2 on Linux">Connecting to MSSQL from Symfony2 on Linux &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -295,10 +199,7 @@ Something that is a bit tiresome in Symfony2 is to have to specify the <code>--e
       var disqus_shortname = 'hglattergotz';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/';
-        var disqus_url = 'http://glatter-gotz.com/blog/2015/05/20/setting-the-symfony2-default-environment/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

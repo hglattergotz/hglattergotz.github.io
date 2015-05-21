@@ -4,7 +4,7 @@
   <title><![CDATA[Category: symfony | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/symfony/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-05-20T12:29:28+02:00</updated>
+  <updated>2015-05-21T23:45:45+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Connecting to MSSQL from Symfony2 on Linux]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/"/>
+    <updated>2015-05-21T23:01:56+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux</id>
+    <content type="html"><![CDATA[<p>If you find yourself trying to connect to a MSSQL database in your Symfony 2 project that is running on Linux you will soon discover that it does not work.
+Even if you have figured out how to connect to MSSQL with PHP itself as outlined <a href="http://www.glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/">here</a>.</p>
+
+<!--more-->
+
+
+<p>Doctrine 2 currently supports drivers called <em>sqlsrv</em>, which is Windows only, and <em>pdo_sqlsrv</em>.
+The later creates a dsn in its driver class (Doctrine\DBAL\Driver\PDOSqlsrv\Driver) that looks like this:</p>
+
+<p><code>php
+$dsn = sqlsrv:server=';
+</code></p>
+
+<p>When it should actually be this:</p>
+
+<p><code>php
+$dsn = 'dblib:host=';
+</code></p>
+
+<p>So what we need is a custom driver class that creates the correct connection instance. Fortunately this already exists and can be installed via composer:</p>
+
+<p><code>bash
+$ composer require leaseweb/doctrine-pdo-dblib
+</code></p>
+
+<p>The docs for this bundle state that you need to install FreeTDS, configure a connection and use that connection name as the value for the <code>host</code> key in your <code>config.yml</code>.
+I have not found that to be necessary on Linux. And on OSX if you follow <a href="http://www.glatter-gotz.com/blog/2011/06/06/connecting-to-microsoft-sql-server-from-php-on-osx-and-xampp/">this</a> I did not see the need for it either.</p>
+
+<p>In your <code>config.yml</code></p>
+
+<p>```yml</p>
+
+<h1>Doctrine Configuration</h1>
+
+<p>doctrine:</p>
+
+<pre><code>dbal:
+    default_connection:   default
+    connections:
+        default:
+            #driver:       "%default_database_driver%"
+            driver_class: Lsw\DoctrinePdoDblib\Doctrine\DBAL\Driver\PDODblib\Driver
+            host:         "%default_database_host%"
+            port:         "%default_database_port%"
+            dbname:       "%default_database_name%"
+            user:         "%default_database_user%"
+            password:     "%default_database_password%"
+            charset:      UTF8
+</code></pre>
+
+<p>```</p>
+
+<p>Notice that the <code>driver</code> parameter is commented out and a new parameter called <code>driver_class</code> is added, which tells doctrine to use the custom driver class that we installed.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[./symfony doctrine:build-schema for a Single Table]]></title>

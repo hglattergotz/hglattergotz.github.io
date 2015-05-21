@@ -9,7 +9,7 @@
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="A little while ago I came across a problem in PHP where I had to process large amounts of data from Google Analytics. If I choose a date range that &hellip;">
+  <meta name="description" content="It is sometimes useful and necessary to run a symfony task from within an action. I have found that it is a good practice to keep the amount of code &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +75,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/05/06/run-a-symfony-task-from-an-action/">Run a symfony Task from an Action</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-06T00:00:00+02:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It is sometimes useful and necessary to run a symfony task from within an action. I have found that it is a good practice to keep the amount of code in a task to a minimum by putting all your logic into a class and then simply instantiating an object of that class in a task and then calling a method to which you pass the task arguments and options to get your work done.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/05/06/run-a-symfony-task-from-an-action/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -262,6 +303,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/">Connecting to MSSQL from Symfony2 on Linux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/20/setting-the-symfony2-default-environment/">Setting the Symfony2 default environment</a>
       </li>
     
@@ -275,10 +320,6 @@
     
       <li class="post">
         <a href="/blog/2015/01/20/sorting-records-with-ember-dot-js/">Sorting records with Ember.js</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/12/bye-bye-spideroak/">Bye Bye Spideroak</a>
       </li>
     
   </ul>
