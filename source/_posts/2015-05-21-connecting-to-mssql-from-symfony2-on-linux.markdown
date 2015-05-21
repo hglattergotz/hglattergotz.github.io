@@ -13,7 +13,7 @@ Doctrine 2 currently supports drivers called *sqlsrv*, which is Windows only, an
 The later creates a dsn in its driver class (Doctrine\DBAL\Driver\PDOSqlsrv\Driver) that looks like this:
 
 ```php
-$dsn = sqlsrv:server=';
+$dsn = 'sqlsrv:server=';
 ```
 
 When it should actually be this:
