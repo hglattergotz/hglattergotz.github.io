@@ -108,31 +108,12 @@ sometimes helpful if you can run the &hellip;">
   <div class="entry-content"><p>When using data providers in your phpunit tests to run the same test for N different sets of input data it is
 sometimes helpful if you can run the test for just a specific data set from the command line.</p>
 
-<p>Since I can never remember the syntax when I need it I decided to write it down (mostly for myself). Next up would be to create an alias or a helper script. We shall see.</p>
-
-<p>So lets say I want to run the test method <code>testTheThing</code> with dataset #12.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>phpunit -c app/ --filter <span class="s1">&#39;/::testTheThing .*#12$/&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Details:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>-c app/  ....... The place where my phpunit config lives
-</span><span class='line'>--filter ....... pass in a filter that will limit the run to what you need
-</span><span class='line'>testTheThing ... The <span class="nb">test </span>method to call
-</span><span class='line'>12 ............. The number of the dataset to run
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/05/22/running-a-phpunit-test-for-a-specific-dataset/">Read on &rarr;</a>
+    </footer>
   
 
 

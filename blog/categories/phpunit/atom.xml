@@ -4,7 +4,7 @@
   <title><![CDATA[Category: phpunit | henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/blog/categories/phpunit/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-05-22T12:49:59+02:00</updated>
+  <updated>2015-05-22T12:50:54+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -20,6 +20,9 @@
     <id>http://glatter-gotz.com/blog/2015/05/22/running-a-phpunit-test-for-a-specific-dataset</id>
     <content type="html"><![CDATA[<p>When using data providers in your phpunit tests to run the same test for N different sets of input data it is
 sometimes helpful if you can run the test for just a specific data set from the command line.</p>
+
+<!--more-->
+
 
 <p>Since I can never remember the syntax when I need it I decided to write it down (mostly for myself). Next up would be to create an alias or a helper script. We shall see.</p>
 
