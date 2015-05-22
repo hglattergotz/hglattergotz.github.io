@@ -7,6 +7,7 @@ categories: [ phpunit, php ]
 ---
 When using data providers in your phpunit tests to run the same test for N different sets of input data it is
 sometimes helpful if you can run the test for just a specific data set from the command line.
+<!--more-->
 
 Since I can never remember the syntax when I need it I decided to write it down (mostly for myself). Next up would be to create an alias or a helper script. We shall see.
 
