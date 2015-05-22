@@ -9,7 +9,8 @@
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="If you find yourself trying to connect to a MSSQL database in your Symfony 2 project that is running on Linux you will soon discover that it does not &hellip;">
+  <meta name="description" content="When using data providers in your phpunit tests to run the same test for N different sets of input data it is
+sometimes helpful if you can run the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +76,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/22/running-a-phpunit-test-for-a-specific-dataset/">Running a phpunit test for a specific dataset</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-22T12:41:40+02:00" pubdate data-updated="true">May 22<span>nd</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When using data providers in your phpunit tests to run the same test for N different sets of input data it is
+sometimes helpful if you can run the test for just a specific data set from the command line.</p>
+
+<p>Since I can never remember the syntax when I need it I decided to write it down (mostly for myself). Next up would be to create an alias or a helper script. We shall see.</p>
+
+<p>So lets say I want to run the test method <code>testTheThing</code> with dataset #12.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>phpunit -c app/ --filter <span class="s1">&#39;/::testTheThing .*#12$/&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Details:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>-c app/  ....... The place where my phpunit config lives
+</span><span class='line'>--filter ....... pass in a filter that will limit the run to what you need
+</span><span class='line'>testTheThing ... The <span class="nb">test </span>method to call
+</span><span class='line'>12 ............. The number of the dataset to run
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -491,54 +553,6 @@ Composer has to pull it all back down.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/08/git-merge-specific-files-from-one-branch-into-another/">Git merge specific files from one branch into another</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-08T10:10:41+02:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have started to use <a href="http://nvie.com/posts/a-successful-git-branching-model/">git branching</a>
-more heavily in recent months and also make it a point to have small and well
-documented commits. This sometimes leads to the need to merge specific files
-from one branch into another (good or bad, it just happens). Git facilitates
-this with <code>checkout</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout <span class="nb">source</span>-branch-name/commit-sha path/tofile/of/interest
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you do not provide the commit sha it will simply checkout the file at the
-HEAD of the source branch.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -561,6 +575,10 @@ HEAD of the source branch.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/22/running-a-phpunit-test-for-a-specific-dataset/">Running a phpunit test for a specific dataset</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/">Connecting to MSSQL from Symfony2 on Linux</a>
       </li>
     
@@ -574,10 +592,6 @@ HEAD of the source branch.</p>
     
       <li class="post">
         <a href="/blog/2015/02/21/how-to-run-cron-jobs-with-an-offset/">How to run cron jobs with an offset</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/20/sorting-records-with-ember-dot-js/">Sorting records with Ember.js</a>
       </li>
     
   </ul>

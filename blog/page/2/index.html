@@ -9,8 +9,9 @@
   <meta name="author" content="Henning Glatter-Götz">
 
   
-  <meta name="description" content="There are a number of new (and not so new) things I would like to learn or have
-been meaning to learn. Maybe putting them down on &#8220;paper&#8221 &hellip;">
+  <meta name="description" content="I have started to use git branching
+more heavily in recent months and also make it a point to have small and well
+documented commits. This sometimes &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +77,54 @@ been meaning to learn. Maybe putting them down on &#8220;paper&#8221 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/08/git-merge-specific-files-from-one-branch-into-another/">Git merge specific files from one branch into another</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-08T10:10:41+02:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have started to use <a href="http://nvie.com/posts/a-successful-git-branching-model/">git branching</a>
+more heavily in recent months and also make it a point to have small and well
+documented commits. This sometimes leads to the need to merge specific files
+from one branch into another (good or bad, it just happens). Git facilitates
+this with <code>checkout</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout <span class="nb">source</span>-branch-name/commit-sha path/tofile/of/interest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you do not provide the commit sha it will simply checkout the file at the
+HEAD of the source branch.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -491,47 +540,6 @@ After lots of searching and lot of trial and error I finally got my upsert worki
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6/">Install Xdebug 2.1.0 on OSX 10.6</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-31T00:00:00+02:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have had to install Xdebug on a few systems now and I always find myself spending time going down the wrong, or should I say the harder, path. Which is to try to install via PECL as recommended. For some reason the PECL install on OSX does not work as designed. The built extension ends up being of the wrong architecture. My guess is that it is built as a 32 bit extension instead of 64 bit.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -556,6 +564,10 @@ After lots of searching and lot of trial and error I finally got my upsert worki
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/22/running-a-phpunit-test-for-a-specific-dataset/">Running a phpunit test for a specific dataset</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/21/connecting-to-mssql-from-symfony2-on-linux/">Connecting to MSSQL from Symfony2 on Linux</a>
       </li>
     
@@ -569,10 +581,6 @@ After lots of searching and lot of trial and error I finally got my upsert worki
     
       <li class="post">
         <a href="/blog/2015/02/21/how-to-run-cron-jobs-with-an-offset/">How to run cron jobs with an offset</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/20/sorting-records-with-ember-dot-js/">Sorting records with Ember.js</a>
       </li>
     
   </ul>

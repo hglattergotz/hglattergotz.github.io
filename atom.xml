@@ -4,7 +4,7 @@
   <title><![CDATA[henning glatter-götz]]></title>
   <link href="http://glatter-gotz.com/atom.xml" rel="self"/>
   <link href="http://glatter-gotz.com/"/>
-  <updated>2015-05-22T00:02:36+02:00</updated>
+  <updated>2015-05-22T12:49:59+02:00</updated>
   <id>http://glatter-gotz.com/</id>
   <author>
     <name><![CDATA[Henning Glatter-Götz]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Running a phpunit test for a specific dataset]]></title>
+    <link href="http://glatter-gotz.com/blog/2015/05/22/running-a-phpunit-test-for-a-specific-dataset/"/>
+    <updated>2015-05-22T12:41:40+02:00</updated>
+    <id>http://glatter-gotz.com/blog/2015/05/22/running-a-phpunit-test-for-a-specific-dataset</id>
+    <content type="html"><![CDATA[<p>When using data providers in your phpunit tests to run the same test for N different sets of input data it is
+sometimes helpful if you can run the test for just a specific data set from the command line.</p>
+
+<p>Since I can never remember the syntax when I need it I decided to write it down (mostly for myself). Next up would be to create an alias or a helper script. We shall see.</p>
+
+<p>So lets say I want to run the test method <code>testTheThing</code> with dataset #12.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>phpunit -c app/ --filter <span class="s1">&#39;/::testTheThing .*#12$/&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Details:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>-c app/  ....... The place where my phpunit config lives
+</span><span class='line'>--filter ....... pass in a filter that will limit the run to what you need
+</span><span class='line'>testTheThing ... The <span class="nb">test </span>method to call
+</span><span class='line'>12 ............. The number of the dataset to run
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Connecting to MSSQL from Symfony2 on Linux]]></title>
@@ -1754,39 +1788,6 @@ There is a configuration file for this driver located at</p>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$conn</span> <span class="o">=</span> mssql_connect<span class="o">(</span><span class="s1">&#39;MyServerXYZ&#39;</span>, <span class="nv">$username</span>, <span class="nv">$password</span><span class="o">)</span>;
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Install Xdebug 2.1.0 on OSX 10.6]]></title>
-    <link href="http://glatter-gotz.com/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6/"/>
-    <updated>2011-05-31T00:00:00+02:00</updated>
-    <id>http://glatter-gotz.com/blog/2011/05/31/install-xdebug-2-1-0-on-osx-10-6</id>
-    <content type="html"><![CDATA[<p>I have had to install Xdebug on a few systems now and I always find myself spending time going down the wrong, or should I say the harder, path. Which is to try to install via PECL as recommended. For some reason the PECL install on OSX does not work as designed. The built extension ends up being of the wrong architecture. My guess is that it is built as a 32 bit extension instead of 64 bit.</p>
-
-<!--more-->
-
-
-<p>Anyway, if Xdebug will not load after you installed on OSX using PECL and you find something like this in your apache error log:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>Failed loading /Applications/XAMPP/xamppfiles/lib/php/php-
-</span><span class='line'>5.3.1/extensions/no-debug-non-zts-20090626/xdebug.so:
-</span><span class='line'>dlopen<span class="o">(</span>/Applications/XAMPP/xamppfiles/lib/php/php-5.3.1/extensions/no-
-</span><span class='line'>debug-non-zts-20090626/xdebug.so, 9<span class="o">)</span>: no suitable image found.  Did
-</span><span class='line'>find: /Applications/XAMPP/xamppfiles/lib/php/php-5.3.1/extensions/no-
-</span><span class='line'>debug-non-zts-20090626/xdebug.so: mach-o, but wrong architecture
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Go to <a href="http://code.activestate.com/komodo/remotedebugging/">http://code.activestate.com/komodo/remotedebugging/</a> and download the binary for your version of PHP and put it in the extension directory. Restart apache and you should be good to go.</p>
-
-<p>If anyone knows how to coax PECL into building the correct version of the Xdebug extension on OSX please drop me a comment.</p>
 ]]></content>
   </entry>
   
